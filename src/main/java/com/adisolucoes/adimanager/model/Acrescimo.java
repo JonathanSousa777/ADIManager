@@ -52,7 +52,7 @@ public class Acrescimo implements Serializable {
         this.valor = valor;
     }
 
-    @ManyToMany(mappedBy="acrescimos")
+    @ManyToMany(mappedBy = "acrescimos")
     public List<Projeto> getProjeto() {
         return projeto;
     }

@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -47,6 +48,7 @@ public class Projeto implements Serializable {
     private String formaPagamento;
     private TipoPagamento tipoPagamento;
     private List<Ferramenta> ferramentas;
+    private Servidor servidor;
 
     public Projeto() {
     }
@@ -229,6 +231,15 @@ public class Projeto implements Serializable {
 
     public void setTipoPagamento(TipoPagamento tipoPagamento) {
         this.tipoPagamento = tipoPagamento;
+    }
+
+    @ManyToOne
+    public Servidor getServidor() {
+        return servidor;
+    }
+
+    public void setServidor(Servidor servidor) {
+        this.servidor = servidor;
     }
 
     @Override
