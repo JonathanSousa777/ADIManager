@@ -2,6 +2,7 @@ package com.adisolucoes.adimanager.model;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -73,7 +74,7 @@ public class Cliente implements Serializable {
         this.observacao = observacao;
     }
 
-    @OneToMany(mappedBy = "clienteAtivo")
+    @OneToMany(mappedBy = "clienteAtivo", cascade = CascadeType.ALL)
     public List<Indicacao> getIndicacoes() {
         return indicacoes;
     }
