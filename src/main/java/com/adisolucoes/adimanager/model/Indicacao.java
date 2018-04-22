@@ -2,12 +2,16 @@ package com.adisolucoes.adimanager.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -18,7 +22,7 @@ import javax.persistence.Table;
 public class Indicacao implements Serializable {
 
     private long id;
-    private Cliente clientePassivo;
+    private long codigoClientePassivo;
     private Cliente clienteAtivo;
     private Date data;
     private String descricao;
@@ -36,16 +40,17 @@ public class Indicacao implements Serializable {
         this.id = id;
     }
 
-    @OneToOne
-    public Cliente getClientePassivo() {
-        return clientePassivo;
+    @Column(name = "codigo_cliente_passivo", nullable = false)
+    public long getCodigoClientePassivo() {
+        return codigoClientePassivo;
     }
 
-    public void setClientePassivo(Cliente clientePassivo) {
-        this.clientePassivo = clientePassivo;
+    public void setCodigoClientePassivo(long codigoClientePassivo) {
+        this.codigoClientePassivo = codigoClientePassivo;
     }
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "cliente_ativo_id", nullable = false)
     public Cliente getClienteAtivo() {
         return clienteAtivo;
     }
@@ -54,6 +59,8 @@ public class Indicacao implements Serializable {
         this.clienteAtivo = clienteAtivo;
     }
 
+    @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
     public Date getData() {
         return data;
     }

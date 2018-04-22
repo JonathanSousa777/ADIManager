@@ -2,11 +2,14 @@ package com.adisolucoes.adimanager.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -44,6 +47,8 @@ public class Campanha implements Serializable {
         this.descricao = descricao;
     }
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "data_inicio", nullable = false)
     public Date getDataInicio() {
         return dataInicio;
     }
@@ -52,6 +57,8 @@ public class Campanha implements Serializable {
         this.dataInicio = dataInicio;
     }
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "data_fim", nullable = false)
     public Date getDataFim() {
         return dataFim;
     }

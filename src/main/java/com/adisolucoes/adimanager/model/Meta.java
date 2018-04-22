@@ -3,6 +3,7 @@ package com.adisolucoes.adimanager.model;
 import com.adisolucoes.adimanager.enumerations.TipoPrioridadeMeta;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -10,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -47,6 +50,8 @@ public class Meta implements Serializable {
         this.descricao = descricao;
     }
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "data_inicio", nullable = false)
     public Date getDataInicio() {
         return dataInicio;
     }
@@ -55,6 +60,8 @@ public class Meta implements Serializable {
         this.dataInicio = dataInicio;
     }
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "data_fim", nullable = false)
     public Date getDataFim() {
         return dataFim;
     }
@@ -64,6 +71,7 @@ public class Meta implements Serializable {
     }
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_prioridade_meta")
     public TipoPrioridadeMeta getTipoPrioridadeMeta() {
         return tipoPrioridadeMeta;
     }
@@ -72,6 +80,7 @@ public class Meta implements Serializable {
         this.tipoPrioridadeMeta = tipoPrioridadeMeta;
     }
 
+    @Column(name = "concluida")
     public boolean isConcluida() {
         return concluida;
     }

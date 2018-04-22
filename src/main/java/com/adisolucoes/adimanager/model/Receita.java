@@ -3,12 +3,16 @@ package com.adisolucoes.adimanager.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -51,6 +55,8 @@ public class Receita implements Serializable {
         this.descricao = descricao;
     }
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_inicio", nullable = false)
     public Date getDataInicio() {
         return dataInicio;
     }
@@ -59,6 +65,8 @@ public class Receita implements Serializable {
         this.dataInicio = dataInicio;
     }
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_vencimento", nullable = false)
     public Date getDataVencimento() {
         return dataVencimento;
     }
@@ -68,6 +76,7 @@ public class Receita implements Serializable {
     }
 
     @ManyToOne
+    @JoinColumn(name = "categoria_lancamento_id", nullable = false)
     public CategoriaLancamento getCategoriaLancamento() {
         return categoriaLancamento;
     }
@@ -76,6 +85,7 @@ public class Receita implements Serializable {
         this.categoriaLancamento = categoriaLancamento;
     }
 
+    @Column(nullable = false, precision = 20, scale = 2)
     public BigDecimal getValor() {
         return valor;
     }
@@ -84,6 +94,7 @@ public class Receita implements Serializable {
         this.valor = valor;
     }
 
+    @Column(nullable = false, precision = 20, scale = 2)
     public BigDecimal getDesconto() {
         return desconto;
     }
@@ -92,6 +103,7 @@ public class Receita implements Serializable {
         this.desconto = desconto;
     }
 
+    @Column(name = "forma_pagamento", nullable = false, length = 25)
     public String getFormaPagamento() {
         return formaPagamento;
     }
@@ -100,6 +112,7 @@ public class Receita implements Serializable {
         this.formaPagamento = formaPagamento;
     }
 
+    @Column(name = "recebido")
     public boolean isRecebido() {
         return recebido;
     }
@@ -108,6 +121,8 @@ public class Receita implements Serializable {
         this.recebido = recebido;
     }
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_recebimento", nullable = false)
     public Date getDataRecebimento() {
         return dataRecebimento;
     }
@@ -117,6 +132,7 @@ public class Receita implements Serializable {
     }
 
     @ManyToOne
+    @JoinColumn(name = "cliente_id", nullable = false)
     public Cliente getCliente() {
         return cliente;
     }

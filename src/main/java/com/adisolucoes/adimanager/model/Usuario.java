@@ -4,6 +4,7 @@ import com.adisolucoes.adimanager.enumerations.TipoUsuario;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -46,6 +49,8 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_cadastro", nullable = false)
     public Date getDataCadastro() {
         return dataCadastro;
     }
@@ -54,6 +59,8 @@ public class Usuario implements Serializable {
         this.dataCadastro = dataCadastro;
     }
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_atualizacao", nullable = false)
     public Date getDataAtualizacao() {
         return dataAtualizacao;
     }
@@ -62,6 +69,8 @@ public class Usuario implements Serializable {
         this.dataAtualizacao = dataAtualizacao;
     }
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_ultimo_acesso", nullable = false)
     public Date getDataUltimoAcesso() {
         return dataUltimoAcesso;
     }
@@ -70,6 +79,7 @@ public class Usuario implements Serializable {
         this.dataUltimoAcesso = dataUltimoAcesso;
     }
 
+    @Column(name = "ativo")
     public boolean isStatus() {
         return status;
     }
@@ -78,6 +88,7 @@ public class Usuario implements Serializable {
         this.status = status;
     }
 
+    @Column(nullable = false)
     public String getLogin() {
         return login;
     }
@@ -86,6 +97,7 @@ public class Usuario implements Serializable {
         this.login = login;
     }
 
+    @Column(nullable = false)
     public String getSenha() {
         return senha;
     }
@@ -105,6 +117,7 @@ public class Usuario implements Serializable {
     }
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_usuario")
     public TipoUsuario getTipoUsuario() {
         return tipoUsuario;
     }

@@ -3,6 +3,7 @@ package com.adisolucoes.adimanager.model;
 import com.adisolucoes.adimanager.enumerations.TipoPrioridadeNotificacao;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -10,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -46,6 +49,8 @@ public class Notificacao implements Serializable {
         this.descricao = descricao;
     }
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "data_duracao", nullable = false)
     public Date getDuracao() {
         return duracao;
     }
@@ -55,6 +60,7 @@ public class Notificacao implements Serializable {
     }
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_prioridade_notificacao")
     public TipoPrioridadeNotificacao getTipoPrioridadeNotificacao() {
         return tipoPrioridadeNotificacao;
     }
@@ -63,6 +69,7 @@ public class Notificacao implements Serializable {
         this.tipoPrioridadeNotificacao = tipoPrioridadeNotificacao;
     }
 
+    @Column(name = "lida")
     public boolean isLida() {
         return lida;
     }

@@ -5,14 +5,24 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author Jonathan Sousa
  */
+@Entity
+@Table(name = "tab_promocao")
 public class Promocao implements Serializable {
 
     private long id;
@@ -28,6 +38,8 @@ public class Promocao implements Serializable {
     public Promocao() {
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId() {
         return id;
     }
@@ -36,6 +48,7 @@ public class Promocao implements Serializable {
         this.id = id;
     }
 
+    @Column(name = "novo_valor", nullable = false, precision = 20, scale = 2)
     public BigDecimal getNovoValor() {
         return novoValor;
     }
@@ -45,6 +58,7 @@ public class Promocao implements Serializable {
     }
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_promocao")
     public TipoPromocao getTipoPromocao() {
         return tipoPromocao;
     }
@@ -53,6 +67,7 @@ public class Promocao implements Serializable {
         this.tipoPromocao = tipoPromocao;
     }
 
+    @Column(name = "valor_desconto", nullable = false, precision = 20, scale = 2)
     public BigDecimal getValorDesconto() {
         return valorDesconto;
     }
@@ -61,6 +76,8 @@ public class Promocao implements Serializable {
         this.valorDesconto = valorDesconto;
     }
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "data_inicio", nullable = false)
     public Date getDataInicio() {
         return dataInicio;
     }
@@ -69,6 +86,8 @@ public class Promocao implements Serializable {
         this.dataInicio = dataInicio;
     }
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "data_fim", nullable = false)
     public Date getDataFim() {
         return dataFim;
     }
@@ -85,6 +104,7 @@ public class Promocao implements Serializable {
         this.descricao = descricao;
     }
 
+    @Column(name = "ativada")
     public boolean isStatus() {
         return status;
     }
@@ -93,7 +113,7 @@ public class Promocao implements Serializable {
         this.status = status;
     }
 
-    @OneToMany
+    @OneToMany(mappedBy = "promocao")
     public List<Plano> getPlanos() {
         return planos;
     }

@@ -3,6 +3,7 @@ package com.adisolucoes.adimanager.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -51,6 +52,7 @@ public class Ferramenta implements Serializable {
         this.descricao = descricao;
     }
 
+    @Column(nullable = false)
     public String getUrl() {
         return url;
     }
@@ -59,6 +61,7 @@ public class Ferramenta implements Serializable {
         this.url = url;
     }
 
+    @Column(name = "paga", length = 15)
     public boolean isPaga() {
         return paga;
     }
@@ -67,6 +70,7 @@ public class Ferramenta implements Serializable {
         this.paga = paga;
     }
 
+    @Column(nullable = false, precision = 20, scale = 2)
     public BigDecimal getValor() {
         return valor;
     }
@@ -99,6 +103,7 @@ public class Ferramenta implements Serializable {
         this.notaInstrucao = notaInstrucao;
     }
 
+    @Column(length = 120, nullable = false)
     public String getDesenvolvedora() {
         return desenvolvedora;
     }

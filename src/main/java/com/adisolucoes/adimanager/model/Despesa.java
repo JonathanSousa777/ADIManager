@@ -1,14 +1,21 @@
 package com.adisolucoes.adimanager.model;
 
+import com.adisolucoes.adimanager.enumerations.StatusDespesa;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -28,6 +35,7 @@ public class Despesa implements Serializable {
     private boolean pago;
     private Date dataPagamento;
     private Cliente cliente;
+    private StatusDespesa statusDespesa;
 
     public Despesa() {
     }
@@ -50,6 +58,8 @@ public class Despesa implements Serializable {
         this.descricao = descricao;
     }
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "data_inicio", nullable = false)
     public Date getDataInicio() {
         return dataInicio;
     }
@@ -58,6 +68,8 @@ public class Despesa implements Serializable {
         this.dataInicio = dataInicio;
     }
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "data_vencimento", nullable = false)
     public Date getDataVencimento() {
         return dataVencimento;
     }
@@ -67,6 +79,7 @@ public class Despesa implements Serializable {
     }
 
     @ManyToOne
+    @JoinColumn(name = "categoria_lancamento_id", nullable = false)
     public CategoriaLancamento getCategoriaLancamento() {
         return categoriaLancamento;
     }
@@ -75,6 +88,7 @@ public class Despesa implements Serializable {
         this.categoriaLancamento = categoriaLancamento;
     }
 
+    @Column(nullable = false, precision = 20, scale = 2)
     public BigDecimal getValor() {
         return valor;
     }
@@ -83,6 +97,7 @@ public class Despesa implements Serializable {
         this.valor = valor;
     }
 
+    @Column(name = "forma_pagamento", nullable = false, length = 25)
     public String getFormaPagamento() {
         return formaPagamento;
     }
@@ -91,6 +106,7 @@ public class Despesa implements Serializable {
         this.formaPagamento = formaPagamento;
     }
 
+    @Column(name = "pago")
     public boolean isPago() {
         return pago;
     }
@@ -99,6 +115,8 @@ public class Despesa implements Serializable {
         this.pago = pago;
     }
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "data_pagamento", nullable = false)
     public Date getDataPagamento() {
         return dataPagamento;
     }
@@ -108,12 +126,23 @@ public class Despesa implements Serializable {
     }
 
     @ManyToOne
+    @JoinColumn(name = "cliente_id")
     public Cliente getCliente() {
         return cliente;
     }
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status_empresa")
+    public StatusDespesa getStatusDespesa() {
+        return statusDespesa;
+    }
+
+    public void setStatusDespesa(StatusDespesa statusDespesa) {
+        this.statusDespesa = statusDespesa;
     }
 
     @Override

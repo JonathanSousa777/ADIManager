@@ -2,6 +2,7 @@ package com.adisolucoes.adimanager.model;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,6 +36,7 @@ public class CategoriaPlano implements Serializable {
         this.id = id;
     }
 
+    @Column(nullable = false, length = 60)
     public String getNome() {
         return nome;
     }

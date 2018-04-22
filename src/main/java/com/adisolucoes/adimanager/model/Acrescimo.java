@@ -3,6 +3,7 @@ package com.adisolucoes.adimanager.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +22,6 @@ public class Acrescimo implements Serializable {
     private long id;
     private String descricao;
     private BigDecimal valor;
-    private List<Projeto> projeto;
 
     public Acrescimo() {
     }
@@ -44,21 +44,13 @@ public class Acrescimo implements Serializable {
         this.descricao = descricao;
     }
 
+    @Column(nullable = false, precision = 20, scale = 2)
     public BigDecimal getValor() {
         return valor;
     }
 
     public void setValor(BigDecimal valor) {
         this.valor = valor;
-    }
-
-    @ManyToMany(mappedBy = "acrescimos")
-    public List<Projeto> getProjeto() {
-        return projeto;
-    }
-
-    public void setProjeto(List<Projeto> projeto) {
-        this.projeto = projeto;
     }
 
     @Override

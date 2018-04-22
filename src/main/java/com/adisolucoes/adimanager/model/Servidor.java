@@ -3,6 +3,7 @@ package com.adisolucoes.adimanager.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -40,6 +41,7 @@ public class Servidor implements Serializable {
         this.id = id;
     }
 
+    @Column(name = "codigo_identificador", length = 30)
     public String getCodigoIdentificador() {
         return codigoIdentificador;
     }
@@ -48,6 +50,7 @@ public class Servidor implements Serializable {
         this.codigoIdentificador = codigoIdentificador;
     }
 
+    @Column(length = 255, nullable = false)
     public String getUrl() {
         return url;
     }
@@ -56,6 +59,7 @@ public class Servidor implements Serializable {
         this.url = url;
     }
 
+    @Column(name = "nome_plano" ,length = 60, nullable = false)
     public String getNomePlano() {
         return nomePlano;
     }
@@ -64,6 +68,7 @@ public class Servidor implements Serializable {
         this.nomePlano = nomePlano;
     }
 
+    @Column(nullable = false, scale = 2, precision = 20)
     public BigDecimal getValor() {
         return valor;
     }
@@ -81,6 +86,7 @@ public class Servidor implements Serializable {
         this.projetos = projetos;
     }
 
+    @Column(nullable = false, length = 10)
     public int getGigas() {
         return gigas;
     }
@@ -89,6 +95,7 @@ public class Servidor implements Serializable {
         this.gigas = gigas;
     }
 
+    @Column(name = "empresa_desenvolvedora", nullable = false, length = 50)
     public String getEmpresaDesenvolvedora() {
         return empresaDesenvolvedora;
     }

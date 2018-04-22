@@ -1,11 +1,15 @@
 package com.adisolucoes.adimanager.model;
 
 import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 /**
@@ -36,6 +40,7 @@ public class Empresa implements Serializable {
         this.id = id;
     }
 
+    @Column(nullable = false, length = 30)
     public String getCnpj() {
         return cnpj;
     }
@@ -44,6 +49,7 @@ public class Empresa implements Serializable {
         this.cnpj = cnpj;
     }
 
+    @Column(nullable = false, length = 65)
     public String getNome() {
         return nome;
     }
@@ -60,6 +66,8 @@ public class Empresa implements Serializable {
         this.descricao = descricao;
     }
 
+    @Lob
+    @Basic(fetch = FetchType.LAZY, optional = true)
     public byte[] getLogomarca() {
         return logomarca;
     }

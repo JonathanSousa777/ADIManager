@@ -3,10 +3,12 @@ package com.adisolucoes.adimanager.model;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -41,6 +43,7 @@ public class Cliente implements Serializable {
     }
 
     @OneToOne
+    @JoinColumn(name = "empresa_id")
     public Empresa getEmpresa() {
         return empresa;
     }
@@ -49,6 +52,7 @@ public class Cliente implements Serializable {
         this.empresa = empresa;
     }
 
+    @Column(name = "como_conheceu")
     public String getComoConheceu() {
         return comoConheceu;
     }
@@ -83,6 +87,7 @@ public class Cliente implements Serializable {
         this.indicacoes = indicacoes;
     }
 
+    @Column(name = "codigo_identificador", length = 30)
     public String getCodigoIdentificador() {
         return codigoIdentificador;
     }

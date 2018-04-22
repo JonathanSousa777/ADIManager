@@ -3,14 +3,18 @@ package com.adisolucoes.adimanager.model;
 import com.adisolucoes.adimanager.enumerations.TipoAgendamento;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -24,7 +28,7 @@ public class Agendamento implements Serializable {
     private String descricao;
     private Date dataInicio;
     private Date dataFim;
-    private Date dataConcluido;
+    private Date dataConclusao;
     private TipoAgendamento tipoAgendamento;
     private Usuario usuario;
 
@@ -49,6 +53,8 @@ public class Agendamento implements Serializable {
         this.descricao = descricao;
     }
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "data_inicio", nullable = false)
     public Date getDataInicio() {
         return dataInicio;
     }
@@ -57,6 +63,8 @@ public class Agendamento implements Serializable {
         this.dataInicio = dataInicio;
     }
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "data_fim", nullable = false)
     public Date getDataFim() {
         return dataFim;
     }
@@ -65,15 +73,18 @@ public class Agendamento implements Serializable {
         this.dataFim = dataFim;
     }
 
-    public Date getDataConcluido() {
-        return dataConcluido;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "data_conclusao", nullable = false)
+    public Date getDataConclusao() {
+        return dataConclusao;
     }
 
-    public void setDataConcluido(Date dataConcluido) {
-        this.dataConcluido = dataConcluido;
+    public void setDataConclusao(Date dataConclusao) {
+        this.dataConclusao = dataConclusao;
     }
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_agendamento", nullable = false, length = 20)
     public TipoAgendamento getTipoAgendamento() {
         return tipoAgendamento;
     }
@@ -83,6 +94,7 @@ public class Agendamento implements Serializable {
     }
 
     @ManyToOne
+    @JoinColumn(name = "usuario_id" ,nullable = false)
     public Usuario getUsuario() {
         return usuario;
     }

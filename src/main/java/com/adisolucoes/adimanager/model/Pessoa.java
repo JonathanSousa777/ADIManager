@@ -4,14 +4,21 @@ import com.adisolucoes.adimanager.enumerations.Sexo;
 import com.adisolucoes.adimanager.enumerations.UF;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -48,6 +55,8 @@ public class Pessoa implements Serializable {
         this.id = id;
     }
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_cadastro", nullable = false)
     public Date getDataCadastro() {
         return dataCadastro;
     }
@@ -56,6 +65,8 @@ public class Pessoa implements Serializable {
         this.dataCadastro = dataCadastro;
     }
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_atualizacao", nullable = false)
     public Date getDataAtualizacao() {
         return dataAtualizacao;
     }
@@ -73,6 +84,7 @@ public class Pessoa implements Serializable {
     }
 
     @ManyToOne
+    @JoinColumn(name = "usuario_id")
     public Usuario getUsuario() {
         return usuario;
     }
@@ -82,6 +94,7 @@ public class Pessoa implements Serializable {
     }
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     public Sexo getSexo() {
         return sexo;
     }
@@ -90,6 +103,7 @@ public class Pessoa implements Serializable {
         this.sexo = sexo;
     }
 
+    @Column(length = 200)
     public String getEmail() {
         return email;
     }
@@ -98,6 +112,7 @@ public class Pessoa implements Serializable {
         this.email = email;
     }
 
+    @Column(name = "cpf_cnpj", nullable = false, length = 30)
     public String getCpfCnpj() {
         return cpfCnpj;
     }
@@ -106,6 +121,7 @@ public class Pessoa implements Serializable {
         this.cpfCnpj = cpfCnpj;
     }
 
+    @Column(nullable = false, length = 30)
     public String getNacionalidade() {
         return nacionalidade;
     }
@@ -114,6 +130,8 @@ public class Pessoa implements Serializable {
         this.nacionalidade = nacionalidade;
     }
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_nascimento", nullable = false)
     public Date getDataNascimento() {
         return dataNascimento;
     }
@@ -122,6 +140,8 @@ public class Pessoa implements Serializable {
         this.dataNascimento = dataNascimento;
     }
 
+    @Lob
+    @Basic(fetch = FetchType.LAZY, optional = true)
     public byte[] getImagem() {
         return imagem;
     }
@@ -139,6 +159,7 @@ public class Pessoa implements Serializable {
         this.estado = estado;
     }
 
+    @Column(length = 25, nullable = false)
     public String getTelefone() {
         return telefone;
     }

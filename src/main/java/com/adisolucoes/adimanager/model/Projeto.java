@@ -5,19 +5,24 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -42,7 +47,7 @@ public class Projeto implements Serializable {
     private String codigoidentificador;
     private Plano plano;
     private boolean pago;
-    private String notaApoio;
+    private String observacaoComplementar;
     private Cliente cliente;
     private Date dataVencimento;
     private String formaPagamento;
@@ -71,6 +76,8 @@ public class Projeto implements Serializable {
         this.descricao = descricao;
     }
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_inicio", nullable = false)
     public Date getDataInicio() {
         return dataInicio;
     }
@@ -79,6 +86,8 @@ public class Projeto implements Serializable {
         this.dataInicio = dataInicio;
     }
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_fim", nullable = false)
     public Date getDataFim() {
         return dataFim;
     }
@@ -87,6 +96,7 @@ public class Projeto implements Serializable {
         this.dataFim = dataFim;
     }
 
+    @Column(nullable = false, precision = 20, scale = 2)
     public BigDecimal getValor() {
         return valor;
     }
@@ -95,6 +105,7 @@ public class Projeto implements Serializable {
         this.valor = valor;
     }
 
+    @Column(nullable = false, precision = 20, scale = 2)
     public BigDecimal getDesconto() {
         return desconto;
     }
@@ -103,6 +114,7 @@ public class Projeto implements Serializable {
         this.desconto = desconto;
     }
 
+    @Column(nullable = false, length = 50)
     public String getNomeSite() {
         return nomeSite;
     }
@@ -120,6 +132,7 @@ public class Projeto implements Serializable {
     }
 
     @OneToOne
+    @JoinColumn(name = "fase_id")
     public Fase getFase() {
         return fase;
     }
@@ -128,6 +141,7 @@ public class Projeto implements Serializable {
         this.fase = fase;
     }
 
+    @Column(name = "concluido")
     public boolean isConcluido() {
         return concluido;
     }
@@ -136,6 +150,8 @@ public class Projeto implements Serializable {
         this.concluido = concluido;
     }
 
+    @Lob
+    @Basic(fetch = FetchType.LAZY, optional = true)
     public byte[] getArquivo() {
         return arquivo;
     }
@@ -166,6 +182,7 @@ public class Projeto implements Serializable {
         this.acrescimos = acrescimos;
     }
 
+    @Column(name = "codigo_identificador", length = 30)
     public String getCodigoidentificador() {
         return codigoidentificador;
     }
@@ -175,6 +192,7 @@ public class Projeto implements Serializable {
     }
 
     @ManyToOne
+    @JoinColumn(name = "plano_id", nullable = false)
     public Plano getPlano() {
         return plano;
     }
@@ -183,6 +201,7 @@ public class Projeto implements Serializable {
         this.plano = plano;
     }
 
+    @Column(name = "pago")
     public boolean isPago() {
         return pago;
     }
@@ -191,15 +210,17 @@ public class Projeto implements Serializable {
         this.pago = pago;
     }
 
-    public String getNotaApoio() {
-        return notaApoio;
+    @Column(name = "observacao_complementar")
+    public String getObservacaoComplementar() {
+        return observacaoComplementar;
     }
 
-    public void setNotaApoio(String notaApoio) {
-        this.notaApoio = notaApoio;
+    public void setObservacaoComplementar(String observacaoComplementar) {
+        this.observacaoComplementar = observacaoComplementar;
     }
 
     @ManyToOne
+    @JoinColumn(name = "cliente_id", nullable = false)
     public Cliente getCliente() {
         return cliente;
     }
@@ -208,6 +229,8 @@ public class Projeto implements Serializable {
         this.cliente = cliente;
     }
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_vencimento", nullable = false)
     public Date getDataVencimento() {
         return dataVencimento;
     }
@@ -216,6 +239,7 @@ public class Projeto implements Serializable {
         this.dataVencimento = dataVencimento;
     }
 
+    @Column(name = "forma_pagamento", nullable = false, length = 40)
     public String getFormaPagamento() {
         return formaPagamento;
     }
@@ -225,6 +249,7 @@ public class Projeto implements Serializable {
     }
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_pagamento")
     public TipoPagamento getTipoPagamento() {
         return tipoPagamento;
     }
@@ -234,6 +259,7 @@ public class Projeto implements Serializable {
     }
 
     @ManyToOne
+    @JoinColumn(name = "servidor_id", nullable = false)
     public Servidor getServidor() {
         return servidor;
     }

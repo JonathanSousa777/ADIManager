@@ -2,7 +2,10 @@ package com.adisolucoes.adimanager.model;
 
 import com.adisolucoes.adimanager.enumerations.UF;
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 /**
  *
@@ -22,6 +25,7 @@ public class Endereco implements Serializable {
     public Endereco() {
     }
 
+    @Column(nullable = false)
     public String getLogradouro() {
         return logradouro;
     }
@@ -30,6 +34,7 @@ public class Endereco implements Serializable {
         this.logradouro = logradouro;
     }
 
+    @Column(length = 10)
     public String getNumero() {
         return numero;
     }
@@ -46,6 +51,7 @@ public class Endereco implements Serializable {
         this.complemento = complemento;
     }
 
+    @Column(length = 120, nullable = false)
     public String getCidade() {
         return cidade;
     }
@@ -54,6 +60,7 @@ public class Endereco implements Serializable {
         this.cidade = cidade;
     }
 
+    @Column(length = 120, nullable = false)
     public String getBairro() {
         return bairro;
     }
@@ -62,6 +69,8 @@ public class Endereco implements Serializable {
         this.bairro = bairro;
     }
 
+    @Enumerated(EnumType.STRING)
+    @Column(length = 100, nullable = false)
     public UF getUf() {
         return uf;
     }
@@ -70,6 +79,7 @@ public class Endereco implements Serializable {
         this.uf = uf;
     }
 
+    @Column(length = 45)
     public String getCep() {
         return cep;
     }
