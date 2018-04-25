@@ -24,6 +24,8 @@ public class Empresa implements Serializable {
     private String cnpj;
     private String nome;
     private String descricao;
+    private String telefone;
+    private String email;
     private byte[] logomarca;
     private Endereco endereco;
 
@@ -83,6 +85,24 @@ public class Empresa implements Serializable {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    @Column(length = 50, nullable = false)
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    @Column(length = 100, nullable = false)
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,6 +29,7 @@ public class Cliente implements Serializable {
     private String observacao;
     private List<Indicacao> indicacoes;
     private String codigoIdentificador;
+    private Pessoa pessoa;
 
     public Cliente() {
     }
@@ -94,6 +96,16 @@ public class Cliente implements Serializable {
 
     public void setCodigoIdentificador(String codigoIdentificador) {
         this.codigoIdentificador = codigoIdentificador;
+    }
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, orphanRemoval = false, targetEntity = Pessoa.class)
+    @JoinColumn(name = "tab_pessoas_id")
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
     @Override

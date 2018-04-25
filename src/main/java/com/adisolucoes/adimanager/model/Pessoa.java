@@ -30,6 +30,7 @@ public class Pessoa implements Serializable {
     private long id;
     private Date dataCadastro;
     private Date dataAtualizacao;
+    private String nome;
     private String observacao;
     private String email;
     private String cpfCnpj;
@@ -38,7 +39,6 @@ public class Pessoa implements Serializable {
     private byte[] imagem;
     private Usuario usuario;
     private Sexo sexo;
-    private UF estado;
     private String telefone;
     private Endereco endereco;
 
@@ -150,15 +150,6 @@ public class Pessoa implements Serializable {
         this.imagem = imagem;
     }
 
-    @Enumerated(EnumType.STRING)
-    public UF getEstado() {
-        return estado;
-    }
-
-    public void setEstado(UF estado) {
-        this.estado = estado;
-    }
-
     @Column(length = 25, nullable = false)
     public String getTelefone() {
         return telefone;
@@ -175,6 +166,15 @@ public class Pessoa implements Serializable {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    @Column(length = 100, nullable = false)
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     @Override

@@ -21,7 +21,6 @@ public class CategoriaPlano implements Serializable {
     private long id;
     private String nome;
     private String descricao;
-    private List<Plano> planos;
 
     public CategoriaPlano() {
     }
@@ -51,15 +50,6 @@ public class CategoriaPlano implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    @OneToMany(mappedBy = "categoriaPlano")
-    public List<Plano> getPlanos() {
-        return planos;
-    }
-
-    public void setPlanos(List<Plano> planos) {
-        this.planos = planos;
     }
 
     @Override

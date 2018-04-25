@@ -2,11 +2,13 @@ package com.adisolucoes.adimanager.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,6 +25,7 @@ public class Fase implements Serializable {
     private String descricao;
     private Date dataInicio;
     private Date dataFim;
+    private List<Projeto> projetos;
 
     public Fase() {
     }
@@ -63,6 +66,15 @@ public class Fase implements Serializable {
 
     public void setDataFim(Date dataFim) {
         this.dataFim = dataFim;
+    }
+
+    @ManyToMany(mappedBy = "fases")
+    public List<Projeto> getProjetos() {
+        return projetos;
+    }
+
+    public void setProjetos(List<Projeto> projetos) {
+        this.projetos = projetos;
     }
 
     @Override

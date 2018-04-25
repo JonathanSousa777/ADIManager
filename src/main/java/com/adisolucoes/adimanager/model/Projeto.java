@@ -19,7 +19,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -40,7 +39,7 @@ public class Projeto implements Serializable {
     private BigDecimal desconto;
     private String nomeSite;
     private String url;
-    private Fase fase;
+    private List<Fase> fases;
     private boolean concluido;
     private byte[] arquivo;
     private List<Acrescimo> acrescimos;
@@ -131,14 +130,15 @@ public class Projeto implements Serializable {
         this.url = url;
     }
 
-    @OneToOne
-    @JoinColumn(name = "fase_id")
-    public Fase getFase() {
-        return fase;
+    @ManyToMany
+    @JoinTable(name = "tab_projeto_tab_fase", joinColumns = @JoinColumn(name = "projeto_id"),
+            inverseJoinColumns = @JoinColumn(name = "fase_id"))
+    public List<Fase> getFases() {
+        return fases;
     }
 
-    public void setFase(Fase fase) {
-        this.fase = fase;
+    public void setFases(List<Fase> fases) {
+        this.fases = fases;
     }
 
     @Column(name = "concluido")
@@ -161,7 +161,7 @@ public class Projeto implements Serializable {
     }
 
     @ManyToMany
-    @JoinTable(name = "projeto_ferramenta", joinColumns = @JoinColumn(name = "projeto_id"),
+    @JoinTable(name = "tab_projeto_tab_ferramenta", joinColumns = @JoinColumn(name = "projeto_id"),
             inverseJoinColumns = @JoinColumn(name = "ferramenta_id"))
     public List<Ferramenta> getFerramentas() {
         return ferramentas;
@@ -172,7 +172,7 @@ public class Projeto implements Serializable {
     }
 
     @ManyToMany
-    @JoinTable(name = "projeto_acrescimo", joinColumns = @JoinColumn(name = "projeto_id"),
+    @JoinTable(name = "tab_projeto_tab_acrescimo", joinColumns = @JoinColumn(name = "projeto_id"),
             inverseJoinColumns = @JoinColumn(name = "acrescimo_id"))
     public List<Acrescimo> getAcrescimos() {
         return acrescimos;
