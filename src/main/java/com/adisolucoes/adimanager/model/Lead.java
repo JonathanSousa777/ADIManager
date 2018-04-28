@@ -1,7 +1,6 @@
 package com.adisolucoes.adimanager.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,14 +13,15 @@ import javax.persistence.Table;
  * @author Jonathan Sousa
  */
 @Entity
-@Table(name = "tab_acrescimo")
-public class Acrescimo implements Serializable {
+@Table(name = "tab_lead")
+public class Lead implements Serializable {
 
     private long id;
-    private String descricao;
-    private BigDecimal valor;
+    private String email;
+    private String observacao;
+    private boolean contatado;
 
-    public Acrescimo() {
+    public Lead() {
     }
 
     @Id
@@ -34,27 +34,36 @@ public class Acrescimo implements Serializable {
         this.id = id;
     }
 
-    public String getDescricao() {
-        return descricao;
+    @Column(length = 100)
+    public String getEmail() {
+        return email;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    @Column(nullable = false, precision = 20, scale = 2)
-    public BigDecimal getValor() {
-        return valor;
+    public String getObservacao() {
+        return observacao;
     }
 
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
+
+    @Column(name = "contatado", length = 10)
+    public boolean isContatado() {
+        return contatado;
+    }
+
+    public void setContatado(boolean contatado) {
+        this.contatado = contatado;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 53 * hash + (int) (this.id ^ (this.id >>> 32));
+        int hash = 5;
+        hash = 37 * hash + (int) (this.id ^ (this.id >>> 32));
         return hash;
     }
 
@@ -69,7 +78,7 @@ public class Acrescimo implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Acrescimo other = (Acrescimo) obj;
+        final Lead other = (Lead) obj;
         if (this.id != other.id) {
             return false;
         }

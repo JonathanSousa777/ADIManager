@@ -1,7 +1,6 @@
 package com.adisolucoes.adimanager.model;
 
 import com.adisolucoes.adimanager.enumerations.Sexo;
-import com.adisolucoes.adimanager.enumerations.UF;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
