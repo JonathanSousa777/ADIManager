@@ -16,6 +16,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 
@@ -29,8 +30,16 @@ public class Main {
 
         EntityManagerFactory factory;
         factory = Persistence.createEntityManagerFactory("ADIManagerPU");
+        EntityManager manager = getEntityManager(factory);
+        EntityTransaction trx = manager.getTransaction();
+        trx.begin();
 
+        //TESTE AQUI
+        inserirFase(manager);
+
+        trx.commit();
         close(factory);
+
     }
 
     //TESTE INSERIR FASE
