@@ -106,6 +106,7 @@ public class UsuarioBean implements Serializable {
             usuarioFiltrados.add(usuario);
             usuarioFiltrados.add(usuario2);
             usuarioDAO.salvar(usuario);
+            System.out.println("Cadastrado");
         } catch (ErroBancoDadosException ex) {
             LOG.log(Level.SEVERE, null, ex);
         }
