@@ -1,5 +1,15 @@
 /*CUSTOMIZAÇÕES AQUI*/
 
+body{
+    font-size: 14px;
+    font-family: Verdana, Helvetica, sans-serif;
+    font-weight: normal;
+}
+
+.width-full{
+    width: 100%;
+}
+
 .sidebar-menu li .a-item-menu:hover {
 	border-left: 3px solid #1cc09f;
 }
@@ -32,4 +42,18 @@ a .sidebar-menu li:hover i {
 	100% {
 		margin-left: 0;
 	}
+}
+
+/*CUSTOMIZAÇÃO TABELA*/
+.table-width{
+    width: 90%;
+    font-size: 13px;
+    font-weight: normal;
+    text-align: center;
+}
+
+.container-principal{
+    background-color: #FFFFFF;
+    border-radius: 6px;
+    padding: 20px;
 }
