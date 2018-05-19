@@ -13,62 +13,75 @@
     <ui:define name="breadcrumb"><h:link></h:link> Consulta de Usuários</ui:define>
 
     <ui:define name="conteudo">
-        <div class="container-principal">
-            <h:form id="form-consulta">
-                <div class="container">
+        <div class="box">
+            <div class="box-header with-border">
+                <h:form id="formDados">
+                    <p:messages id="usuarioMessages" autoUpdate="false" />
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12">
-                            <div class="col-xs-12 col-sm-5">
-                                <h:panelGrid columns="1" styleClass="width-full">
-                                    <p:outputLabel value="Nome" for="nome"/>
-                                    <p:inputText id="nome" styleClass="width-full"/>
-                                </h:panelGrid>
-                            </div>
-                            <div class="col-xs-12 col-sm-5">
-                                <h:panelGrid columns="1" styleClass="width-full">
-                                    <p:outputLabel value="Tipo de Usuário" for="tipoUsuario"/>
-                                    <h:selectOneMenu id="tipoUsuario" styleClass="width-full form-control">
-                                        <f:selectItem itemLabel="Selecione um tipo..." noSelectionOption="true"/>
-                                    </h:selectOneMenu>
-                                </h:panelGrid>
-                            </div>
-                            <div class="col-xs-12 col-sm-2">
-                                <h:panelGrid columns="1" styleClass="width-full">
-                                    <br/>
-                                    <p:commandLink styleClass="btn btn-info" ><i class="fa fa-search"></i> Buscar</p:commandLink>
-                                </h:panelGrid>
+                        <div class="col-sm-12 col-lg-12">
+                            <div class="col-sm-12 col-lg-12">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <h:panelGrid columns="1" styleClass="width-full">
+                                            <p:outputLabel value="Nome" />
+                                            <p:inputText id="inputNome"
+                                                         value="#{usuarioBean.nome}"
+                                                         styleClass="form-control"
+                                                         label="Nome"/>
+                                        </h:panelGrid>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <h:panelGrid columns="1" styleClass="width-full">
+                                            <p:outputLabel value="Tipo de Usário" />
+                                            <p:selectOneMenu id="selectTipo"
+                                                             label="Tipo"
+                                                             value="#{usuarioBean.tipoUsuario}">
+                                                <f:selectItem itemLabel="Selecione um Perfil de Usuário" itemValue="" noSelectionOption="true"/>
+                                                <f:selectItems value="#{usuarioBean.tiposUsuario}" var="tipo" itemLabel="#{tipo.descricao}" itemValue="#{tipo}" />
+                                            </p:selectOneMenu>
+                                        </h:panelGrid>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <h:panelGrid columns="1" styleClass="width-full">
+                                            <br/>
+                                            <p:commandLink styleClass="btn btn-info" title="Buscar Usuários" action="#{usuarioBean.pesquisar()}"
+                                                           update="formDados formTable:idDataTableUsuarios" process="@form">
+                                                <i class="fa fa fa-search"></i>
+                                                <span>Buscar</span>
+                                            </p:commandLink>
+                                        </h:panelGrid>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <p:spacer height="20"/>
-
-                <div class="container">
-                    <div class="row">
-                        <p:dataTable id="tableUsuarios"
-                                     value="#{usuarioBean.usuarioFiltrados}"
-                                     var="usuario"
-                                     styleClass="table-width"
-                                     emptyMessage="Nenhum registro encontrado" 
-                                     tableStyle="table-layout:auto;"
-                                     rows="10" 
-                                     paginator="true" 
-                                     paginatorPosition="bottom">
-                            <p:column headerText="Nome" priority="1">
-                                <h:outputText value="#{usuario.pessoa.nome}"/>
-                            </p:column>
-                            <p:column headerText="E-mail" priority="2">
-                                <h:outputText value="#{usuario.pessoa.email}"/>
-                            </p:column>
-                            <p:column headerText="Telefone" priority="1">
-                                <h:outputText value="#{usuario.pessoa.telefone}"/>
-                            </p:column>
-                            <p:column headerText="Tipo de Usuário" priority="2">
-                                <h:outputText value="#{usuario.tipoUsuario.descricao}"/>
-                            </p:column>
-                        </p:dataTable>
-                    </div>
+                </h:form>
+            </div>
+            <h:form id="formTable" >
+                <div id="boxBody" class="box-body">
+                    <p:dataTable value="#{usuarioBean.usuarioFiltrados}" 
+                                 id="idDataTableUsuarios"
+                                 var="usuario" 
+                                 rows="50" 
+                                 rowsPerPageTemplate="25,50,100"
+                                 paginator="true" 
+                                 paginatorPosition="bottom"
+                                 tableStyle="table-layout:auto;"
+                                 emptyMessage="Nenhum Usuário encontrado"
+                                 styleClass="datatable-custom">
+                        <p:column headerText="Nome" priority="1">
+                            <h:outputText value="#{usuario.pessoa.nome}"/>
+                        </p:column>
+                        <p:column headerText="CPF/CNPJ" priority="2">
+                            <h:outputText value="#{usuario.pessoa.cpfCnpj}"/>
+                        </p:column>
+                        <p:column headerText="Tipo de Usuário" priority="1">
+                            <h:outputText value="#{usuario.tipoUsuario.descricao}"/>
+                        </p:column>
+                        <p:column headerText="E-mail" priority="2">
+                            <h:outputText value="#{usuario.pessoa.email}"/>
+                        </p:column>
+                    </p:dataTable>
                 </div>
             </h:form>
         </div>

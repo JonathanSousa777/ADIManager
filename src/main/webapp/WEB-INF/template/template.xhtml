@@ -3,7 +3,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,16 +13,11 @@
         <link rel="shortcut icon" href="#{request.contextPath}/resources/images/favicon.png" /> 
         <title>ADI Manager<ui:insert name="complementoTitulo"/> </title>
 
-        <!-- SETANDO RESPONSIVIDADE -->
-        <h:outputStylesheet library="template" name="bootstrap/css/bootstrap.min.css"/>
-        <!-- FONT AWESOME -->
-        <h:outputStylesheet library="template" name="font-awesome/css/font-awesome.min.css" />
-        <!-- STYLE TEMPLATE -->
-        <h:outputStylesheet library="template" name="person/css/person.css" />
-        <!-- SKINS DE CORES DO TEMPLATE -->
-        <h:outputStylesheet library="template" name="person/css/skins/skin.min.css" />
-        <!-- CUSTOMIZAÇÕES EXTRAS -->
-        <h:outputStylesheet library="template" name="person/css/custom.css" />
+        <h:outputStylesheet library="bootstrap" name="css/bootstrap.min.css"/>
+        <h:outputStylesheet library="adminlte" name="css/adminlte.min.css"/>
+        <h:outputStylesheet library="adminlte" name="css/all-skins.min.css"/>
+        <h:outputStylesheet library="adimanager" name="css/adimanager.css"/>
+        <h:outputStylesheet library="primefaces-bootstrap" name="custom.css"/>
     </h:head>
 
     <h:body class="hold-transition skin-blue sidebar-mini">
@@ -41,8 +37,8 @@
                 <!-- NAVBAR SUPERIOR -->
                 <nav class="navbar navbar-static-top" role="navigation">
                     <!-- BOTÃO MENU DINÂMICO-->
-                    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                        <span class="sr-only">BOTÃO DE NAVEGAÇÃO</span>
+                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only"></span>
                     </a>
                     <!-- NAVBAR DIREITA -->
                     <div class="navbar-custom-menu">
@@ -206,16 +202,14 @@
                     <!-- INDICAÇÃO DE PÁGINA DIREITA -->
                     <ol class="breadcrumb">
                         <li><a href="#"><h:link outcome="index"><i class="fa fa-dashboard"></i>Dashboard</h:link></a></li>
-                        <li class="active"><ui:insert name="breadcrumb">Dashboard</ui:insert></li>
+                        <li class="active"><ui:insert name="breadcrumb">Dashboards</ui:insert></li>
                     </ol>
                 </section>
 
                 <!-- CONTEÚDO -->
-                <section class="content container-fluid">
-                    <ui:insert name="conteudo">
-
-                    </ui:insert>
-                </section>
+                <p:spacer height="10" />
+                <ui:insert name="conteudo">
+                </ui:insert>
                 <!-- FIM DO CONTEUDO -->
 
             </div>
@@ -295,11 +289,9 @@
         </div>
 
         <!-- SCRIPTS -->
-        <!-- jQuery 3 -->
-        <h:outputScript library="template" name="jquery/jquery.min.js" />
-        <!-- Bootstrap 3.3.7 -->
-        <h:outputScript library="template" name="bootstrap/js/bootstrap.min.js" />
-        <!-- Person JS -->
-        <h:outputScript library="template" name="person/js/person.min.js" />
+        <h:outputScript library="primefaces" name="jquery/jquery.js" />
+        <h:outputScript library="bootstrap" name="js/bootstrap.min.js"/>
+        <h:outputScript library="adminlte" name="js/app.min.js"/>
+        <h:outputScript library="adimanager" name="js/adimanager.js"/>
     </h:body>
 </html>
