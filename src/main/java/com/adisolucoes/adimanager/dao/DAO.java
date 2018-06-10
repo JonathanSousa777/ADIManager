@@ -4,10 +4,9 @@ import com.adisolucoes.adimanager.exceptions.ErroBancoDadosException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 
 /**
@@ -16,15 +15,14 @@ import javax.persistence.criteria.CriteriaQuery;
  */
 public abstract class DAO<T> implements Serializable {
 
-    private final Class<T> classe;
-    protected EntityManagerFactory factory;
+    @Inject
     protected EntityManager manager;
+
+    private final Class<T> classe;
     protected EntityTransaction trx;
 
     public DAO(Class<T> classe) {
         this.classe = classe;
-        factory = Persistence.createEntityManagerFactory("ADIManagerPU");
-        manager = factory.createEntityManager();
     }
 
     public void salvar(T t) throws ErroBancoDadosException {

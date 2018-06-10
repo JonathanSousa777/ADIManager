@@ -172,9 +172,19 @@
                     <!-- BLOCO DE MENU -->
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header">MENU DE NAVEGAÇÃO</li>
-                        <!-- LINKS DE MENU -->
-                        <li class=""><a href="#" class="a-item-menu"><i class="fa fa-dashboard"></i> <span>Ativo</span></a></li>
-                        <li><a href="#" class="a-item-menu"><i class="fa fa-file-o"></i> <span>Segundo link</span></a></li>
+                        <!-- LINKS DE MENU --> 
+                        <li>
+                            <p:link outcome="dashboard">
+                                <i class="fa fa-dashboard"></i> 
+                                <span>Dashboard</span>
+                            </p:link>
+                        </li>
+                        <li>
+                            <p:link outcome="consultarUsuario">
+                                <i class="fa fa-users"></i> 
+                                <span>Usuarios</span>
+                            </p:link>
+                        </li>
                         <li class="treeview">
                             <a href="#" class="a-item-menu"><i class="fa fa-user"></i> <span>Link com Dropdown</span>
                                 <span class="pull-right-container">
@@ -201,7 +211,7 @@
                     </h1>
                     <!-- INDICAÇÃO DE PÁGINA DIREITA -->
                     <ol class="breadcrumb">
-                        <li><a href="#"><h:link outcome="index"><i class="fa fa-dashboard"></i>Dashboard</h:link></a></li>
+                        <li><a href="#"><h:link outcome="dashboard"><i class="fa fa-dashboard"></i>Dashboard</h:link></a></li>
                         <li class="active"><ui:insert name="breadcrumb">Dashboards</ui:insert></li>
                     </ol>
                 </section>

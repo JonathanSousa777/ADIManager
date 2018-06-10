@@ -1,0 +1,16 @@
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+    <utl-mapping id="consultarUsuario">
+        <pattern value="/usuarios"/>
+        <view-id value="/consultarUsuario.xhtml"/>
+    </utl-mapping>
+
+<!--    <utl-mapping id="dashboard">
+        <pattern value="/dashboard"/>
+        <view-id value="/dashboard.xhtml"/>
+    </utl-mapping>-->
+
+</pretty-config>
