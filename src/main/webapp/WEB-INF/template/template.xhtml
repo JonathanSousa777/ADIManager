@@ -88,7 +88,10 @@
                                                 <a href="#" class="btn btn-default btn-flat">Perfil</a>
                                             </div>
                                             <div class="pull-right">
-                                                <a href="#" class="btn btn-default btn-flat">Deslogar</a>
+                                                <a class="btn btn-info" title="Sair do sistema" href="/ADIManager/j_spring_security_logout">
+                                                    <i class="fa fa fa-search"></i>
+                                                    <span>Sair</span>
+                                                </a>
                                             </div>
                                         </li>
                                     </li>
@@ -174,13 +177,13 @@
                         <li class="header">MENU DE NAVEGAÇÃO</li>
                         <!-- LINKS DE MENU --> 
                         <li>
-                            <p:link outcome="dashboard">
+                            <p:link outcome="pretty:dashboard">
                                 <i class="fa fa-dashboard"></i> 
                                 <span>Dashboard</span>
                             </p:link>
                         </li>
                         <li>
-                            <p:link outcome="consultarUsuario">
+                            <p:link outcome="pretty:consulta-usuarios">
                                 <i class="fa fa-users"></i> 
                                 <span>Usuarios</span>
                             </p:link>
@@ -297,6 +300,11 @@
             </aside>
             <!-- BLOCO EXTRA DIREITO -->
         </div>
+
+        <p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"/>
+        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closeOnEscape="false" closable="false" resizable="false" responsive="true" showHeader="false">
+            <p:graphicImage value="#{pageContext.servletContext.contextPath}/resources/images/loading.gif" style="width: 65px; height: 65px"/>
+        </p:dialog>
 
         <!-- SCRIPTS -->
         <h:outputScript library="primefaces" name="jquery/jquery.js" />
