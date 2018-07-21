@@ -33,7 +33,7 @@ public class Usuario implements Serializable {
     private String login;
     private String senha;
     private Pessoa pessoa;
-    private boolean status;
+    private boolean ativo;
     private TipoUsuario tipoUsuario;
 
     public Usuario() {
@@ -80,12 +80,12 @@ public class Usuario implements Serializable {
     }
 
     @Column(name = "ativo")
-    public boolean isStatus() {
-        return status;
+    public boolean isAtivo() {
+        return ativo;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 
     @Column(nullable = false)

@@ -47,4 +47,20 @@ public class UsuarioDAO extends DAO<Usuario> implements Serializable {
             return null;
         }
     }
+
+    public Usuario buscarPorLoginSenha(String login, String senha) throws ErroBancoDadosException {
+        Usuario usuario = null;
+        try {
+            String sql = "SELECT u FROM Usuario u WHERE u.login = :login AND u.senha =:senha";
+            TypedQuery<Usuario> query = manager.createQuery(sql, Usuario.class);
+            query.setParameter("login", login);
+            query.setParameter("senha", senha);
+            usuario = query.getSingleResult();
+        } catch (NonUniqueResultException | IllegalArgumentException ex) {
+            throw new ErroBancoDadosException(ex.getMessage());
+        } catch (NoResultException ex) {
+            usuario = null;
+        }
+        return usuario;
+    }
 }

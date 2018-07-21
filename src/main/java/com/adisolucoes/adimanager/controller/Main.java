@@ -238,11 +238,11 @@ public class Main {
 
             Pessoa pessoa = new Pessoa();
             pessoa.setCpfCnpj("098764343");
-            pessoa.setNome("Jonathan Silva Sousa");
+            pessoa.setNome("Juliano Miguel");
             pessoa.setDataAtualizacao(new Date());
             pessoa.setDataCadastro(new Date());
             pessoa.setDataNascimento(new Date());
-            pessoa.setEmail("marioadi157@gmail");
+            pessoa.setEmail("as@gmail");
             pessoa.setEndereco(endereco);
             pessoa.setNacionalidade("Brasileiro");
             pessoa.setObservacao("Referenciada");
@@ -256,8 +256,8 @@ public class Main {
             usuario.setLogin("JUnior teste");
             usuario.setPessoa(pessoa);
             usuario.setSenha("22323");
-            usuario.setStatus(true);
-            usuario.setTipoUsuario(TipoUsuario.MASTER);
+            usuario.setAtivo(true);
+            usuario.setTipoUsuario(TipoUsuario.FUNCIONARIO);
             usuario.setPessoa(pessoa);
 
             manager.persist(usuario);

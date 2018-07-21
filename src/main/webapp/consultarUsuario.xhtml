@@ -44,7 +44,7 @@
                                         <h:panelGrid columns="1" styleClass="width-full">
                                             <br/>
                                             <p:commandLink styleClass="btn btn-info" title="Buscar Usuários" action="#{usuarioBean.pesquisar()}"
-                                                           update="formDados formTable:idDataTableUsuarios" process="@form">
+                                                           update="formDados #{p:component('idDataTableUsuarios')}" process="@form">
                                                 <i class="fa fa fa-search"></i>
                                                 <span>Buscar</span>
                                             </p:commandLink>

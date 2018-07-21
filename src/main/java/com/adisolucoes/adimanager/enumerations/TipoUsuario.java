@@ -7,22 +7,32 @@ import java.io.Serializable;
  * @author Jonathan Sousa
  */
 public enum TipoUsuario implements Serializable {
-    MASTER("Master"),
-    FUNCIONARIO("Funcionário"),
-    CLIENTE("Cliente");
+    MASTER("Master", new String[]{"consultarUsuario.xhtml"}),
+    FUNCIONARIO("Funcionario", new String[]{}),
+    CLIENTE("Cliente", new String[]{});
 
-    private String descricao;
+    private final String descricao;
+    private final String[] paginas;
 
-    private TipoUsuario(String descricao) {
+    private TipoUsuario(String descricao, String[] paginas) {
         this.descricao = descricao;
+        this.paginas = paginas;
+    }
+
+    public String[] getPaginas() {
+        return paginas;
     }
 
     public String getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public static TipoUsuario fromDescricao(String descricao) {
+        for (TipoUsuario tipoUsuario : TipoUsuario.values()) {
+            if (tipoUsuario.getDescricao().equals(descricao)) {
+                return tipoUsuario;
+            }
+        }
+        throw new UnsupportedOperationException("O tipo usuário " + descricao + " não é suportado");
     }
-
 }

@@ -9,6 +9,12 @@
         </locale-config>
     </application>
     
+    <lifecycle>
+        <phase-listener>
+            com.adisolucoes.adimanager.listener.LoginPhaseListener
+        </phase-listener>
+    </lifecycle>
+    
     <factory>
         <exception-handler-factory>
             com.adisolucoes.adimanager.util.jsf.JsfExceptionHandlerFactory

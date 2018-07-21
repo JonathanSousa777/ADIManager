@@ -12,4 +12,8 @@
         <pattern value="/dashboard"/>
         <view-id value="/dashboard.xhtml"/>
     </url-mapping>
+    <url-mapping id="login">
+        <pattern value="/login"/>
+        <view-id value="/login.xhtml"/>
+    </url-mapping>
 </pretty-config>
