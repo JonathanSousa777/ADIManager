@@ -1,14 +1,19 @@
 package com.adisolucoes.adimanager.controller;
 
 import com.adisolucoes.adimanager.dao.UsuarioDAO;
+import com.adisolucoes.adimanager.enumerations.Sexo;
 import com.adisolucoes.adimanager.enumerations.TipoUsuario;
+import com.adisolucoes.adimanager.enumerations.UF;
 import com.adisolucoes.adimanager.exceptions.ErroBancoDadosException;
+import com.adisolucoes.adimanager.model.Endereco;
+import com.adisolucoes.adimanager.model.Pessoa;
 import com.adisolucoes.adimanager.model.Usuario;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -28,10 +33,21 @@ public class UsuarioBean implements Serializable {
     @Inject
     private Usuario usuario;
 
+    private Pessoa pessoa;
+    private Endereco endereco;
     private String nome;
     private TipoUsuario tipoUsuario;
 
     private List<Usuario> usuarioFiltrados;
+
+    @PostConstruct
+    public void inicializar() {
+        pessoa = new Pessoa();
+        endereco = new Endereco();
+        pessoa.setEndereco(endereco);
+        usuario = new Usuario();
+        usuario.setPessoa(pessoa);
+    }
 
     public List<Usuario> pesquisar() {
         try {
@@ -43,6 +59,10 @@ public class UsuarioBean implements Serializable {
             LOG.log(Level.SEVERE, null, ex);
         }
         return usuarioFiltrados;
+    }
+
+    public void salvar() {
+        System.out.println("teste");
     }
 
     public void preencherTabela() {
@@ -57,6 +77,10 @@ public class UsuarioBean implements Serializable {
         return TipoUsuario.values();
     }
 
+    public UF[] getEstados() {
+        return UF.values();
+    }
+
     public List<Usuario> getUsuarioFiltrados() {
         if (usuarioFiltrados == null) {
             preencherTabela();
@@ -66,6 +90,10 @@ public class UsuarioBean implements Serializable {
 
     public void setUsuarioFiltrados(List<Usuario> usuarioFiltrados) {
         this.usuarioFiltrados = usuarioFiltrados;
+    }
+
+    public Sexo[] getSexos() {
+        return Sexo.values();
     }
 
     public Usuario getUsuario() {
@@ -90,6 +118,14 @@ public class UsuarioBean implements Serializable {
 
     public void setTipoUsuario(TipoUsuario tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
 }

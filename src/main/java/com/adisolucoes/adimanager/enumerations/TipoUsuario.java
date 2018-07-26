@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @author Jonathan Sousa
  */
 public enum TipoUsuario implements Serializable {
-    MASTER("Master", new String[]{"consultarUsuario.xhtml"}),
+    MASTER("Master", new String[]{"consultarUsuario.xhtml", "cadastrarUsuario.xhtml"}),
     FUNCIONARIO("Funcionario", new String[]{}),
     CLIENTE("Cliente", new String[]{});
 

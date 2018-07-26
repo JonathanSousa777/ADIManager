@@ -16,4 +16,8 @@
         <pattern value="/login"/>
         <view-id value="/login.xhtml"/>
     </url-mapping>
+    <url-mapping id="cadastro-usuarios">
+        <pattern value="/cadastro-usuarios"/>
+        <view-id value="/cadastrarUsuario.xhtml"/>
+    </url-mapping>
 </pretty-config>
