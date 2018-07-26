@@ -40,13 +40,13 @@
 }
 
 .botaoVerde{    
-    background-color: #1cab42 !important;
+    background-color: #199236 !important;
     color: #fff !important;
     text-shadow: none;
 }
 
 .botaoVerde:hover{
-    background-color:#397458 !important; 
+    background-color:#0e7c28 !important; 
 }
 
 .botaoCinza{    
@@ -70,7 +70,6 @@ input.botaoCinza, input.botaoAzul, input.botaoVerde{
 .btn {
     color: #ffffff;
     font-size: 15px;
-    background: #3498db;
     padding: 10px 20px 10px 20px;
     text-decoration: none;
 }
@@ -232,4 +231,92 @@ a:active {
     .ui-fileupload-buttonbar .ui-button {
         padding: 0em !important;
     }
+}
+
+/* PAGINA LOGIN*/
+.login-body{
+    background-image: url("#{resource['images/bg-dark.jpg']}");
+    height: 100%;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: auto;
+}
+
+.container--space{
+    margin-top: 100px;
+}
+
+.login-header{
+    background-color: #199236;
+    text-align: center;
+    padding: 8px 14px;
+    border-radius: 2px;
+    -webkit-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 6px 10px 0 rgba(0, 0, 0, 0.14);
+    -moz-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 6px 10px 0 rgba(0, 0, 0, 0.14);
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 6px 10px 0 rgba(0, 0, 0, 0.14);
+ 
+}
+
+.container-login{
+    padding: 50px 70px;
+    background-color: hsla(0, 8%, 95%, 0.94);
+    border-radius: 1px;
+    -webkit-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 6px 10px 0 rgba(0, 0, 0, 0.14);
+    -moz-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 6px 10px 0 rgba(0, 0, 0, 0.14);
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 6px 10px 0 rgba(0, 0, 0, 0.14);
+
+    }
+
+ @media (max-width: 400px) {
+  .container-login{
+    padding: 50px 20px;
+    background-color: hsla(0, 8%, 95%, 0.94);
+    border-radius: 1px;
+    -webkit-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 6px 10px 0 rgba(0, 0, 0, 0.14);
+    -moz-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 6px 10px 0 rgba(0, 0, 0, 0.14);
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 6px 10px 0 rgba(0, 0, 0, 0.14);
+    }
+}
+
+.container-login h1{
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 16px;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.input-field{
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.login-footer{
+    color: #fff;
+    text-align: center;
+    padding: 8px 14px;
+}
+
+.login-footer h1{
+    font-size: 14px;
+    margin-top: -5px;
+}
+
+.login-footer p{
+    font-size: 12px;
+}
+
+/* PAGINAS DE ERRORS */
+p{line-height: 18px; margin-top: -10px; font-weight: bold;}
+.display-1 {text-align:center;margin-bottom: -20px;color: #199236;}
+.fa-space{margin: 0px 2px;}
+.display-1 .fa {animation:fa-spin 5s infinite linear;}
+.display-3 {text-align:center;color:#199236;font-size: 35pt; color: #333;}
+.lower-case {text-align:center;}
+.container-error{
+    height: 505px;
+    background-color: #FFFFFF;
+    border-radius: 6px;
+    padding: 140px 20px;
 }

@@ -20,24 +20,57 @@
         <h:outputStylesheet library="primefaces-bootstrap" name="custom.css"/>
     </h:head>
 
-    <h:body class="hold-transition skin-blue sidebar-mini">
-        <h:form id="formLogin">
-            <p:growl id="growl" autoUpdate="false"/>
-            <h:panelGrid columns="2">
-                <p:outputLabel value="Usuário" for="usuario"/>
-                <h:inputText id="usuario" value="#{loginBean.login}"/>
-                <p:outputLabel value="Senha" for="senha" />
-                <p:password id="senha" value="#{loginBean.senha}"/>
-                <p:commandLink styleClass="btn btn-info" title="Enviar" 
-                               process="@this usuario senha"
-                               update="formLogin"
-                               ajax="false"
-                               action="#{loginBean.efetuarLogin()}">
-                    <i class="fa fa fa-sign-in"></i>
-                    <span>Enviar</span>
-                </p:commandLink>
-            </h:panelGrid>
-        </h:form>
+    <h:body class="login-body">
+        <div class="container container--space" >
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+                    <div class="login-header">
+                        <h:graphicImage library="images" name="teste-a.png" width="60" height="60"/>
+                    </div>
+                    <div class="container-login">
+                        <h:form id="formLogin">
+                            <p:growl id="growl" autoUpdate="false"/>
+                            <h1>ADI Manager</h1>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="input-field col-xs-12 col-sm-12">
+                                        <label class="control-label">Usuário</label>
+                                        <p:inputText class="form-control" id="usuario" value="#{loginBean.login}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="input-field col-xs-12 col-sm-12">
+                                        <label class="control-label">Senha</label>
+                                        <p:password class="form-control" id="senha" value="#{loginBean.senha}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="input-field col-xs-12 col-sm-12">
+                                        <p:commandButton styleClass="btn botaoVerde btn-block" value="Logar"
+                                                       process="@this usuario senha"
+                                                       update="formlogin"
+                                                       ajax="false"
+                                                       action="#{loginBean.efetuarLogin()}">
+                                        </p:commandButton>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                    <div class="login-footer">
+                        <hgroup>
+                            <h1>ADI Manager</h1>
+                            <p>1.0</p>
+                        </hgroup>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- SCRIPTS -->
         <h:outputScript library="primefaces" name="jquery/jquery.js" />
