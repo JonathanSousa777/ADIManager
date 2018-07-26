@@ -41,13 +41,24 @@
                                         </h:panelGrid>
                                     </div>
                                     <div class="col-sm-2">
-                                        <h:panelGrid columns="1" styleClass="width-full">
-                                            <br/>
-                                            <p:commandLink styleClass="btn btn-info" title="Buscar Usuários" action="#{usuarioBean.pesquisar()}"
-                                                           update="formDados #{p:component('idDataTableUsuarios')}" process="@form">
-                                                <i class="fa fa fa-search"></i>
-                                                <span>Buscar</span>
-                                            </p:commandLink>
+                                        <h:panelGrid columns="2" styleClass="width-full">
+                                            <h:panelGroup>
+                                                <br/>
+                                                <p:commandLink styleClass="btn btn-info" title="Buscar Usuários" action="#{usuarioBean.pesquisar()}"
+                                                               update="formDados #{p:component('idDataTableUsuarios')}" process="@form">
+                                                    <i class="fa fa fa-search"></i>
+                                                    <span>Buscar</span>
+                                                </p:commandLink>
+                                            </h:panelGroup>
+                                            <h:panelGroup>
+                                                <br/>
+                                                <p:commandLink styleClass="btn botaoVerde" title="Cadastrar Usuários" 
+                                                               action="pretty:cadastro-usuarios"
+                                                               update="formDados #{p:component('idDataTableUsuarios')}" process="@form">
+                                                    <i class="fa fa fa-plus"></i>
+                                                    <span>Cadastrar</span>
+                                                </p:commandLink>
+                                            </h:panelGroup>
                                         </h:panelGrid>
                                     </div>
                                 </div>
