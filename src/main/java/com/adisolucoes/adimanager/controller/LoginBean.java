@@ -42,6 +42,7 @@ public class LoginBean implements Serializable {
                 if (usuarioTemporario.isAtivo()) {
                     usuarioTemporario.setDataUltimoAcesso(new Date());
                     usuarioDAO.atualizar(usuarioTemporario);
+                    usuarioTemporario.setDataUltimoAcesso(new Date());
                     FacesUtils.setUsuarioLogado(usuarioTemporario);
                     retorno = "pretty:dashboard";
                 } else {

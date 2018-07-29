@@ -333,6 +333,12 @@ a:active {
     font-size: 12px;
 }
 
+.painel-botoes {
+    display: block;
+    text-align: center;
+    margin: 15px 0 5px 0;
+}
+
 /* PAGINAS DE ERRORS */
 p{line-height: 18px; margin-top: -10px; font-weight: bold;}
 .display-1 {text-align:center;margin-bottom: -20px;color: #199236;}

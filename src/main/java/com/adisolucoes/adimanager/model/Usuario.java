@@ -27,8 +27,6 @@ import javax.persistence.TemporalType;
 public class Usuario implements Serializable {
 
     private long id;
-    private Date dataCadastro;
-    private Date dataAtualizacao;
     private Date dataUltimoAcesso;
     private String login;
     private String senha;
@@ -47,26 +45,6 @@ public class Usuario implements Serializable {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    @Temporal(TemporalType.DATE)
-    @Column(name = "data_cadastro", nullable = false)
-    public Date getDataCadastro() {
-        return dataCadastro;
-    }
-
-    public void setDataCadastro(Date dataCadastro) {
-        this.dataCadastro = dataCadastro;
-    }
-
-    @Temporal(TemporalType.DATE)
-    @Column(name = "data_atualizacao", nullable = false)
-    public Date getDataAtualizacao() {
-        return dataAtualizacao;
-    }
-
-    public void setDataAtualizacao(Date dataAtualizacao) {
-        this.dataAtualizacao = dataAtualizacao;
     }
 
     @Temporal(TemporalType.DATE)

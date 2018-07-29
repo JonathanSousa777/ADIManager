@@ -2,6 +2,7 @@ package com.adisolucoes.adimanager.dao;
 
 import com.adisolucoes.adimanager.enumerations.TipoUsuario;
 import com.adisolucoes.adimanager.exceptions.ErroBancoDadosException;
+import com.adisolucoes.adimanager.exceptions.ErroLoginDuplicadoException;
 import com.adisolucoes.adimanager.model.Usuario;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -62,5 +63,16 @@ public class UsuarioDAO extends DAO<Usuario> implements Serializable {
             usuario = null;
         }
         return usuario;
+    }
+
+    public void verificarLoginDuplicado(String login) throws ErroBancoDadosException, ErroLoginDuplicadoException {
+        try {
+            TypedQuery<Usuario> query = manager.createQuery("SELECT u FROM Usuario u WHERE u.login = :login", Usuario.class);
+            query.setParameter("login", login);
+            Usuario usuario = query.getSingleResult();
+            throw new ErroLoginDuplicadoException(usuario);
+        } catch (NoResultException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        }
     }
 }

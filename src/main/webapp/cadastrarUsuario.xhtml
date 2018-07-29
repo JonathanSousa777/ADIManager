@@ -15,6 +15,7 @@
     <ui:define name="conteudo">
         <div class="box">
             <div class="box-header with-border">
+                <p:messages id="messages" autoUpdate="false" closable="true"/>
                 <h:form id="formDadosUsuario">
                     <div class="col-sm-12">
                         <div class="panel panel-default">
@@ -38,7 +39,7 @@
                                             <div class="col-xs-12 col-sm-8">
                                                 <div class="col-xs-12 col-sm-12">
                                                     <p:outputLabel value="Nome" for="nome"/>
-                                                    <p:inputText id="nome" styleClass="width-full" value="#{usuarioBean.usuario.pessoa.nome}"/>
+                                                    <p:inputText id="nome" styleClass="width-full" value="#{usuarioBean.usuario.pessoa.nome}" required="true"/>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-12">
                                                     <p:outputLabel value="E-mail" for="email"/>
@@ -46,25 +47,33 @@
                                                 </div>
                                                 <div class="col-xs-12 col-sm-6">
                                                     <p:outputLabel value="Nacionalidade" for="nacionalidade"/>
-                                                    <p:inputText id="nacionalidade" value="#{usuarioBean.usuario.pessoa.nacionalidade}" styleClass="width-full"/>
+                                                    <p:inputText id="nacionalidade" value="#{usuarioBean.usuario.pessoa.nacionalidade}" styleClass="width-full" required="true"/>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-6">
                                                     <p:outputLabel value="Telefone" for="telefone"/>
-                                                    <p:inputMask id="telefone" value="#{usuarioBean.usuario.pessoa.telefone}" styleClass="width-full" mask="(99)9999-9999" />
+                                                    <p:inputMask id="telefone" value="#{usuarioBean.usuario.pessoa.telefone}" styleClass="width-full" mask="(99)9999-9999" required="true"/>
                                                 </div>
                                             </div>
                                             <div class="col-xs-12 col-sm-4">
                                                 <div class="col-xs-12 col-sm-12">
                                                     <p:outputLabel value="Data de Nascimento" for="dataNascimento"/><br/>
-                                                    <p:calendar id="dataNascimento" value="#{usuarioBean.usuario.pessoa.dataNascimento}" styleClass="width-full-input"/>
+                                                    <p:calendar id="dataNascimento" 
+                                                                required="true"
+                                                                navigator="true" 
+                                                                effect="fade"
+                                                                placeholder="__/__/____"
+                                                                pattern="dd/MM/yyyy"
+                                                                value="#{usuarioBean.usuario.pessoa.dataNascimento}" 
+                                                                styleClass="width-full-input" 
+                                                                locale="pt"/>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-12">
                                                     <p:outputLabel value="CPF" for="cpf"/>
-                                                    <p:inputMask id="cpf" value="#{usuarioBean.usuario.pessoa.cpfCnpj}" styleClass="width-full" mask="999.999.999-99"/>
+                                                    <p:inputMask id="cpf" value="#{usuarioBean.usuario.pessoa.cpfCnpj}" styleClass="width-full" mask="999.999.999-99" required="true"/>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-12">
                                                     <p:outputLabel value="Sexo" for="sexo"/>
-                                                    <p:selectOneRadio id="sexo" styleClass="width-full">
+                                                    <p:selectOneRadio id="sexo" styleClass="width-full" value="#{usuarioBean.usuario.pessoa.sexo}" required="true">
                                                         <f:selectItems value="#{usuarioBean.sexos}" var="sexo" itemLabel="#{sexo.descricao}" itemValue="#{sexo}"/>
                                                     </p:selectOneRadio>
                                                 </div>
@@ -82,7 +91,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-6">
                                         <p:outputLabel value="Estado" for="selectEstado"/>
-                                        <p:selectOneMenu id="selectEstado" styleClass="width-full" style="margin-top: -5px;" value="#{usuarioBean.usuario.pessoa.endereco.uf}">
+                                        <p:selectOneMenu id="selectEstado" styleClass="width-full" style="margin-top: -5px;" value="#{usuarioBean.usuario.pessoa.endereco.uf}" required="true">
                                             <f:selectItem itemLabel="Selecione um estado..." noSelectionOption="true"/>
                                             <f:selectItems value="#{usuarioBean.estados}" var="estado" itemLabel="#{estado.descricao}" itemValue="#{estado}"/>
                                         </p:selectOneMenu>
@@ -93,15 +102,15 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-6">
                                         <p:outputLabel value="Cidade" for="cidade"/>
-                                        <p:inputText id="cidade" value="#{usuarioBean.usuario.pessoa.endereco.cidade}" styleClass="width-full"/>
+                                        <p:inputText id="cidade" value="#{usuarioBean.usuario.pessoa.endereco.cidade}" styleClass="width-full" required="true"/>
                                     </div>
                                     <div class="col-xs-12 col-sm-6">
                                         <p:outputLabel value="Bairro" for="inputBairro"/>
-                                        <p:inputText id="inputBairro" styleClass="width-full" value="#{usuarioBean.usuario.pessoa.endereco.bairro}"/>
+                                        <p:inputText id="inputBairro" styleClass="width-full" value="#{usuarioBean.usuario.pessoa.endereco.bairro}" required="true"/>
                                     </div>
                                     <div class="col-xs-12 col-sm-12">
                                         <p:outputLabel value="Logradouro" for="inputLogradouro"/>
-                                        <p:inputText id="inputLogradouro" styleClass="width-full" value="#{usuarioBean.usuario.pessoa.endereco.logradouro}"/>
+                                        <p:inputText id="inputLogradouro" styleClass="width-full" value="#{usuarioBean.usuario.pessoa.endereco.logradouro}" required="true"/>
                                     </div>
                                     <div class="col-xs-12 col-sm-12">
                                         <p:outputLabel value="Complemento" for="inputComplemento"/>
@@ -125,15 +134,25 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-6">
                                         <p:outputLabel value="Login" for="inputLogin"/>
-                                        <p:inputText id="inputLogin" styleClass="width-full" value="#{usuarioBean.usuario.login}"/>
+                                        <p:inputText id="inputLogin" styleClass="width-full" value="#{usuarioBean.usuario.login}" required="true"/>
                                     </div>
                                     <div class="col-xs-12 col-sm-6">
                                         <p:outputLabel value="Senha" for="secretSenha"/>
-                                        <p:password id="secretSenha" styleClass="width-full" value="#{usuarioBean.usuario.senha}" match="secretConfirmacao"/>
+                                        <p:password id="secretSenha" 
+                                                    styleClass="width-full" 
+                                                    value="#{usuarioBean.senha}" 
+                                                    match="secretConfirmacao" 
+                                                    required="true"
+                                                    feedback="true"
+                                                    promptLabel="Informe uma senha"
+                                                    weakLabel="Fraca"
+                                                    goodLabel="Boa"
+                                                    strongLabel="Forte"
+                                                    validatorMessage="A confirmação não está igual à senha"/>
                                     </div>
                                     <div class="col-xs-12 col-sm-6">
                                         <p:outputLabel value="Confirmação da Senha" for="secretConfirmacao"/>
-                                        <p:password id="secretConfirmacao" styleClass="width-full" value="#{usuarioBean.usuario.senha}"/>
+                                        <p:password id="secretConfirmacao" styleClass="width-full" value="#{usuarioBean.usuario.senha}" required="true"/>
                                     </div>
                                     <div class="col-xs-12 col-sm-12">
                                         <p:outputLabel value="Observação" for="inputObservacao"/>
@@ -149,16 +168,21 @@
                     </div>
                     <div class="col-xs-12 col-sm-12">
                         <p:spacer height="15"/>
-                        <p:commandLink styleClass="btn botaoAzul" title="Salvar Usuários" 
-                                       style="margin-right: 5px;"
-                                       process="formDadosUsuario">
-                            <i class="fa fa fa-save"></i>
-                            <span>Salvar</span>
-                        </p:commandLink>
-                        <p:commandLink styleClass="btn botaoCinza">
-                            <i class="fa fa fa-backward"></i>
-                            <span>Voltar</span>
-                        </p:commandLink>
+                        <div class="painel-botoes">
+                            <p:commandLink styleClass="btn btn-info" title="Salvar Usuários" 
+                                           action="#{usuarioBean.salvar()}"
+                                           update="formDadosUsuario #{p:component('messages')}"
+                                           style="margin-right: 5px;"
+                                           process="formDadosUsuario">
+                                <i class="fa fa fa-save"></i>
+                                <span>Salvar</span>
+                            </p:commandLink>
+                            <p:commandLink styleClass="btn botaoCinza"
+                                           action="pretty:consulta-usuarios">
+                                <i class="fa fa fa-backward"></i>
+                                <span>Voltar</span>
+                            </p:commandLink>
+                        </div>
                     </div>
                 </h:form>
             </div>

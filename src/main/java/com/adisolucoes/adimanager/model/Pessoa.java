@@ -16,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -44,6 +46,16 @@ public class Pessoa implements Serializable {
     public Pessoa() {
     }
 
+    @PrePersist
+    public void onCreate() {
+        dataCadastro = new Date();
+    }
+
+    @PreUpdate
+    public void onUpdate() {
+        dataAtualizacao = new Date();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId() {
@@ -65,7 +77,7 @@ public class Pessoa implements Serializable {
     }
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "data_atualizacao", nullable = false)
+    @Column(name = "data_atualizacao")
     public Date getDataAtualizacao() {
         return dataAtualizacao;
     }

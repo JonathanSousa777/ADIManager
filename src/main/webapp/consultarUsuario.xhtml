@@ -29,7 +29,7 @@
                                                          label="Nome"/>
                                         </h:panelGrid>
                                     </div>
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-4">
                                         <h:panelGrid columns="1" styleClass="width-full">
                                             <p:outputLabel value="Tipo de Usário" />
                                             <p:selectOneMenu id="selectTipo"
@@ -40,28 +40,22 @@
                                             </p:selectOneMenu>
                                         </h:panelGrid>
                                     </div>
-                                    <div class="col-sm-2">
-                                        <h:panelGrid columns="2" styleClass="width-full">
-                                            <h:panelGroup>
-                                                <br/>
-                                                <p:commandLink styleClass="btn btn-info" title="Buscar Usuários" action="#{usuarioBean.pesquisar()}"
-                                                               update="formDados #{p:component('idDataTableUsuarios')}" process="@form">
-                                                    <i class="fa fa fa-search"></i>
-                                                    <span>Buscar</span>
-                                                </p:commandLink>
-                                            </h:panelGroup>
-                                            <h:panelGroup>
-                                                <br/>
-                                                <p:commandLink styleClass="btn botaoVerde" title="Cadastrar Usuários" 
-                                                               action="pretty:cadastro-usuarios"
-                                                               update="formDados #{p:component('idDataTableUsuarios')}" process="@form">
-                                                    <i class="fa fa fa-plus"></i>
-                                                    <span>Cadastrar</span>
-                                                </p:commandLink>
-                                            </h:panelGroup>
-                                        </h:panelGrid>
+                                    <div class="col-sm-12">
+                                        <div class="painel-botoes">
+                                            <p:commandLink styleClass="btn btn-info" title="Buscar Usuários" action="#{usuarioBean.pesquisar()}" style="margin-right: 5px;"
+                                                           update="formDados #{p:component('idDataTableUsuarios')}" process="@form">
+                                                <i class="fa fa fa-search"></i>
+                                                <span>Buscar</span>
+                                            </p:commandLink>
+                                            <p:commandLink styleClass="btn botaoVerde" title="Cadastrar Usuários" 
+                                                           action="pretty:cadastro-usuarios"
+                                                           update="formDados #{p:component('idDataTableUsuarios')}" process="@form">
+                                                <i class="fa fa fa-plus"></i>
+                                                <span>Cadastrar</span>
+                                            </p:commandLink>
+                                        </div>
                                     </div>
-                                </div>
+                                </div>                                
                             </div>
                         </div>
                     </div>
@@ -72,8 +66,8 @@
                     <p:dataTable value="#{usuarioBean.usuarioFiltrados}" 
                                  id="idDataTableUsuarios"
                                  var="usuario" 
-                                 rows="50" 
-                                 rowsPerPageTemplate="25,50,100"
+                                 rows="10" 
+                                 rowsPerPageTemplate="10,20,50"
                                  paginator="true" 
                                  paginatorPosition="bottom"
                                  tableStyle="table-layout:auto;"

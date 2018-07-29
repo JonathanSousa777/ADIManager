@@ -37,9 +37,9 @@ public class Main {
         trx.begin();
 
         //TESTE AQUI
-        inserirUsuario(manager);
+        //inserirUsuario(manager);
 
-        trx.commit();
+        //trx.commit();
         close(factory);
 
     }
@@ -250,8 +250,6 @@ public class Main {
             pessoa.setTelefone("0101001");
 
             Usuario usuario = new Usuario();
-            usuario.setDataAtualizacao(new Date());
-            usuario.setDataCadastro(new Date());
             usuario.setDataUltimoAcesso(new Date());
             usuario.setLogin("JUnior teste");
             usuario.setPessoa(pessoa);
