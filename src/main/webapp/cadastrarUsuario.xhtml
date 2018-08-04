@@ -18,6 +18,7 @@
                 <p:messages id="messages" autoUpdate="false" closable="true"/>
                 <h:form id="formDadosUsuario">
                     <div class="col-sm-12">
+                        <div class="msg-campos-obrigatorios">Os campos marcados com um asterísco <i style="color: red;">*</i> são obrigatórios.</div>
                         <div class="panel panel-default">
                             <div class="panel-heading">Dados Pessoais</div>
                             <div class="panel-body">
@@ -43,7 +44,7 @@
                                                 </div>
                                                 <div class="col-xs-12 col-sm-12">
                                                     <p:outputLabel value="E-mail" for="email"/>
-                                                    <p:inputText id="email" value="#{usuarioBean.usuario.pessoa.email}" styleClass="width-full" placeholder="seuemail@gmail.com"/>
+                                                    <p:inputText id="email" value="#{usuarioBean.usuario.pessoa.email}" styleClass="width-full" placeholder="seuemail@gmail.com" required="true"/>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-6">
                                                     <p:outputLabel value="Nacionalidade" for="nacionalidade"/>
@@ -178,6 +179,7 @@
                                 <span>Salvar</span>
                             </p:commandLink>
                             <p:commandLink styleClass="btn botaoCinza"
+                                           process="@this"
                                            action="pretty:consulta-usuarios">
                                 <i class="fa fa fa-backward"></i>
                                 <span>Voltar</span>

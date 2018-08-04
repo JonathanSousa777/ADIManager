@@ -79,6 +79,13 @@ input.botaoCinza, input.botaoAzul, input.botaoVerde{
     color: #333333;
 }
 
+.msg-campos-obrigatorios {
+    font-size: 15px;
+    font-weight: bold;
+    color: dimgrey;
+    margin-bottom: 5px;
+}
+
 .adimanager-group {
     margin-bottom: 15px;
     -webkit-box-sizing: border-box;
