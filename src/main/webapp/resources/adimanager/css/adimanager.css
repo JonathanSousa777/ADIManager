@@ -210,6 +210,10 @@ input.botaoCinza, input.botaoAzul, input.botaoVerde{
     background-image: none!important;
 }
 
+.tooltip-custom p {
+    padding: 15px 0px 0px 0px;
+}
+
 a { 
     color: #258dc8;
     text-decoration: none;        

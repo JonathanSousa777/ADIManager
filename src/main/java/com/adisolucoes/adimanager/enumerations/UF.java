@@ -44,6 +44,15 @@ public enum UF implements Serializable {
         this.descricao = descricao;
     }
 
+    public static UF fromDescricao(String value) {
+        for (UF uf : UF.values()) {
+            if (uf.getSigla().equals(value)) {
+                return uf;
+            }
+        }
+        throw new UnsupportedOperationException("O estado " + value + " não é suportado");
+    }
+
     public String getSigla() {
         return sigla;
     }

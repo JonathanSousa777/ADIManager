@@ -89,35 +89,63 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">Endereço</div>
                             <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-6">
-                                        <p:outputLabel value="Estado" for="selectEstado"/>
-                                        <p:selectOneMenu id="selectEstado" styleClass="width-full" style="margin-top: -5px;" value="#{usuarioBean.usuario.pessoa.endereco.uf}" required="true">
-                                            <f:selectItem itemLabel="Selecione um estado..." noSelectionOption="true"/>
-                                            <f:selectItems value="#{usuarioBean.estados}" var="estado" itemLabel="#{estado.descricao}" itemValue="#{estado}"/>
-                                        </p:selectOneMenu>
+                                <p:outputPanel id="panelEndereco">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6">
+                                            <p:outputLabel value="Estado" for="selectEstado"/>
+                                            <p:selectOneMenu id="selectEstado" styleClass="width-full" style="margin-top: -5px;" value="#{usuarioBean.usuario.pessoa.endereco.uf}" required="true">
+                                                <f:selectItem itemLabel="Selecione um estado..." noSelectionOption="true"/>
+                                                <f:selectItems value="#{usuarioBean.estados}" var="estado" itemLabel="#{estado.descricao}" itemValue="#{estado}"/>
+                                            </p:selectOneMenu>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <p:outputLabel value="CEP" for="maskCep"/>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-12">
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-sm-12">
+                                                            <p:inputMask id="maskCep" 
+                                                                         mask="99999-999" 
+                                                                         value="#{usuarioBean.usuario.pessoa.endereco.cep}" 
+                                                                         style="width: 76%" 
+                                                                         placeholder="_____-___">
+                                                            </p:inputMask>
+                                                            <p:commandButton id="buttonPreencherCep"
+                                                                             icon="fa fa-search" 
+                                                                             title="Preencher CEP" 
+                                                                             style="width: 13%; margin: 0px 1px;" 
+                                                                             action="#{usuarioBean.preencherDadosPorCep()}" 
+                                                                             update="#{p:component('messages')} panelEndereco"
+                                                                             process="@this maskCep" />
+                                                            <h:graphicImage id="help-cep" library="images" name="icon_help.png" style="width: 8%"/>
+                                                            <p:tooltip styleClass="tooltip-custom" for="help-cep" position="top" >
+                                                                <h:panelGrid width="250" style="text-align: justify;">
+                                                                    <p>Digite um CEP, clique na lupa e os demais campos serão preenchidos automaticamente.</p>
+                                                                </h:panelGrid>
+                                                            </p:tooltip>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <p:outputLabel value="Cidade" for="cidade"/>
+                                            <p:inputText id="cidade" value="#{usuarioBean.usuario.pessoa.endereco.cidade}" styleClass="width-full" required="true"/>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <p:outputLabel value="Bairro" for="inputBairro"/>
+                                            <p:inputText id="inputBairro" styleClass="width-full" value="#{usuarioBean.usuario.pessoa.endereco.bairro}" required="true"/>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12">
+                                            <p:outputLabel value="Logradouro" for="inputLogradouro"/>
+                                            <p:inputText id="inputLogradouro" styleClass="width-full" value="#{usuarioBean.usuario.pessoa.endereco.logradouro}" required="true"/>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12">
+                                            <p:outputLabel value="Complemento" for="inputComplemento"/>
+                                            <p:inputText id="inputComplemento" styleClass="width-full" value="#{usuarioBean.usuario.pessoa.endereco.complemento}"/>
+                                        </div>
                                     </div>
-                                    <div class="col-xs-12 col-sm-6">
-                                        <p:outputLabel value="CEP" for="cep"/>
-                                        <p:inputMask id="cep" mask="99999-999" styleClass="width-full" value="#{usuarioBean.usuario.pessoa.endereco.cep}"/>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-6">
-                                        <p:outputLabel value="Cidade" for="cidade"/>
-                                        <p:inputText id="cidade" value="#{usuarioBean.usuario.pessoa.endereco.cidade}" styleClass="width-full" required="true"/>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-6">
-                                        <p:outputLabel value="Bairro" for="inputBairro"/>
-                                        <p:inputText id="inputBairro" styleClass="width-full" value="#{usuarioBean.usuario.pessoa.endereco.bairro}" required="true"/>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-12">
-                                        <p:outputLabel value="Logradouro" for="inputLogradouro"/>
-                                        <p:inputText id="inputLogradouro" styleClass="width-full" value="#{usuarioBean.usuario.pessoa.endereco.logradouro}" required="true"/>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-12">
-                                        <p:outputLabel value="Complemento" for="inputComplemento"/>
-                                        <p:inputText id="inputComplemento" styleClass="width-full" value="#{usuarioBean.usuario.pessoa.endereco.complemento}"/>
-                                    </div>
-                                </div>
+                                </p:outputPanel>
                             </div>
                         </div>
                     </div>
