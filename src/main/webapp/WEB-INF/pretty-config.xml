@@ -4,20 +4,20 @@
                xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
                       http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
 
-    <url-mapping id="consulta-usuarios">
-        <pattern value="/usuarios"/>
-        <view-id value="/consultarUsuario.xhtml"/>
+    <url-mapping id="login">
+        <pattern value="/login"/>
+        <view-id value="/login.xhtml"/>
     </url-mapping>
     <url-mapping id="dashboard">
         <pattern value="/dashboard"/>
         <view-id value="/dashboard.xhtml"/>
     </url-mapping>
-    <url-mapping id="login">
-        <pattern value="/login"/>
-        <view-id value="/login.xhtml"/>
+    <url-mapping id="consulta-usuarios">
+        <pattern value="/usuarios"/>
+        <view-id value="/consultaUsuarios.xhtml"/>
     </url-mapping>
     <url-mapping id="cadastro-usuarios">
         <pattern value="/cadastro-usuarios"/>
-        <view-id value="/cadastrarUsuario.xhtml"/>
+        <view-id value="/cadastroUsuarios.xhtml"/>
     </url-mapping>
 </pretty-config>

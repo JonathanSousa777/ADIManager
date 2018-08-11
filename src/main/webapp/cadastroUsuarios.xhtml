@@ -26,14 +26,23 @@
                                     <div class="margin-down">
                                         <div class="col-xs-12 col-sm-2">
                                             <div class="col-xs-12 col-sm-12">
-                                                <h:graphicImage name="user.png" library="images" styleClass="image-perfil"/>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-12">
-                                                <p:commandLink styleClass="btn botaoAzul btn-perfil" title="Enviar Foto" 
-                                                               action="pretty:cadastro-usuarios">
-                                                    <i class="fa fa fa-plus"></i>
-                                                    <span>Enviar</span>
-                                                </p:commandLink>
+                                                <p:outputPanel id="outputPanelImagem">
+                                                    <h:graphicImage name="user.png" library="images" styleClass="image-perfil" rendered="#{usuarioBean.usuario.pessoa.imagem == null}"/>
+                                                    <p:fileUpload id="profileUpload" 
+                                                                  invalidFileMessage="Extensão de arquivo inválida."
+                                                                  invalidSizeMessage="Arquivo muito grande. Tamanho máximo 300KB."
+                                                                  multiple="false"                                                                                
+                                                                  auto="true"                                          
+                                                                  sizeLimit="307200" 
+                                                                  uploadLabel="Enviar"
+                                                                  allowTypes="/(\.|\/)(jpe?g|png)$/"
+                                                                  label="Imagem"
+                                                                  process="@this"
+                                                                  fileUploadListener="#{usuarioBean.enviarImagemUsuario}"
+                                                                  update="outputPanelImagem"
+                                                                  styleClass="upload-ideb">
+                                                    </p:fileUpload>
+                                                </p:outputPanel>
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-10">
