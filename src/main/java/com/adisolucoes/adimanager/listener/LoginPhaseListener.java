@@ -27,7 +27,7 @@ public class LoginPhaseListener implements PhaseListener {
     public void afterPhase(PhaseEvent event) {
         externalContext = event.getFacesContext().getExternalContext();
         List<String> paginasPermitidasLogado = new ArrayList(Arrays.asList("dashboard"));
-        List<String> paginasPermitidas = new ArrayList(Arrays.asList("login"));
+        List<String> paginasPermitidas = new ArrayList(Arrays.asList("login","error_403"));
         FacesContext context = event.getFacesContext();
         String viewId = context.getViewRoot().getViewId();
         String pagina = viewId.substring(viewId.lastIndexOf("/") + 1, viewId.indexOf("."));
@@ -40,7 +40,7 @@ public class LoginPhaseListener implements PhaseListener {
             }
             if (!permitidoLogado && loggedIn()) {
                 if (!hasAcess(viewId)) {
-                    handler.handleNavigation(context, null, "/dashboard");//Alterar para uma página de acesso negado
+                    handler.handleNavigation(context, null, "/error_403");
                 }
             }
         }
