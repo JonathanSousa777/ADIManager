@@ -20,6 +20,7 @@ import javax.persistence.Table;
 public class Ferramenta implements Serializable {
 
     private long id;
+    private String nome;
     private String descricao;
     private String url;
     private boolean paga;
@@ -127,6 +128,14 @@ public class Ferramenta implements Serializable {
 
     public void setProjetos(List<Projeto> projetos) {
         this.projetos = projetos;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.adisolucoes.adimanager.controller;
 
 import com.adisolucoes.adimanager.enumerations.Sexo;
+import com.adisolucoes.adimanager.enumerations.TipoPagamento;
 import com.adisolucoes.adimanager.enumerations.TipoUsuario;
 import com.adisolucoes.adimanager.enumerations.UF;
 import com.adisolucoes.adimanager.model.Acrescimo;
@@ -11,11 +12,17 @@ import com.adisolucoes.adimanager.model.Cliente;
 import com.adisolucoes.adimanager.model.Empresa;
 import com.adisolucoes.adimanager.model.Endereco;
 import com.adisolucoes.adimanager.model.Fase;
+import com.adisolucoes.adimanager.model.Ferramenta;
 import com.adisolucoes.adimanager.model.Indicacao;
 import com.adisolucoes.adimanager.model.Pessoa;
+import com.adisolucoes.adimanager.model.Plano;
+import com.adisolucoes.adimanager.model.Projeto;
+import com.adisolucoes.adimanager.model.Servidor;
 import com.adisolucoes.adimanager.model.Usuario;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -37,9 +44,9 @@ public class Main {
         trx.begin();
 
         //TESTE AQUI
-        //inserirUsuario(manager);
-
-        //trx.commit();
+        inserirFerramenta(manager);
+        trx.commit();
+        manager.close();
         close(factory);
 
     }
@@ -262,6 +269,273 @@ public class Main {
             System.out.println("-------------OK------------");
         } catch (PersistenceException ex) {
             System.out.println("------------FALHA----------");
+        }
+    }
+
+    //TESTE INSERIR PROJETO
+    public static void inserirProjeto(EntityManager manager) {
+        try {
+            Endereco endereco = new Endereco();
+            endereco.setBairro("Promorarr");
+            endereco.setCep("64027.080");
+            endereco.setCidade("Teresina");
+            endereco.setLogradouro("Quadra-30 Lote-21 Casa-B");
+            endereco.setNumero("456");
+            endereco.setUf(UF.DF);
+
+            Pessoa pessoa = new Pessoa();
+            pessoa.setCpfCnpj("05183216304");
+            pessoa.setNome("Daniel Julio");
+            pessoa.setDataAtualizacao(new Date());
+            pessoa.setDataCadastro(new Date());
+            pessoa.setDataNascimento(new Date());
+            pessoa.setEmail("teste@gmail");
+            pessoa.setEndereco(endereco);
+            pessoa.setNacionalidade("Brasileiro");
+            pessoa.setObservacao("Referenciada");
+            pessoa.setSexo(Sexo.FEMININO);
+            pessoa.setTelefone("88888888");
+
+            Cliente cliente = new Cliente();
+            cliente.setCodigoIdentificador("cli12");
+            cliente.setComoConheceu("Campanha");
+            cliente.setObservacao("Novo desse mês");
+            cliente.setPessoa(pessoa);
+            manager.persist(cliente);
+
+            CategoriaPlano categoriaPlano = new CategoriaPlano();
+            categoriaPlano.setDescricao("Plano com os mais variádos recursos de softwares");
+            categoriaPlano.setNome("Ecommerce");
+            manager.persist(categoriaPlano);
+
+            Plano plano = new Plano();
+            plano.setDescricao("Maior controle financeiro");
+            plano.setApelido("GOLD");
+            plano.setCor("#654654");
+            plano.setPromocao(null);
+            plano.setValor(new BigDecimal(124.99));
+            plano.setCategoriaPlano(categoriaPlano);
+            manager.persist(plano);
+
+            Servidor servidor = new Servidor();
+            servidor.setCodigoIdentificador("HG");
+            servidor.setEmpresaDesenvolvedora("HOSTGATOR");
+            servidor.setGigas(30);
+            servidor.setNomePlano("BUSINNES");
+            servidor.setUrl("www.hostgator.com");
+            servidor.setValor(new BigDecimal(35));
+            servidor.setProjetos(new ArrayList<Projeto>());
+            manager.persist(servidor);
+
+            Projeto projeto = new Projeto();
+            projeto.setCodigoidentificador("VS");
+            projeto.setConcluido(true);
+            projeto.setDataFim(new Date());
+            projeto.setDataInicio(new Date());
+            projeto.setDataVencimento(new Date());
+            projeto.setDesconto(new BigDecimal(20));
+            projeto.setDescricao("Site PRO da Vikstar");
+            projeto.setFormaPagamento("Espécie");
+            projeto.setNomeSite("Vikstar");
+            projeto.setObservacaoComplementar("Desenvolvido para ser testado");
+            projeto.setPago(true);
+            projeto.setTipoPagamento(TipoPagamento.ANUAL);
+            projeto.setUrl("www.vikstar.com.br");
+            projeto.setValor(new BigDecimal(1498));
+            projeto.setCliente(cliente);
+            projeto.setPlano(plano);
+            projeto.setServidor(servidor);
+
+            manager.persist(projeto);
+            System.out.println("----------OK-------------");
+        } catch (Exception ex) {
+            System.out.println("-----------Falha------------");
+            System.out.println("Error: " + ex.getMessage());
+        }
+    }
+
+    //TESTE INSERIR FERRAMENTA
+    public static void inserirFerramenta(EntityManager manager) {
+        try {
+            Endereco endereco = new Endereco();
+            endereco.setBairro("Promorarr");
+            endereco.setCep("64027.080");
+            endereco.setCidade("Teresina");
+            endereco.setLogradouro("Quadra-30 Lote-21 Casa-B");
+            endereco.setNumero("456");
+            endereco.setUf(UF.DF);
+
+            Pessoa pessoa = new Pessoa();
+            pessoa.setCpfCnpj("05183216304");
+            pessoa.setNome("Daniel Julio");
+            pessoa.setDataAtualizacao(new Date());
+            pessoa.setDataCadastro(new Date());
+            pessoa.setDataNascimento(new Date());
+            pessoa.setEmail("teste@gmail");
+            pessoa.setEndereco(endereco);
+            pessoa.setNacionalidade("Brasileiro");
+            pessoa.setObservacao("Referenciada");
+            pessoa.setSexo(Sexo.FEMININO);
+            pessoa.setTelefone("88888888");
+
+            Cliente cliente = new Cliente();
+            cliente.setCodigoIdentificador("cli12");
+            cliente.setComoConheceu("Campanha");
+            cliente.setObservacao("Novo desse mês");
+            cliente.setPessoa(pessoa);
+            manager.persist(cliente);
+
+            CategoriaPlano categoriaPlano = new CategoriaPlano();
+            categoriaPlano.setDescricao("Plano com os mais variádos recursos de softwares");
+            categoriaPlano.setNome("Ecommerce");
+            manager.persist(categoriaPlano);
+
+            Plano plano = new Plano();
+            plano.setDescricao("Maior controle financeiro");
+            plano.setApelido("GOLD");
+            plano.setCor("#654654");
+            plano.setPromocao(null);
+            plano.setValor(new BigDecimal(124.99));
+            plano.setCategoriaPlano(categoriaPlano);
+            manager.persist(plano);
+
+            Servidor servidor = new Servidor();
+            servidor.setCodigoIdentificador("HG");
+            servidor.setEmpresaDesenvolvedora("HOSTGATOR");
+            servidor.setGigas(30);
+            servidor.setNomePlano("BUSINNES");
+            servidor.setUrl("www.hostgator.com");
+            servidor.setValor(new BigDecimal(35));
+            servidor.setProjetos(new ArrayList<Projeto>());
+            manager.persist(servidor);
+
+            Projeto projeto = new Projeto();
+            projeto.setCodigoidentificador("VS");
+            projeto.setConcluido(true);
+            projeto.setDataFim(new Date());
+            projeto.setDataInicio(new Date());
+            projeto.setDataVencimento(new Date());
+            projeto.setDesconto(new BigDecimal(20));
+            projeto.setDescricao("Site PRO da Vikstar");
+            projeto.setFormaPagamento("Espécie");
+            projeto.setNomeSite("Vikstar");
+            projeto.setObservacaoComplementar("Desenvolvido para ser testado");
+            projeto.setPago(true);
+            projeto.setTipoPagamento(TipoPagamento.ANUAL);
+            projeto.setUrl("www.vikstar.com.br");
+            projeto.setValor(new BigDecimal(1498));
+            projeto.setCliente(cliente);
+            projeto.setPlano(plano);
+            projeto.setServidor(servidor);
+
+            List<Projeto> projetos = new ArrayList<Projeto>();
+            projetos.add(projeto);
+
+            Ferramenta ferramenta = new Ferramenta();
+            ferramenta.setAvaliacao("Excelente para formulários");
+            ferramenta.setDescricao("Para formulários avançados");
+            ferramenta.setDesenvolvedora("FiveTeam");
+            ferramenta.setDesvantagens("Lenta e Cara");
+            ferramenta.setNome("FormsPro");
+            ferramenta.setNotaInstrucao("CONTATO");
+            ferramenta.setPaga(true);
+            ferramenta.setUrl("www.formspro.com.br");
+            ferramenta.setValor(new BigDecimal(120));
+            ferramenta.setVantagens("Rápida e Barata");
+            ferramenta.setProjetos(projetos);
+            manager.persist(ferramenta);
+            
+            List<Ferramenta> ferramentas = new ArrayList<>();
+            ferramentas.add(ferramenta);
+            projeto.setFerramentas(ferramentas);
+            manager.persist(projeto);
+
+            System.out.println("----------OK-------------");
+        } catch (Exception ex) {
+            System.out.println("-----------Falha------------");
+            System.out.println("Error: " + ex.getMessage());
+        }
+    }
+
+    //TESTE INSERIR PROJETO COM FERRAMENTAS
+    public void inserirProjetoFerramenta(EntityManager manager) {
+        try {
+            Endereco endereco = new Endereco();
+            endereco.setBairro("Promorarr");
+            endereco.setCep("64027.080");
+            endereco.setCidade("Teresina");
+            endereco.setLogradouro("Quadra-30 Lote-21 Casa-B");
+            endereco.setNumero("456");
+            endereco.setUf(UF.DF);
+
+            Pessoa pessoa = new Pessoa();
+            pessoa.setCpfCnpj("05183216304");
+            pessoa.setNome("Daniel Julio");
+            pessoa.setDataAtualizacao(new Date());
+            pessoa.setDataCadastro(new Date());
+            pessoa.setDataNascimento(new Date());
+            pessoa.setEmail("teste@gmail");
+            pessoa.setEndereco(endereco);
+            pessoa.setNacionalidade("Brasileiro");
+            pessoa.setObservacao("Referenciada");
+            pessoa.setSexo(Sexo.FEMININO);
+            pessoa.setTelefone("88888888");
+
+            Cliente cliente = new Cliente();
+            cliente.setCodigoIdentificador("cli12");
+            cliente.setComoConheceu("Campanha");
+            cliente.setObservacao("Novo desse mês");
+            cliente.setPessoa(pessoa);
+            manager.persist(cliente);
+
+            CategoriaPlano categoriaPlano = new CategoriaPlano();
+            categoriaPlano.setDescricao("Plano com os mais variádos recursos de softwares");
+            categoriaPlano.setNome("Ecommerce");
+            manager.persist(categoriaPlano);
+
+            Plano plano = new Plano();
+            plano.setDescricao("Maior controle financeiro");
+            plano.setApelido("GOLD");
+            plano.setCor("#654654");
+            plano.setPromocao(null);
+            plano.setValor(new BigDecimal(124.99));
+            plano.setCategoriaPlano(categoriaPlano);
+            manager.persist(plano);
+
+            Servidor servidor = new Servidor();
+            servidor.setCodigoIdentificador("HG");
+            servidor.setEmpresaDesenvolvedora("HOSTGATOR");
+            servidor.setGigas(30);
+            servidor.setNomePlano("BUSINNES");
+            servidor.setUrl("www.hostgator.com");
+            servidor.setValor(new BigDecimal(35));
+            servidor.setProjetos(new ArrayList<Projeto>());
+            manager.persist(servidor);
+
+            Projeto projeto = new Projeto();
+            projeto.setCodigoidentificador("VS");
+            projeto.setConcluido(true);
+            projeto.setDataFim(new Date());
+            projeto.setDataInicio(new Date());
+            projeto.setDataVencimento(new Date());
+            projeto.setDesconto(new BigDecimal(20));
+            projeto.setDescricao("Site PRO da Vikstar");
+            projeto.setFormaPagamento("Espécie");
+            projeto.setNomeSite("Vikstar");
+            projeto.setObservacaoComplementar("Desenvolvido para ser testado");
+            projeto.setPago(true);
+            projeto.setTipoPagamento(TipoPagamento.ANUAL);
+            projeto.setUrl("www.vikstar.com.br");
+            projeto.setValor(new BigDecimal(1498));
+            projeto.setCliente(cliente);
+            projeto.setPlano(plano);
+            projeto.setServidor(servidor);
+
+            manager.persist(projeto);
+            System.out.println("----------OK-------------");
+        } catch (Exception ex) {
+            System.out.println("-----------Falha------------");
+            System.out.println("Error: " + ex.getMessage());
         }
     }
 

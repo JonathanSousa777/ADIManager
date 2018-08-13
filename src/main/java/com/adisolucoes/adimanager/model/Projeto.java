@@ -104,7 +104,7 @@ public class Projeto implements Serializable {
         this.valor = valor;
     }
 
-    @Column(nullable = false, precision = 20, scale = 2)
+    @Column(precision = 20, scale = 2)
     public BigDecimal getDesconto() {
         return desconto;
     }

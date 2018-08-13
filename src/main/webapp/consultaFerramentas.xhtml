@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<ui:composition template="/WEB-INF/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="complementoTitulo"> - Consulta de Ferramentas</ui:define>
+    <ui:define name="header">Consulta de Feramentas</ui:define>
+    <ui:define name="breadcrumb"><h:link></h:link> Consulta de Ferramentas</ui:define>
+
+    <ui:define name="conteudo">
+        <div class="box">
+            <div class="box-header with-border">
+                <h:form id="formDados">
+                    <p:messages id="msg"/>
+                    <div class="col-xs-12 col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <h:panelGrid columns="1" styleClass="width-full">
+                                    <p:outputLabel value="Nome" />
+                                    <p:inputText id="inputNome"
+                                                 value="#{ferramentaBean.ferramentaFiltro.nome}"
+                                                 styleClass="form-control"
+                                                 label="Nome"/>
+                                </h:panelGrid>
+                            </div>
+                            <div class="col-sm-3">
+                                <h:panelGrid columns="1" styleClass="width-full">
+                                    <p:outputLabel value="Desenvolvedora" />
+                                    <p:inputText id="inputDesenvolvedora"
+                                                 value="#{ferramentaBean.ferramentaFiltro.desenvolvedora}"
+                                                 styleClass="form-control"
+                                                 label="Desenvolvedora"/>
+                                </h:panelGrid>
+                            </div>
+                            <div class="col-sm-4">
+                                <h:panelGrid columns="1" styleClass="width-full">
+                                    <p:outputLabel value="Projeto" />
+                                    <p:selectOneMenu id="selectTipo"
+                                                     label="Projeto"
+                                                     converter="entityConverter"
+                                                     filter="true"
+                                                     value="#{ferramentaBean.ferramentaFiltro.projeto}">
+                                        <f:selectItem itemLabel="Selecione um Projeto" itemValue="" noSelectionOption="true"/>
+                                        <f:selectItems value="#{ferramentaBean.projetos}" var="projeto" itemLabel="#{projeto.nomeSite}" itemValue="#{projeto}" />
+                                    </p:selectOneMenu>
+                                </h:panelGrid>
+                            </div>
+                            <div class="col-sm-1">
+                                <h:panelGrid columns="1" styleClass="width-full">
+                                    <p:outputLabel value="Paga" for="switchPaga"/>
+                                    <p:inputSwitch id="switchPaga" styleClass="width-full" value="#{ferramentaBean.ferramentaFiltro.paga}" onLabel="Sim" offLabel="Não" style="margin-top: 4px;"/>
+                                </h:panelGrid>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="painel-botoes">
+                                    <p:commandLink styleClass="btn btn-info" title="Buscar Ferramentas" action="#{ferramentaBean.pesquisarLazy()}" style="margin:0 5px 3px 0;"
+                                                   update="formDados  #{p:component('dataTableFerramentas')}" process="@form @this">
+                                        <i class="fa fa fa-search"></i>
+                                        <span>Buscar</span>
+                                        <f:setPropertyActionListener value="false" target="#{ferramentaBean.ferramentaFiltro.todas}"/>
+                                    </p:commandLink>
+                                    <p:commandLink styleClass="btn botaoCinza" title="Buscar todas Ferramentas" style="margin:0 5px 3px 0;" action="#{ferramentaBean.buscarTodas()}"
+                                                   update="formDados #{p:component('dataTableFerramentas')}" process="@form">
+                                        <i class="fa fa fa-list"></i>
+                                        <span>Buscar Todas</span>
+                                    </p:commandLink>
+                                    <p:commandLink styleClass="btn botaoVerde" title="Cadastrar Ferramentas" 
+                                                   action="pretty:cadastro-usuarios"
+                                                   update="formDados #{p:component('dataTableFerramentas')}" process="@form">
+                                        <i class="fa fa fa-plus"></i>
+                                        <span>Cadastrar</span>
+                                    </p:commandLink>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </div>
+
+            <h:form id="formTable">
+                <div id="boxBody" class="box-body" >
+                    <p:dataTable value="#{ferramentaBean.modelo}" 
+                                 id="dataTableFerramentas"
+                                 var="ferramenta" 
+                                 rows="20" 
+                                 lazy="true"
+                                 rowsPerPageTemplate="20,30,50"
+                                 paginator="true" 
+                                 paginatorPosition="bottom"
+                                 tableStyle="table-layout:auto;"
+                                 emptyMessage="Nenhuma Ferramenta encontrada"
+                                 styleClass="datatable-custom">
+                        <p:column headerText="Nome" priority="1">
+                            <h:outputText value="#{ferramenta.nome}"/>
+                        </p:column>
+                        <p:column headerText="Desenvolvedora" priority="2">
+                            <h:outputText value="#{ferramenta.desenvolvedora}"/>
+                        </p:column>
+                        <p:column headerText="Descrição" priority="1">
+                            <h:outputText value="#{ferramenta.descricao}"/>
+                        </p:column>
+                        <p:column headerText="URL" priority="2">
+                            <h:outputLink value="#{ferramenta.url}" target="_blank">#{ferramenta.url}</h:outputLink>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

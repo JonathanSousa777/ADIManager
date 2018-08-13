@@ -20,4 +20,8 @@
         <pattern value="/cadastro-usuarios"/>
         <view-id value="/cadastroUsuarios.xhtml"/>
     </url-mapping>
+    <url-mapping id="consulta-ferramentas">
+        <pattern value="/ferramentas"/>
+        <view-id value="/consultaFerramentas.xhtml"/>
+    </url-mapping>
 </pretty-config>
