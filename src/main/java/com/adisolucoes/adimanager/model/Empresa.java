@@ -9,7 +9,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -21,6 +23,7 @@ import javax.persistence.Table;
 public class Empresa implements Serializable {
 
     private long id;
+    private Cliente cliente;
     private String cnpj;
     private String nome;
     private String descricao;
@@ -40,6 +43,16 @@ public class Empresa implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+    
+    @ManyToOne
+    @JoinColumn(name="cliente_id")
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     @Column(nullable = false, length = 30)
