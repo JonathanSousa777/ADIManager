@@ -23,7 +23,7 @@ import javax.persistence.Table;
 public class Empresa implements Serializable {
 
     private long id;
-    private Cliente clsiente;
+    private Cliente cliente;
     private String cnpj;
     private String nome;
     private String descricao;
