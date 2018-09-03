@@ -85,6 +85,11 @@
                         <p:column headerText="E-mail" priority="2">
                             <h:outputText value="#{usuario.pessoa.email}"/>
                         </p:column>
+                        <p:column priority="1" width="15">
+                            <p:commandButton icon="fa fa-pencil" title="Editar Usuário" process="@this #{p:component('formTable')}" action="pretty:editar-usuarios" >
+                                <f:setPropertyActionListener value="#{usuario.id * 483957299}" target="#{usuarioBean.codigo}"/>
+                            </p:commandButton>
+                        </p:column>
                     </p:dataTable>
                 </div>
             </h:form>

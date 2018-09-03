@@ -31,8 +31,8 @@
                                                     <p:fileUpload id="profileUpload" 
                                                                   invalidFileMessage="Extensão de arquivo inválida."
                                                                   invalidSizeMessage="Arquivo muito grande. Tamanho máximo 300KB."
-                                                                  multiple="false"                                                                                
-                                                                  auto="true"                                          
+                                                                  multiple="false"
+                                                                  auto="true"
                                                                   sizeLimit="307200" 
                                                                   uploadLabel="Enviar"
                                                                   allowTypes="/(\.|\/)(jpe?g|png)$/"
@@ -72,6 +72,7 @@
                                                                 navigator="true" 
                                                                 effect="fade"
                                                                 placeholder="__/__/____"
+                                                                mask="99/99/9999"
                                                                 pattern="dd/MM/yyyy"
                                                                 value="#{usuarioBean.usuario.pessoa.dataNascimento}" 
                                                                 styleClass="width-full-input" 
@@ -180,7 +181,7 @@
                                                     styleClass="width-full" 
                                                     value="#{usuarioBean.senha}" 
                                                     match="secretConfirmacao" 
-                                                    required="true"
+                                                    required="#{usuarioBean.usuario.id eq null}"
                                                     feedback="true"
                                                     promptLabel="Informe uma senha"
                                                     weakLabel="Fraca"
@@ -190,7 +191,7 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-6">
                                         <p:outputLabel value="Confirmação da Senha" for="secretConfirmacao"/>
-                                        <p:password id="secretConfirmacao" styleClass="width-full" value="#{usuarioBean.usuario.senha}" required="true"/>
+                                        <p:password id="secretConfirmacao" styleClass="width-full" value="#{usuarioBean.senha}" required="#{usuarioBean.usuario.id eq null}"/>
                                     </div>
                                     <div class="col-xs-12 col-sm-12">
                                         <p:outputLabel value="Observação" for="inputObservacao"/>

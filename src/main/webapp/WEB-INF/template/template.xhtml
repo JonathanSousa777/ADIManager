@@ -184,7 +184,7 @@
                                 </p:link>
                             </li>
                             <li>
-                                <p:link outcome="pretty:consulta-usuarios">
+                                <p:link outcome="pretty:consulta-usuarios" rendered="#{usuarioBean.usuarioLogado.tipoUsuario eq 'MASTER'}">
                                     <i class="fa fa-users"></i> 
                                     <span>Usuarios</span>
                                 </p:link>

@@ -36,6 +36,7 @@ public class Pessoa implements Serializable {
     private String email;
     private String cpfCnpj;
     private String nacionalidade;
+    private String nomeImagem = "";
     private Date dataNascimento;
     private byte[] imagem;
     private Usuario usuario;
@@ -186,6 +187,14 @@ public class Pessoa implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getNomeImagem() {
+        return nomeImagem;
+    }
+
+    public void setNomeImagem(String nomeImagem) {
+        this.nomeImagem = nomeImagem;
     }
 
     @Override

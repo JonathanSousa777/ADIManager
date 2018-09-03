@@ -27,7 +27,7 @@ import org.jsoup.nodes.Document;
 
 /**
  *
- * @author Junior Sy
+ * @author ADI Soluções
  */
 @Named
 @ViewScoped
@@ -37,6 +37,7 @@ public class UsuarioBean implements Serializable {
 
     @Inject
     private UsuarioDAO usuarioDAO;
+
     @Inject
     private Usuario usuario;
 
@@ -45,6 +46,8 @@ public class UsuarioBean implements Serializable {
     private String nome;
     private String senha;
     private TipoUsuario tipoUsuario;
+    private Usuario usuarioLogado;
+    private long codigo;
 
     private List<Usuario> usuarioFiltrados;
 
@@ -56,6 +59,7 @@ public class UsuarioBean implements Serializable {
         usuario = new Usuario();
         usuario.setAtivo(true);
         usuario.setPessoa(pessoa);
+        usuarioLogado = FacesUtils.getUsuarioLogado();
     }
 
     public List<Usuario> pesquisar() {
@@ -72,18 +76,44 @@ public class UsuarioBean implements Serializable {
 
     public void salvar() {
         try {
-            usuario.setSenha(FacesUtils.md5(senha));
-            usuario.setDataUltimoAcesso(new Date());
-            usuarioDAO.verificarLoginDuplicado(usuario.getLogin());
-            usuarioDAO.salvar(usuario);
-            FacesUtils.showFacesMessage("Usuário salvo com sucesso!", 2);
-            limparForm();
+            if (usuario != null) {
+                usuario.setDataUltimoAcesso(new Date());
+                Usuario usuarioExistente = usuarioDAO.buscarPorLogin(usuario.getLogin());
+                if (usuario.getId() == 0) {
+                    if (usuarioExistente != null) {
+                        throw new ErroLoginDuplicadoException();
+                    }
+                    usuario.setSenha(FacesUtils.md5(senha));
+                    usuarioDAO.salvar(usuario);
+                    FacesUtils.showFacesMessage("Usuário salvo com sucesso!", 2);
+                    limparForm();
+                } else {
+                    if (usuarioExistente != null && usuarioExistente.getId() != usuario.getId()) {
+                        throw new ErroLoginDuplicadoException();
+                    }
+                    if (!senha.equals("")) {
+                        usuario.setSenha(FacesUtils.md5(senha));
+                    }
+                    usuarioDAO.atualizar(usuario);
+                    FacesUtils.showFacesMessage("Usuário atualizado com sucesso!", 2);
+                }
+            }
         } catch (ErroBancoDadosException ex) {
             LOG.log(Level.SEVERE, null, ex);
             FacesUtils.showFacesMessage("Ocorreu um erro no banco de dados, contate o suporte!", 1);
         } catch (ErroLoginDuplicadoException ex) {
             LOG.log(Level.SEVERE, null, ex);
             FacesUtils.showFacesMessage("Já existe um usuário com esse Login!", 1);
+        }
+    }
+
+    public void buscarUsuario() {
+        try {
+            codigo = codigo / 483957299;
+            usuario = usuarioDAO.buscarPorId(codigo);
+        } catch (ErroBancoDadosException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+            FacesUtils.showFacesMessage("Erro ao recuperar usuário!", 1);
         }
     }
 
@@ -189,6 +219,22 @@ public class UsuarioBean implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public Usuario getUsuarioLogado() {
+        return usuarioLogado;
+    }
+
+    public void setUsuarioLogado(Usuario usuarioLogado) {
+        this.usuarioLogado = usuarioLogado;
+    }
+
+    public long getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(long codigo) {
+        this.codigo = codigo;
     }
 
 }
