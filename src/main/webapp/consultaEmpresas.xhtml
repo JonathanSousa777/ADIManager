@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<ui:composition template="/WEB-INF/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="complementoTitulo"> - Consulta de Empresas</ui:define>   
+    <ui:define name="header">Consulta de Empresas</ui:define>
+    <ui:define name="breadcrumb">Consulta de Empresas</ui:define>
+
+    <ui:define name="conteudo">
+        <div class="box">
+            <div class="box-header with-border">
+                <h:form id="formDados">
+                    <p:messages id="msg"/>
+                    <div class="col-xs-12 col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <h:panelGrid columns="1" styleClass="width-full">
+                                    <h:outputLabel value="Nome"/>
+                                    <h:inputText id="inputNome" 
+                                                 value="#{empresaBean.empresaFiltro.nome}"
+                                                 styleClass="form-control"
+                                                 label="nome"/>
+                                </h:panelGrid>
+                            </div>
+                            <div class="col-sm-4">
+                                <h:panelGrid columns="1" styleClass="width-full">
+                                    <h:outputLabel value="CNPJ"/>
+                                    <h:inputText id="inputCnpj"
+                                                 value="#{empresaBean.empresaFiltro.cnpj}"
+                                                 styleClass="form-control"
+                                                 label="cnpj"/>
+                                </h:panelGrid>
+                            </div>
+                            <div class="col-sm-4">
+                                <h:panelGrid columns="1" styleClass="width-full">
+                                    <h:outputLabel value="Proprietario"/>
+                                    <p:selectOneMenu  id="selectTipo"
+                                                      label="Proprietario"
+                                                      converter="entityConverter"
+                                                      filter="true"
+                                                      value="#{empresaBean.empresaFiltro.cliente}">
+                                        <f:selectItem itemLabel="Selecione um Usuário" noSelectionOption="true"/>
+                                        <f:selectItems value="#{empresaBean.clientes}" var="usuarios" itemLabel="#{usuarios.pessoa.nome}" itemValue="#{usuarios}"/>              
+                                    </p:selectOneMenu>
+                                </h:panelGrid>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="painel-botoes">
+                                    <p:commandLink styleClass="btn btn-info" title="Buscar Empresa" action="#{empresaBean.pesquisarLazy()}"
+                                                   update="formDados #{p:component('dataTableEmpresas')}"  process="@form @this">
+                                        <i class="fa fa fa-search"></i>
+                                        <span>Buscar</span>
+                                        <f:setPropertyActionListener value="false" target="#{empresaBean.empresaFiltro.todas}"/>
+                                    </p:commandLink>
+                                    <p:commandLink styleClass="btn botaoCinza" title="Buscas todas as Empresas" style="margin:0px 5px 0px 5px;"
+                                                   action="#{empresaBean.buscarTodas()}" update="formDados #{p:component('dataTableEmpresas')}" 
+                                                   process="@form">
+                                        <i class="fa fa fa-list"></i>
+                                        <span>Buscar Todas</span>
+                                    </p:commandLink>
+                                    <p:commandLink styleClass="btn botaoVerde" title="Cadastrar Empresa" update="formDados #{p:component('dataTableEmpresas')}"
+                                                   process="@form">
+                                        <i class="fa fa fa-plus"></i>
+                                        <span>Cadastrar</span>
+                                    </p:commandLink>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </div>
+            xxxx
+            <h:form id="formTable">
+                <div class="box-body" id="boxbody">
+                    <p:dataTable value="#{empresaBean.modelo}"
+                                 id="dataTableEmpresas"
+                                 var="empresa"
+                                 rows="20"
+                                 lazy="true"
+                                 rowsPerPageTemplate="20,30,40"
+                                 paginator="true"
+                                 paginatorPosition="bottom"
+                                 tableStyle="table-layout:auto;"
+                                 emptyMessage="Nenhuma empresa foi encontrada"
+                                 styleClass="datatable-custom">
+                        <p:column headerText="Nome Empresa" priority="1">
+                            <h:outputText value="#{empresa.nome}"/>
+                        </p:column>
+                        <p:column headerText="CNPJ" priority="2">
+                            <h:outputText value="#{empresa.cnpj}"/>
+                        </p:column>
+                        <p:column headerText="Proprietário" priority="1">
+                            <h:outputText value="#{empresa.pessoa.nome}"/>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

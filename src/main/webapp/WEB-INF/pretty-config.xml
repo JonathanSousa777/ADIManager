@@ -29,4 +29,8 @@
         <pattern value="/ferramentas"/>
         <view-id value="/consultaFerramentas.xhtml"/>
     </url-mapping>
+    <url-mapping id="consulta-empresas">
+        <pattern value="/empresas"/>
+        <view-id value="/consultaEmpresas.xhtml"/>
+    </url-mapping>
 </pretty-config>
