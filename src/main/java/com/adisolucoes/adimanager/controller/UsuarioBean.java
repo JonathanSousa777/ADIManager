@@ -19,11 +19,13 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
+import org.primefaces.event.FileUploadEvent;
 
 /**
  *
@@ -48,6 +50,8 @@ public class UsuarioBean implements Serializable {
     private TipoUsuario tipoUsuario;
     private Usuario usuarioLogado;
     private long codigo;
+    @ManagedProperty(value = "#{fotoBean}")
+    private FotoBean fotoBean;
 
     private List<Usuario> usuarioFiltrados;
 
@@ -156,6 +160,12 @@ public class UsuarioBean implements Serializable {
         usuario = new Usuario();
         usuario.setAtivo(true);
         usuario.setPessoa(pessoa);
+    }
+
+    public void carregarImagem(FileUploadEvent event) {
+        fotoBean = new FotoBean();
+        fotoBean.setUsuario(usuario.getPessoa());
+        fotoBean.alterarImagem(event);
     }
 
     public TipoUsuario[] getTiposUsuario() {

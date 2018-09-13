@@ -6,7 +6,8 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:b="http://xmlns.jcp.org/jsf/composite/b">
 
     <ui:define name="complementoTitulo"> - Cadastro de Usuários</ui:define>
     <ui:define name="header">Cadastro de Usuários</ui:define>
@@ -15,8 +16,8 @@
     <ui:define name="conteudo">
         <div class="box">
             <div class="box-header with-border">
-                <p:messages id="messages" autoUpdate="false" closable="true"/>
-                <h:form id="formDadosUsuario">
+                <h:form id="formDadosUsuario" enctype="multipart/form-data">
+                    <p:messages id="messages" autoUpdate="false" closable="true"/>
                     <div class="col-sm-12">
                         <div class="msg-campos-obrigatorios">Os campos marcados com um asterísco <i style="color: red;">*</i> são obrigatórios.</div>
                         <div class="panel panel-default">
@@ -27,21 +28,24 @@
                                         <div class="col-xs-12 col-sm-2">
                                             <div class="col-xs-12 col-sm-12">
                                                 <p:outputPanel id="outputPanelImagem">
-                                                    <h:graphicImage name="user.png" library="images" styleClass="image-perfil" rendered="#{usuarioBean.usuario.pessoa.imagem == null}"/>
-                                                    <p:fileUpload id="profileUpload" 
-                                                                  invalidFileMessage="Extensão de arquivo inválida."
-                                                                  invalidSizeMessage="Arquivo muito grande. Tamanho máximo 300KB."
-                                                                  multiple="false"
-                                                                  auto="true"
-                                                                  sizeLimit="307200" 
-                                                                  uploadLabel="Enviar"
-                                                                  allowTypes="/(\.|\/)(jpe?g|png)$/"
-                                                                  label="Imagem"
-                                                                  process="@this"
-                                                                  fileUploadListener="#{usuarioBean.enviarImagemUsuario}"
-                                                                  update="outputPanelImagem"
-                                                                  styleClass="upload-ideb">
+                                                    <p:graphicImage id="usuarioSemFoto" name="user.png" library="images" styleClass="center-object-block image-perfil" rendered="#{usuarioBean.usuario.pessoa.imagem == null and fotoBean.imagemTemporaria == null}" />
+                                                    <p:graphicImage id="usuarioImagemTemporaria" styleClass="center-object-block image-perfil" rendered="#{fotoBean.imagemTemporaria != null}" value="#{fotoBean.imagemTemporaria}" />
+                                                    <p:fileUpload  fileUploadListener="#{usuarioBean.carregarImagem}"
+                                                                   allowTypes="/(\.|\/)(jpg|png)$/"
+                                                                   auto="true"
+                                                                   label="Imagem"
+                                                                   cancelLabel="Cancelar"
+                                                                   uploadLabel="Enviar"
+                                                                   process="@this"
+                                                                   update="#{p:component('outputPanelImagem')} msgUpload" 
+                                                                   sizeLimit="1536000"
+                                                                   invalidFileMessage="Extensão de arquivo inválida. Selecione JPG ou PNG."
+                                                                   invalidSizeMessage="Arquivo muito grande. Tamanho máximo 150KB."
+                                                                   multiple="false"
+                                                                   dragDropSupport="true"
+                                                                   styleClass="center-object-block file-upload-foto">
                                                     </p:fileUpload>
+                                                    <p:messages id="msgUpload" autoUpdate="false" closable="true"/>
                                                 </p:outputPanel>
                                             </div>
                                         </div>
