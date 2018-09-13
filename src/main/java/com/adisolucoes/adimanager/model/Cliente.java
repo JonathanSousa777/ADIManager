@@ -23,7 +23,6 @@ import javax.persistence.Table;
 public class Cliente implements Serializable {
 
     private long id;
-    private List<Empresa> empresas;
     private String comoConheceu;
     private List<Projeto> projetos;
     private String observacao;
@@ -42,15 +41,6 @@ public class Cliente implements Serializable {
 
     public void setId(long id) {
         this.id = id;
-    }
-    
-    @OneToMany(mappedBy="cliente")
-    public List<Empresa> getEmpresas() {
-        return empresas;
-    }
-
-    public void setEmpresas(List<Empresa> empresas) {
-        this.empresas = empresas;
     }
 
     @Column(name = "como_conheceu")
@@ -131,5 +121,5 @@ public class Cliente implements Serializable {
         }
         return true;
     }
-    
+
 }

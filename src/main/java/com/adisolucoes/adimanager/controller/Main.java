@@ -44,7 +44,7 @@ public class Main {
         trx.begin();
 
         //TESTE AQUI
-        inserirFerramenta(manager);
+        inserirProjeto(manager);
         trx.commit();
         manager.close();
         close(factory);
@@ -123,20 +123,41 @@ public class Main {
     public static void inserirEmpresa(EntityManager manager) {
         try {
             Endereco endereco = new Endereco();
-            endereco.setBairro("Promorar");
+            endereco.setBairro("Porto Alegre");
             endereco.setCep("64027.080");
             endereco.setCidade("Teresina");
             endereco.setLogradouro("Quadra-30 Lote-21 Casa-B");
             endereco.setNumero("456");
             endereco.setUf(UF.DF);
 
+            Pessoa pessoa = new Pessoa();
+            pessoa.setCpfCnpj("5641651555");
+            pessoa.setNome("Gabriel Barbosa");
+            pessoa.setDataAtualizacao(new Date());
+            pessoa.setDataCadastro(new Date());
+            pessoa.setDataNascimento(new Date());
+            pessoa.setEmail("gabriel@gmail");
+            pessoa.setEndereco(endereco);
+            pessoa.setNacionalidade("Brasileiro");
+            pessoa.setObservacao("Referenciada");
+            pessoa.setSexo(Sexo.FEMININO);
+            pessoa.setTelefone("45665468");
+
+            Cliente cliente = new Cliente();
+            cliente.setCodigoIdentificador("cliGarb");
+            cliente.setComoConheceu("Campanha");
+            cliente.setObservacao("Novo desse mês");
+            cliente.setPessoa(pessoa);
+            manager.persist(cliente);
+
             Empresa empresa = new Empresa();
-            empresa.setEmail("empresa@gmail.com");
+            empresa.setEmail("devs@gmail.com");
             empresa.setCnpj("0000.111/0000,0");
-            empresa.setDescricao("Vende plásticos");
+            empresa.setDescricao("Empresa de desenvolvimento");
             empresa.setEndereco(endereco);
-            empresa.setNome("Razão Fantasma");
-            empresa.setTelefone("99999999");
+            empresa.setNome("Devs Top");
+            empresa.setTelefone("99898349");
+            empresa.setCliente(cliente);
 
             manager.persist(empresa);
             System.out.println("----------OK-------------");
@@ -444,7 +465,7 @@ public class Main {
             ferramenta.setVantagens("Rápida e Barata");
             ferramenta.setProjetos(projetos);
             manager.persist(ferramenta);
-            
+
             List<Ferramenta> ferramentas = new ArrayList<>();
             ferramentas.add(ferramenta);
             projeto.setFerramentas(ferramentas);

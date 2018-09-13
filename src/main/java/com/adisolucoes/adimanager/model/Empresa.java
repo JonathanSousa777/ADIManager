@@ -44,9 +44,9 @@ public class Empresa implements Serializable {
     public void setId(long id) {
         this.id = id;
     }
-    
+
     @ManyToOne
-    @JoinColumn(name="cliente_id")
+    @JoinColumn(name = "cliente_id")
     public Cliente getCliente() {
         return cliente;
     }
