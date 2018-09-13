@@ -16,7 +16,7 @@ public class EmpresaFiltro implements LazyFiltro{
     private String cnpj;
     private Cliente cliente;
 
-    
+        
     public Integer getPrimeiro() {
         return primeiro;
     }
