@@ -75,7 +75,6 @@
                     </div>
                 </h:form>
             </div>
-            xxxx
             <h:form id="formTable">
                 <div class="box-body" id="boxbody">
                     <p:dataTable value="#{empresaBean.modelo}"
@@ -96,7 +95,7 @@
                             <h:outputText value="#{empresa.cnpj}"/>
                         </p:column>
                         <p:column headerText="Proprietário" priority="1">
-                            <h:outputText value="#{empresa.pessoa.nome}"/>
+                            <h:outputText value="#{empresa.cliente}"/>
                         </p:column>
                     </p:dataTable>
                 </div>

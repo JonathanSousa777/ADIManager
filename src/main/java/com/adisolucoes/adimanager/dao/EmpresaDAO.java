@@ -47,21 +47,21 @@ public class EmpresaDAO extends DAO<Empresa> implements LazyDAO<Empresa>, Serial
     
     private String gerarSQL(EmpresaFiltro filtro){
         String sql = "";
-        sql += filtro.isCount() ? "SELECT COUNT(e) FROM Empresa e WHERE e.id IS NOT NULL" : "SELECT e FROM Empresa WHERE e.id IS NOT NULL";
-        sql += (filtro.getNome() != null && !filtro.getNome().isEmpty()) ? "AND e.nome LIKE :nome" : "";
-        sql += (filtro.getCnpj() != null && !filtro.getCnpj().isEmpty()) ? "AND e.cnpj LIKE :cnpj" : "";
-        sql += (filtro.getCliente() != null) ? "AND :empresa MEMBER OF e.empresas" : "";
+        sql += filtro.isCount() ? "SELECT COUNT(e) FROM Empresa e WHERE e.id IS NOT NULL " : "SELECT e FROM Empresa e WHERE e.id IS NOT NULL ";
+        sql += (filtro.getNome() != null && !filtro.getNome().isEmpty()) ? "AND e.nome LIKE :nome " : "";
+        sql += (filtro.getCnpj() != null && !filtro.getCnpj().isEmpty()) ? "AND e.cnpj LIKE :cnpj " : "";
+        sql += (filtro.getCliente() != null) ? "AND :empresa MEMBER OF e.cliente " : "";
         sql += " ORDER BY e.nome ASC";
         return sql;
     }
     
     private void preencherParametros(EmpresaFiltro filtro, Query query){
         if(filtro.getNome() != null && !filtro.getNome().isEmpty()){
-            query.setParameter("nome", "%"+ filtro.getNome() +"%");
+            query.setParameter("nome", "%" + filtro.getNome() + "%");
         }
         
         if(filtro.getCnpj() != null && !filtro.getCnpj().isEmpty()){
-            query.setParameter("cnpj", "%"+ filtro.getCnpj() +"%");
+            query.setParameter("cnpj", "%" + filtro.getCnpj() + "%");
         }
         
         if(filtro.getCliente() != null){
