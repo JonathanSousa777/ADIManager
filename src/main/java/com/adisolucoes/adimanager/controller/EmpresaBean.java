@@ -25,7 +25,7 @@ import javax.inject.Named;
 @ViewScoped
 public class EmpresaBean implements Serializable {
 
-    private static final Logger LOG = Logger.getLogger(Empresa.class.getName());
+    private static final Logger LOG = Logger.getLogger(EmpresaBean.class.getName());
 
     @Inject
     private EmpresaDAO empresaDAO;

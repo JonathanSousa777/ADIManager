@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Jonathan Sousa
+ * @author ADI Soluções
  */
 @Entity
 @Table(name = "tab_cliente")

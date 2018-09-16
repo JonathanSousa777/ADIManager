@@ -44,6 +44,11 @@
         <location>/error_404.xhtml</location>
     </error-page>
     
+    <error-page>
+        <error-code>403</error-code>
+        <location>/error_403.xhtml</location>
+    </error-page>
+    
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>

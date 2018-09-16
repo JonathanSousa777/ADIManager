@@ -1,19 +1,20 @@
 package com.adisolucoes.adimanager.filtros;
 
-import com.adisolucoes.adimanager.model.Cliente;
+import com.adisolucoes.adimanager.model.Projeto;
 
 /**
  *
  * @author ADI Manager
  */
-public class EmpresaFiltro implements LazyFiltro {
+public class ClienteFiltro implements LazyFiltro {
 
     private Integer primeiro;
     private Integer quantidade;
     private boolean count;
     private String nome;
-    private String cnpj;
-    private Cliente proprietario;
+    private String cpfCnpj;
+    private String codigo;
+    private Projeto projeto;
 
     public Integer getPrimeiro() {
         return primeiro;
@@ -47,19 +48,28 @@ public class EmpresaFiltro implements LazyFiltro {
         this.nome = nome;
     }
 
-    public String getCnpj() {
-        return cnpj;
+    public String getCpfCnpj() {
+        return cpfCnpj;
     }
 
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+    public void setCpfCnpj(String cpfCnpj) {
+        this.cpfCnpj = cpfCnpj;
     }
 
-    public Cliente getProprietario() {
-        return proprietario;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setProprietario(Cliente proprietario) {
-        this.proprietario = proprietario;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
+
+    public Projeto getProjeto() {
+        return projeto;
+    }
+
+    public void setProjeto(Projeto projeto) {
+        this.projeto = projeto;
+    }
+
 }

@@ -239,6 +239,13 @@ a:active {
     width: 100%;
 }
 
+.link-consulta-acao {
+    font-size: 16px;
+    font-weight: bold;
+    float: right;
+    margin-top: 5px;
+}
+
 @media screen and (max-width: 40em){
     .ui-fileupload-buttonbar .ui-button .ui-button-text {
         display: inline-block !important; 

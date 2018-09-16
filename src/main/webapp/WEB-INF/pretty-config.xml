@@ -33,4 +33,8 @@
         <pattern value="/empresas"/>
         <view-id value="/consultaEmpresas.xhtml"/>
     </url-mapping>
+    <url-mapping id="consulta-clientes">
+        <pattern value="/clientes"/>
+        <view-id value="/consultaClientes.xhtml"/>
+    </url-mapping>
 </pretty-config>
