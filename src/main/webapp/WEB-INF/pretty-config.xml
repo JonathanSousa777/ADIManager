@@ -14,7 +14,7 @@
     </url-mapping>
     <url-mapping id="consulta-usuarios">
         <pattern value="/usuarios"/>
-        <view-id value="/consultaUsuarios.xhtml"/>
+        <view-id value="/consultas/consultaUsuarios.xhtml"/>
     </url-mapping>
     <url-mapping id="cadastro-usuarios">
         <pattern value="/cadastro-usuarios"/>
@@ -27,14 +27,14 @@
     </url-mapping>
     <url-mapping id="consulta-ferramentas">
         <pattern value="/ferramentas"/>
-        <view-id value="/consultaFerramentas.xhtml"/>
+        <view-id value="/consultas/consultaFerramentas.xhtml"/>
     </url-mapping>
     <url-mapping id="consulta-empresas">
         <pattern value="/empresas"/>
-        <view-id value="/consultaEmpresas.xhtml"/>
+        <view-id value="/consultas/consultaEmpresas.xhtml"/>
     </url-mapping>
     <url-mapping id="consulta-clientes">
         <pattern value="/clientes"/>
-        <view-id value="/consultaClientes.xhtml"/>
+        <view-id value="/consultas/consultaClientes.xhtml"/>
     </url-mapping>
 </pretty-config>

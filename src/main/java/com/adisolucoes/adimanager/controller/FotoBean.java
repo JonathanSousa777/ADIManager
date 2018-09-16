@@ -51,7 +51,7 @@ public class FotoBean implements Serializable {
     }
 
     public String getImagemTemporaria() {
-        System.out.println(imagemTemporaria);
+        //System.out.println(imagemTemporaria);
         return imagemTemporaria;
     }
 
