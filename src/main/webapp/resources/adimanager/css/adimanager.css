@@ -202,6 +202,10 @@ input.botaoCinza, input.botaoAzul, input.botaoVerde{
     box-shadow: 0 16px 24px 0 rgba(0,0,0,0.22),0 25px 55px 0 rgba(0,0,0,0.21) !important;
 }
 
+.datatable-custom {
+    text-align: center;
+}
+
 .ui-dialog.responsive.responsive-small > .ui-dialog-content {
     max-width: 375px;
 }

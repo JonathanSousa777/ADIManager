@@ -23,51 +23,45 @@ import javax.inject.Named;
  */
 @Named
 @ViewScoped
-public class EmpresaBean implements  Serializable{
-    
+public class EmpresaBean implements Serializable {
+
     private static final Logger LOG = Logger.getLogger(Empresa.class.getName());
-    
+
     @Inject
     private EmpresaDAO empresaDAO;
-    
+
     @Inject
     private ClienteDAO clienteDAO;
-    
+
     private Empresa empresa;
     private Cliente cliente;
     private EmpresaFiltro empresaFiltro;
     private List<Cliente> clientes;
     private LazyBean<Empresa> modelo;
-            
-    public EmpresaBean(){
+
+    public EmpresaBean() {
         clientes = new ArrayList<Cliente>();
     }
-    
+
     @PostConstruct
-    public void inicializar(){
+    public void inicializar() {
         cliente = new Cliente();
         empresaFiltro = new EmpresaFiltro();
-        carregarEmpresas();
+        carregarClientes();
     }
-    
-    public void carregarEmpresas(){
+
+    public void carregarClientes() {
         try {
             clientes = clienteDAO.listarTodos();
-        } catch (ErroBancoDadosException ex){
+        } catch (ErroBancoDadosException ex) {
             LOG.log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void buscarTodas(){
-        empresaFiltro = new EmpresaFiltro();
-        empresaFiltro.setTodas(true);
-        pesquisarLazy();
-    }
-    
-    public void pesquisarLazy(){
+
+    public void pesquisarLazy() {
         modelo = new LazyBean<Empresa>(empresaDAO, empresaFiltro);
     }
-    
+
     public Empresa getEmpresa() {
         return empresa;
     }
@@ -101,8 +95,8 @@ public class EmpresaBean implements  Serializable{
     }
 
     public LazyBean<Empresa> getModelo() {
-        if(modelo == null){
-            buscarTodas();
+        if (modelo == null) {
+            pesquisarLazy();
         }
         return modelo;
     }

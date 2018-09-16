@@ -44,7 +44,7 @@
                                                       label="Proprietario"
                                                       converter="entityConverter"
                                                       filter="true"
-                                                      value="#{empresaBean.empresaFiltro.cliente}">
+                                                      value="#{empresaBean.empresaFiltro.proprietario}">
                                         <f:selectItem itemLabel="Selecione um Usuário" noSelectionOption="true"/>
                                         <f:selectItems value="#{empresaBean.clientes}" var="usuarios" itemLabel="#{usuarios.pessoa.nome}" itemValue="#{usuarios}"/>              
                                     </p:selectOneMenu>
@@ -52,17 +52,11 @@
                             </div>
                             <div class="col-sm-12">
                                 <div class="painel-botoes">
-                                    <p:commandLink styleClass="btn btn-info" title="Buscar Empresa" action="#{empresaBean.pesquisarLazy()}"
+                                    <p:commandLink styleClass="btn btn-info" title="Buscar Empresa" action="#{empresaBean.pesquisarLazy()}" style="margin:0px 5px 0px 5px;"
                                                    update="formDados #{p:component('dataTableEmpresas')}"  process="@form @this">
                                         <i class="fa fa fa-search"></i>
                                         <span>Buscar</span>
                                         <f:setPropertyActionListener value="false" target="#{empresaBean.empresaFiltro.todas}"/>
-                                    </p:commandLink>
-                                    <p:commandLink styleClass="btn botaoCinza" title="Buscas todas as Empresas" style="margin:0px 5px 0px 5px;"
-                                                   action="#{empresaBean.buscarTodas()}" update="formDados #{p:component('dataTableEmpresas')}" 
-                                                   process="@form">
-                                        <i class="fa fa fa-list"></i>
-                                        <span>Buscar Todas</span>
                                     </p:commandLink>
                                     <p:commandLink styleClass="btn botaoVerde" title="Cadastrar Empresa" update="formDados #{p:component('dataTableEmpresas')}"
                                                    process="@form">
@@ -95,7 +89,7 @@
                             <h:outputText value="#{empresa.cnpj}"/>
                         </p:column>
                         <p:column headerText="Proprietário" priority="1">
-                            <h:outputText value="#{empresa.cliente}"/>
+                            <h:outputText value="#{empresa.proprietario.pessoa.nome}"/>
                         </p:column>
                     </p:dataTable>
                 </div>

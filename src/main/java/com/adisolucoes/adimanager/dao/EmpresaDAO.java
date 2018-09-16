@@ -13,14 +13,14 @@ import javax.persistence.Query;
  *
  * @author ADI Manager
  */
-public class EmpresaDAO extends DAO<Empresa> implements LazyDAO<Empresa>, Serializable{
+public class EmpresaDAO extends DAO<Empresa> implements LazyDAO<Empresa>, Serializable {
 
     private static final Logger LOG = Logger.getLogger(EmpresaDAO.class.getName());
-    
+
     public EmpresaDAO() {
         super(Empresa.class);
     }
-    
+
     @Override
     public int quantidadeLazy(LazyFiltro filtro) throws ErroBancoDadosException {
         EmpresaFiltro empresaFiltro = (EmpresaFiltro) filtro;
@@ -44,28 +44,28 @@ public class EmpresaDAO extends DAO<Empresa> implements LazyDAO<Empresa>, Serial
         List<Empresa> empresas = query.getResultList();
         return empresas;
     }
-    
-    private String gerarSQL(EmpresaFiltro filtro){
+
+    private String gerarSQL(EmpresaFiltro filtro) {
         String sql = "";
         sql += filtro.isCount() ? "SELECT COUNT(e) FROM Empresa e WHERE e.id IS NOT NULL " : "SELECT e FROM Empresa e WHERE e.id IS NOT NULL ";
         sql += (filtro.getNome() != null && !filtro.getNome().isEmpty()) ? "AND e.nome LIKE :nome " : "";
         sql += (filtro.getCnpj() != null && !filtro.getCnpj().isEmpty()) ? "AND e.cnpj LIKE :cnpj " : "";
-        sql += (filtro.getCliente() != null) ? "AND :empresa MEMBER OF e.cliente " : "";
+        sql += (filtro.getProprietario() != null) ? "AND e.proprietario.id = :idProprietario" : "";
         sql += " ORDER BY e.nome ASC";
         return sql;
     }
-    
-    private void preencherParametros(EmpresaFiltro filtro, Query query){
-        if(filtro.getNome() != null && !filtro.getNome().isEmpty()){
+
+    private void preencherParametros(EmpresaFiltro filtro, Query query) {
+        if (filtro.getNome() != null && !filtro.getNome().isEmpty()) {
             query.setParameter("nome", "%" + filtro.getNome() + "%");
         }
-        
-        if(filtro.getCnpj() != null && !filtro.getCnpj().isEmpty()){
+
+        if (filtro.getCnpj() != null && !filtro.getCnpj().isEmpty()) {
             query.setParameter("cnpj", "%" + filtro.getCnpj() + "%");
         }
-        
-        if(filtro.getCliente() != null){
-            query.setParameter("empresa", filtro.getCliente());
+
+        if (filtro.getProprietario() != null) {
+            query.setParameter("idProprietario", filtro.getProprietario().getId());
         }
     }
 }

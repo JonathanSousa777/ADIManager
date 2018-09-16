@@ -6,21 +6,20 @@ import com.adisolucoes.adimanager.model.Cliente;
  *
  * @author ADI Manager
  */
-public class EmpresaFiltro implements LazyFiltro{
-    
+public class EmpresaFiltro implements LazyFiltro {
+
     private Integer primeiro;
     private Integer quantidade;
     private boolean count;
     private boolean todas;
     private String nome;
     private String cnpj;
-    private Cliente cliente;
+    private Cliente proprietario;
 
-        
     public Integer getPrimeiro() {
         return primeiro;
     }
-    
+
     public void setPrimeiro(Integer primeiro) {
         this.primeiro = primeiro;
     }
@@ -32,7 +31,7 @@ public class EmpresaFiltro implements LazyFiltro{
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
-    
+
     public boolean isCount() {
         return count;
     }
@@ -65,11 +64,11 @@ public class EmpresaFiltro implements LazyFiltro{
         this.cnpj = cnpj;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Cliente getProprietario() {
+        return proprietario;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setProprietario(Cliente proprietario) {
+        this.proprietario = proprietario;
     }
 }

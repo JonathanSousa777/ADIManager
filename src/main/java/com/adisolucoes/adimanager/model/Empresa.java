@@ -23,7 +23,7 @@ import javax.persistence.Table;
 public class Empresa implements Serializable {
 
     private long id;
-    private Cliente cliente;
+    private Cliente proprietario;
     private String cnpj;
     private String nome;
     private String descricao;
@@ -46,13 +46,13 @@ public class Empresa implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id")
-    public Cliente getCliente() {
-        return cliente;
+    @JoinColumn(name = "proprietario_id")
+    public Cliente getProprietario() {
+        return proprietario;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setProprietario(Cliente proprietario) {
+        this.proprietario = proprietario;
     }
 
     @Column(nullable = false, length = 30)

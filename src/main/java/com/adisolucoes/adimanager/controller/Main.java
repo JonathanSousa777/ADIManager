@@ -44,7 +44,7 @@ public class Main {
         trx.begin();
 
         //TESTE AQUI
-        inserirProjeto(manager);
+        inserirEmpresa(manager);
         trx.commit();
         manager.close();
         close(factory);
@@ -157,7 +157,7 @@ public class Main {
             empresa.setEndereco(endereco);
             empresa.setNome("Devs Top");
             empresa.setTelefone("99898349");
-            empresa.setCliente(cliente);
+            empresa.setProprietario(cliente);
 
             manager.persist(empresa);
             System.out.println("----------OK-------------");
@@ -257,7 +257,7 @@ public class Main {
     public static void inserirUsuario(EntityManager manager) {
         try {
             Endereco endereco = new Endereco();
-            endereco.setBairro("Sao Paulo");
+            endereco.setBairro("Porto Alegre");
             endereco.setCep("64027.080");
             endereco.setCidade("Barueri");
             endereco.setLogradouro("Quadra-30 Lote-21 Casa-B");
@@ -265,12 +265,12 @@ public class Main {
             endereco.setUf(UF.DF);
 
             Pessoa pessoa = new Pessoa();
-            pessoa.setCpfCnpj("098764343");
-            pessoa.setNome("Juliano Miguel");
+            pessoa.setCpfCnpj("654546545");
+            pessoa.setNome("Jonathan Sousa");
             pessoa.setDataAtualizacao(new Date());
             pessoa.setDataCadastro(new Date());
             pessoa.setDataNascimento(new Date());
-            pessoa.setEmail("as@gmail");
+            pessoa.setEmail("jon@gmail");
             pessoa.setEndereco(endereco);
             pessoa.setNacionalidade("Brasileiro");
             pessoa.setObservacao("Referenciada");
@@ -279,11 +279,11 @@ public class Main {
 
             Usuario usuario = new Usuario();
             usuario.setDataUltimoAcesso(new Date());
-            usuario.setLogin("JUnior teste");
+            usuario.setLogin("master");
             usuario.setPessoa(pessoa);
-            usuario.setSenha("22323");
+            usuario.setSenha("1");
             usuario.setAtivo(true);
-            usuario.setTipoUsuario(TipoUsuario.FUNCIONARIO);
+            usuario.setTipoUsuario(TipoUsuario.MASTER);
             usuario.setPessoa(pessoa);
 
             manager.persist(usuario);
@@ -379,36 +379,36 @@ public class Main {
     public static void inserirFerramenta(EntityManager manager) {
         try {
             Endereco endereco = new Endereco();
-            endereco.setBairro("Promorarr");
+            endereco.setBairro("Porto Alegre");
             endereco.setCep("64027.080");
             endereco.setCidade("Teresina");
-            endereco.setLogradouro("Quadra-30 Lote-21 Casa-B");
+            endereco.setLogradouro("Quadra-36 Lote-23 Casa-B");
             endereco.setNumero("456");
             endereco.setUf(UF.DF);
 
             Pessoa pessoa = new Pessoa();
-            pessoa.setCpfCnpj("05183216304");
-            pessoa.setNome("Daniel Julio");
+            pessoa.setCpfCnpj("2342343243");
+            pessoa.setNome("Bartolomeu Rodrigues");
             pessoa.setDataAtualizacao(new Date());
             pessoa.setDataCadastro(new Date());
             pessoa.setDataNascimento(new Date());
-            pessoa.setEmail("teste@gmail");
+            pessoa.setEmail("bart@gmail");
             pessoa.setEndereco(endereco);
             pessoa.setNacionalidade("Brasileiro");
-            pessoa.setObservacao("Referenciada");
+            pessoa.setObservacao("Aroazes");
             pessoa.setSexo(Sexo.FEMININO);
             pessoa.setTelefone("88888888");
 
             Cliente cliente = new Cliente();
-            cliente.setCodigoIdentificador("cli12");
-            cliente.setComoConheceu("Campanha");
+            cliente.setCodigoIdentificador("cliBar");
+            cliente.setComoConheceu("Facebook");
             cliente.setObservacao("Novo desse mês");
             cliente.setPessoa(pessoa);
             manager.persist(cliente);
 
             CategoriaPlano categoriaPlano = new CategoriaPlano();
-            categoriaPlano.setDescricao("Plano com os mais variádos recursos de softwares");
-            categoriaPlano.setNome("Ecommerce");
+            categoriaPlano.setDescricao("Plano para administradores");
+            categoriaPlano.setNome("Admin");
             manager.persist(categoriaPlano);
 
             Plano plano = new Plano();
@@ -460,7 +460,7 @@ public class Main {
             ferramenta.setNome("FormsPro");
             ferramenta.setNotaInstrucao("CONTATO");
             ferramenta.setPaga(true);
-            ferramenta.setUrl("www.formspro.com.br");
+            ferramenta.setUrl("http://www.formspro.com.br");
             ferramenta.setValor(new BigDecimal(120));
             ferramenta.setVantagens("Rápida e Barata");
             ferramenta.setProjetos(projetos);
