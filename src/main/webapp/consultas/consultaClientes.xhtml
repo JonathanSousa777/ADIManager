@@ -79,13 +79,13 @@
                             </p:outputPanel>
                             <div class="col-sm-12">
                                 <div class="painel-botoes" style="margin-top: 30px;">
-                                    <p:commandLink styleClass="btn btn-info" title="Buscar Clientes" action="#{clienteBean.pesquisarLazy()}" style="margin:0 5px 3px 0;"
+                                    <p:commandLink styleClass="btn btn-info" title="Buscar Clientes" action="#{clienteBean.pesquisarLazy()}" style="margin:3px 5px 3px 0;"
                                                    update="formDados  #{p:component('dataTableClientes')}" process="@form @this">
                                         <i class="fa fa fa-search"></i>
                                         <span>Buscar</span>
                                     </p:commandLink>
                                     <p:commandLink styleClass="btn botaoVerde" title="Cadastrar Clientes" 
-                                                   action="pretty:cadastro-usuarios"
+                                                   action="pretty:cadastro-clientes"
                                                    update="formDados #{p:component('dataTableClientes')}" process="@form">
                                         <i class="fa fa fa-plus"></i>
                                         <span>Cadastrar</span>
@@ -113,7 +113,7 @@
                         <p:column headerText="Nome" priority="1">
                             <h:outputText value="#{cliente.pessoa.nome}"/>
                         </p:column>
-                        <p:column headerText="CPF" priority="2">
+                        <p:column headerText="CPF" priority="1">
                             <h:outputText value="#{cliente.pessoa.cpfCnpj}"/>
                         </p:column>
                         <p:column headerText="E-mail" priority="2">

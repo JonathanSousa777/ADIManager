@@ -18,6 +18,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -25,7 +26,8 @@ import javax.persistence.TemporalType;
  *
  * @author Jonathan Sousa
  */
-@Entity(name = "tab_pessoa")
+@Entity
+@Table(name = "tab_pessoa")
 public class Pessoa implements Serializable {
 
     private long id;

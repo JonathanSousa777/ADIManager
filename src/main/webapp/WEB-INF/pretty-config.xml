@@ -18,7 +18,7 @@
     </url-mapping>
     <url-mapping id="cadastro-usuarios">
         <pattern value="/cadastro-usuarios"/>
-        <view-id value="/cadastroUsuarios.xhtml"/>
+        <view-id value="/cadastros/cadastroUsuarios.xhtml"/>
     </url-mapping>
     <url-mapping id="editar-usuarios">
         <pattern value="/editar-usuarios=#{ pcid : usuarioBean.codigo}"/>
@@ -36,5 +36,9 @@
     <url-mapping id="consulta-clientes">
         <pattern value="/clientes"/>
         <view-id value="/consultas/consultaClientes.xhtml"/>
+    </url-mapping>
+    <url-mapping id="cadastro-clientes">
+        <pattern value="/cadastro-clientes"/>
+        <view-id value="/cadastros/cadastroClientes.xhtml"/>
     </url-mapping>
 </pretty-config>

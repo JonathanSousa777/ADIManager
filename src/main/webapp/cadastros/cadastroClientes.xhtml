@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<ui:composition template="/WEB-INF/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:b="http://xmlns.jcp.org/jsf/composite/b">
+
+    <ui:define name="complementoTitulo"> - Cadastro de Clientes</ui:define>
+    <ui:define name="header">Cadastro de Clientes</ui:define>
+    <ui:define name="breadcrumb"><h:link></h:link> Cadastro de Clientes</ui:define>
+
+    <ui:define name="conteudo">
+        <div class="box">
+            <div class="box-header with-border">
+                <h:form id="formDadosCliente" enctype="multipart/form-data">
+                    <p:messages id="messages" autoUpdate="false" closable="true"/>
+                    <p:outputPanel id="panelCadastroCliente">
+                        <div class="col-sm-12">
+                            <div class="msg-campos-obrigatorios">Os campos marcados com um asterísco <i style="color: red;">*</i> são obrigatórios.</div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Dados Pessoais</div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="margin-down">
+                                            <div class="col-xs-12 col-sm-2">
+                                                <div class="col-xs-12 col-sm-12">
+                                                    <p:outputPanel id="outputPanelImagem">
+                                                        <p:graphicImage id="usuarioSemFoto" name="user.png" library="images" styleClass="center-object-block image-perfil" rendered="#{usuarioBean.usuario.pessoa.imagem == null and fotoBean.imagemTemporaria == null}" />
+                                                        <p:graphicImage id="usuarioImagemTemporaria" styleClass="center-object-block image-perfil" rendered="#{fotoBean.imagemTemporaria != null}" value="#{fotoBean.imagemTemporaria}" />
+                                                        <p:fileUpload  fileUploadListener="#{usuarioBean.carregarImagem}"
+                                                                       allowTypes="/(\.|\/)(jpg|png)$/"
+                                                                       auto="true"
+                                                                       label="Imagem"
+                                                                       cancelLabel="Cancelar"
+                                                                       uploadLabel="Enviar"
+                                                                       process="@this"
+                                                                       update="#{p:component('outputPanelImagem')} messages" 
+                                                                       sizeLimit="1536000"
+                                                                       invalidFileMessage="Extensão de arquivo inválida. Selecione JPG ou PNG."
+                                                                       invalidSizeMessage="Arquivo muito grande. Tamanho máximo 150KB."
+                                                                       multiple="false"
+                                                                       dragDropSupport="true"
+                                                                       styleClass="center-object-block file-upload-foto">
+                                                        </p:fileUpload>
+                                                    </p:outputPanel>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-10">
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <div class="col-xs-12 col-sm-12">
+                                                        <p:outputLabel value="Nome" for="nome"/>
+                                                        <p:inputText id="nome" styleClass="width-full" value="#{clienteBean.cliente.pessoa.nome}" required="true"/>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12">
+                                                        <p:outputLabel value="E-mail" for="email"/>
+                                                        <p:inputText id="email" value="#{clienteBean.cliente.pessoa.email}" styleClass="width-full" placeholder="seuemail@gmail.com" required="true"/>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6">
+                                                        <p:outputLabel value="Nacionalidade" for="nacionalidade"/>
+                                                        <p:inputText id="nacionalidade" value="#{clienteBean.cliente.pessoa.nacionalidade}" styleClass="width-full" required="true"/>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6">
+                                                        <p:outputLabel value="Telefone" for="telefone"/>
+                                                        <p:inputMask id="telefone" value="#{clienteBean.cliente.pessoa.telefone}" styleClass="width-full" mask="(99)9999-9999" required="true"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4">
+                                                    <div class="col-xs-12 col-sm-12">
+                                                        <p:outputLabel value="Data de Nascimento" for="dataNascimento"/><br/>
+                                                        <p:calendar id="dataNascimento" 
+                                                                    required="true"
+                                                                    navigator="true" 
+                                                                    effect="fade"
+                                                                    placeholder="__/__/____"
+                                                                    mask="99/99/9999"
+                                                                    pattern="dd/MM/yyyy"
+                                                                    value="#{clienteBean.cliente.pessoa.dataNascimento}" 
+                                                                    styleClass="width-full-input" 
+                                                                    locale="pt"/>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12">
+                                                        <p:outputLabel value="CPF" for="cpf"/>
+                                                        <p:inputMask id="cpf" value="#{clienteBean.cliente.pessoa.cpfCnpj}" styleClass="width-full" mask="999.999.999-99" required="true">
+                                                            <p:ajax listener="#{clienteBean.verificarCpfCnpj()}" update="messages"/>
+                                                        </p:inputMask>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12">
+                                                        <p:outputLabel value="Sexo" for="sexo"/>
+                                                        <p:selectOneRadio id="sexo" styleClass="width-full" value="#{clienteBean.cliente.pessoa.sexo}" required="true">
+                                                            <f:selectItems value="#{clienteBean.sexos}" var="sexo" itemLabel="#{sexo.descricao}" itemValue="#{sexo}"/>
+                                                        </p:selectOneRadio>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Endereço</div>
+                                <div class="panel-body">
+                                    <p:outputPanel id="panelEndereco">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-6">
+                                                <p:outputLabel value="Estado" for="selectEstado"/>
+                                                <p:selectOneMenu id="selectEstado" styleClass="width-full" style="margin-top: -5px;" value="#{clienteBean.cliente.pessoa.endereco.uf}" required="true">
+                                                    <f:selectItem itemLabel="Selecione um estado..." noSelectionOption="true"/>
+                                                    <f:selectItems value="#{clienteBean.estados}" var="estado" itemLabel="#{estado.descricao}" itemValue="#{estado}"/>
+                                                </p:selectOneMenu>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6">
+                                                <p:outputLabel value="CEP" for="maskCep"/>
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-12">
+                                                        <div class="row">
+                                                            <div class="col-xs-12 col-sm-12">
+                                                                <p:inputMask id="maskCep" 
+                                                                             mask="99999-999" 
+                                                                             value="#{clienteBean.cliente.pessoa.endereco.cep}" 
+                                                                             style="width: 76%" 
+                                                                             placeholder="_____-___">
+                                                                </p:inputMask>
+                                                                <p:commandButton id="buttonPreencherCep"
+                                                                                 icon="fa fa-search" 
+                                                                                 title="Preencher CEP" 
+                                                                                 style="width: 13%; margin: 0px 1px;" 
+                                                                                 action="#{clienteBean.preencherDadosPorCep()}" 
+                                                                                 update="#{p:component('messages')} panelEndereco"
+                                                                                 process="@this maskCep" />
+                                                                <h:graphicImage id="help-cep" library="images" name="icon_help.png" style="width: 8%"/>
+                                                                <p:tooltip styleClass="tooltip-custom" for="help-cep" position="top" >
+                                                                    <h:panelGrid width="250" style="text-align: justify;">
+                                                                        <p>Digite um CEP, clique na lupa e os demais campos serão preenchidos automaticamente.</p>
+                                                                    </h:panelGrid>
+                                                                </p:tooltip>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6">
+                                                <p:outputLabel value="Cidade" for="cidade"/>
+                                                <p:inputText id="cidade" value="#{clienteBean.cliente.pessoa.endereco.cidade}" styleClass="width-full" required="true"/>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6">
+                                                <p:outputLabel value="Bairro" for="inputBairro"/>
+                                                <p:inputText id="inputBairro" styleClass="width-full" value="#{clienteBean.cliente.pessoa.endereco.bairro}" required="true"/>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12">
+                                                <p:outputLabel value="Logradouro" for="inputLogradouro"/>
+                                                <p:inputText id="inputLogradouro" styleClass="width-full" value="#{clienteBean.cliente.pessoa.endereco.logradouro}" required="true"/>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12">
+                                                <p:outputLabel value="Complemento" for="inputComplemento"/>
+                                                <p:inputText id="inputComplemento" styleClass="width-full" value="#{clienteBean.cliente.pessoa.endereco.complemento}"/>
+                                            </div>
+                                        </div>
+                                    </p:outputPanel>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Dados Adicionais</div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12">
+                                            <p:outputLabel value="Código" for="inputCodigo"/>
+                                            <p:inputText id="inputCodigo" styleClass="width-full" value="#{clienteBean.cliente.codigoIdentificador}" required="true"/>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12">
+                                            <p:outputLabel value="Como conheceu?" for="inputAreaConheceu"/>
+                                            <p:inputTextarea id="inputAreaConheceu" styleClass="width-full" value="#{clienteBean.cliente.comoConheceu}" />
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12">
+                                            <p:outputLabel value="Observação" for="inputObservacao"/>
+                                            <p:inputTextarea id="inputObservacao" styleClass="width-full" value="#{clienteBean.cliente.observacao}" rows="2"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12">
+                            <p:spacer height="15"/>
+                            <div class="painel-botoes">
+                                <p:commandLink styleClass="btn btn-info" title="Salvar Usuários" 
+                                               action="#{clienteBean.salvar()}"
+                                               update="#{p:component('panelCadastroCliente')} #{p:component('messages')}"
+                                               style="margin-right: 5px;"
+                                               process="formDadosCliente">
+                                    <i class="fa fa fa-save"></i>
+                                    <span>Salvar</span>
+                                </p:commandLink>
+                                <p:commandLink styleClass="btn botaoCinza"
+                                               process="@this"
+                                               action="pretty:consulta-clientes">
+                                    <i class="fa fa fa-backward"></i>
+                                    <span>Voltar</span>
+                                </p:commandLink>
+                            </div>
+                        </div>
+                    </p:outputPanel>
+                </h:form>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

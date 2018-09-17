@@ -9,6 +9,7 @@ import com.adisolucoes.adimanager.exceptions.ErroLoginDuplicadoException;
 import com.adisolucoes.adimanager.model.Endereco;
 import com.adisolucoes.adimanager.model.Pessoa;
 import com.adisolucoes.adimanager.model.Usuario;
+import com.adisolucoes.adimanager.util.crud.CrudUtils;
 import com.adisolucoes.adimanager.util.jsf.ConnectionUtils;
 import com.adisolucoes.adimanager.util.jsf.FacesUtils;
 import java.io.IOException;
@@ -52,7 +53,7 @@ public class UsuarioBean implements Serializable {
     private long codigo;
     @ManagedProperty(value = "#{fotoBean}")
     private FotoBean fotoBean;
-
+    private CrudUtils enderecoUtils;
     private List<Usuario> usuarioFiltrados;
 
     @PostConstruct
@@ -64,6 +65,7 @@ public class UsuarioBean implements Serializable {
         usuario.setAtivo(true);
         usuario.setPessoa(pessoa);
         usuarioLogado = FacesUtils.getUsuarioLogado();
+        enderecoUtils = new CrudUtils();
     }
 
     public List<Usuario> pesquisar() {
@@ -130,27 +132,7 @@ public class UsuarioBean implements Serializable {
     }
 
     public void preencherDadosPorCep() {
-        try {
-            String cep = usuario.getPessoa().getEndereco().getCep();
-            if (cep != null || !cep.equals("")) {
-                ConnectionUtils connectionUtils = new ConnectionUtils();
-                Connection con = connectionUtils.getConnection("http://cep.republicavirtual.com.br/web_cep.php?cep=" + cep + "&formato=xml", null, null);
-                Document doc = con.get();
-                if (doc.getElementsByTag("resultado_txt").text().contains("cep não encontrado")) {
-                    FacesUtils.showFacesMessage("CEP não encontrado, informe um CEP válido!", 1);
-                } else {
-                    UF uf = UF.fromDescricao(doc.getElementsByTag("uf").text());
-                    usuario.getPessoa().getEndereco().setUf(uf);
-                    usuario.getPessoa().getEndereco().setCidade(doc.getElementsByTag("cidade").text());
-                    usuario.getPessoa().getEndereco().setBairro(doc.getElementsByTag("bairro").text());
-                    usuario.getPessoa().getEndereco().setLogradouro(doc.getElementsByTag("logradouro").text());
-                    usuario.getPessoa().getEndereco().setComplemento(doc.getElementsByTag("tipo_logradouro").text() + ": ");
-                }
-            }
-        } catch (IOException ex) {
-            LOG.log(Level.SEVERE, null, ex);
-            FacesUtils.showFacesMessage("Ouve um erro na conexão com o WebService, informe de forma manual!", 1);
-        }
+        enderecoUtils.preencherDadosPorCep(usuario.getPessoa().getEndereco());
     }
 
     public void limparForm() {
