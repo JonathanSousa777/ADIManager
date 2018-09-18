@@ -1,13 +1,21 @@
 package com.adisolucoes.adimanager.util.crud;
 
+import com.adisolucoes.adimanager.dao.EmpresaDAO;
+import com.adisolucoes.adimanager.dao.PessoaDAO;
 import com.adisolucoes.adimanager.enumerations.UF;
+import com.adisolucoes.adimanager.exceptions.ErroBancoDadosException;
+import com.adisolucoes.adimanager.exceptions.ErroEmpresaDuplicadaException;
+import com.adisolucoes.adimanager.exceptions.ErroPessoaDuplicadoException;
+import com.adisolucoes.adimanager.model.Empresa;
 import com.adisolucoes.adimanager.model.Endereco;
+import com.adisolucoes.adimanager.model.Pessoa;
 import com.adisolucoes.adimanager.util.jsf.ConnectionUtils;
 import com.adisolucoes.adimanager.util.jsf.FacesUtils;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.inject.Inject;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 
@@ -16,6 +24,12 @@ import org.jsoup.nodes.Document;
  * @author ADI Soluções
  */
 public class CrudUtils implements Serializable {
+
+    @Inject
+    private PessoaDAO pessoaDAO;
+
+    @Inject
+    private EmpresaDAO empresaDAO;
 
     private static final Logger LOG = Logger.getLogger(CrudUtils.class.getName());
 
@@ -42,5 +56,39 @@ public class CrudUtils implements Serializable {
             FacesUtils.showFacesMessage("Ouve um erro na conexão com o WebService, informe os dados de endereço forma manual!", 1);
         }
         return endereco;
+    }
+
+    public void verificarCpfCnpjCliente(String cpfCnpj) throws ErroPessoaDuplicadoException {
+        Pessoa pessoa = null;
+        try {
+            if (cpfCnpj != null && !cpfCnpj.equals("")) {
+                pessoa = pessoaDAO.buscarPorCpfCnpj(cpfCnpj);
+            }
+            if (pessoa != null) {
+                FacesUtils.showFacesMessage("Já existe uma Pessoa com esse CPF/CNPJ", 1);
+                throw new ErroPessoaDuplicadoException();
+            } else {
+                LOG.info("CPF/CNPJ livre para cadastro!");
+            }
+        } catch (ErroBancoDadosException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void verificarCpfCnpjEmpresa(String cpfCnpj) throws ErroEmpresaDuplicadaException {
+        Empresa empresa = null;
+        try {
+            if (cpfCnpj != null && !cpfCnpj.equals("")) {
+                empresa = empresaDAO.buscarPorCnpj(cpfCnpj);
+            }
+            if (empresa != null) {
+                FacesUtils.showFacesMessage("Já existe uma Empresa com esse CNPJ", 1);
+                throw new ErroEmpresaDuplicadaException();
+            } else {
+                LOG.info("CNPJ livre para cadastro!");
+            }
+        } catch (ErroBancoDadosException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        }
     }
 }

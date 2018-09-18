@@ -4,10 +4,15 @@ import com.adisolucoes.adimanager.exceptions.ErroBancoDadosException;
 import com.adisolucoes.adimanager.filtros.EmpresaFiltro;
 import com.adisolucoes.adimanager.filtros.LazyFiltro;
 import com.adisolucoes.adimanager.model.Empresa;
+import com.adisolucoes.adimanager.model.Pessoa;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -19,6 +24,25 @@ public class EmpresaDAO extends DAO<Empresa> implements LazyDAO<Empresa>, Serial
 
     public EmpresaDAO() {
         super(Empresa.class);
+    }
+
+    public Empresa buscarPorCnpj(String cnpj) throws ErroBancoDadosException {
+        Empresa empresa = null;
+        try {
+            String sql = "SELECT e FROM Empresa e WHERE e.cnpj LIKE :cnpj";
+            TypedQuery<Empresa> query = manager.createQuery(sql, Empresa.class);
+            query.setParameter("cnpj", cnpj);
+            List<Empresa> empresas = new ArrayList<Empresa>();
+            empresas = query.getResultList();
+            if (!empresas.isEmpty()) {
+                empresa = query.getResultList().get(0);
+            }
+        } catch (NonUniqueResultException | IllegalArgumentException ex) {
+            throw new ErroBancoDadosException(ex.getMessage());
+        } catch (NoResultException ex) {
+            empresa = null;
+        }
+        return empresa;
     }
 
     @Override

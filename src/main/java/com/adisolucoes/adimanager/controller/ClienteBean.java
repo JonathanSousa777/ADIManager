@@ -47,14 +47,14 @@ public class ClienteBean implements Serializable {
     private Cliente cliente;
     private ClienteFiltro clienteFiltro;
     private boolean buscaAvancada;
-    private final CrudUtils enderecoUtils;
+    private final CrudUtils crudUtils;
     private List<Projeto> projetos;
     private LazyBean<Cliente> modelo;
 
     public ClienteBean() {
         projetos = new ArrayList<Projeto>();
         clienteFiltro = new ClienteFiltro();
-        enderecoUtils = new CrudUtils();
+        crudUtils = new CrudUtils();
         limparForm();
     }
 
@@ -91,24 +91,11 @@ public class ClienteBean implements Serializable {
     }
 
     public void verificarCpfCnpj() throws ErroPessoaDuplicadoException {
-        Pessoa pessoa = null;
-        try {
-            if (cliente.getPessoa() != null && !cliente.getPessoa().getCpfCnpj().equals("")) {
-                pessoa = pessoaDAO.buscarPorCpfCnpj(cliente.getPessoa().getCpfCnpj());
-            }
-            if (pessoa != null) {
-                FacesUtils.showFacesMessage("Já existe uma Pessoa com esse CPF/CNPJ", 1);
-                throw new ErroPessoaDuplicadoException();
-            } else {
-                LOG.info("CPF/CNPJ livre para cadastro!");
-            }
-        } catch (ErroBancoDadosException ex) {
-            LOG.log(Level.SEVERE, null, ex);
-        }
+        crudUtils.verificarCpfCnpjCliente(cliente.getPessoa().getCpfCnpj());
     }
 
     public void preencherDadosPorCep() {
-        enderecoUtils.preencherDadosPorCep(cliente.getPessoa().getEndereco());
+        crudUtils.preencherDadosPorCep(cliente.getPessoa().getEndereco());
     }
 
     public List<Projeto> getProjetos() {
