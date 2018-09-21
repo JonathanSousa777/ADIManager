@@ -10,9 +10,7 @@ import com.adisolucoes.adimanager.model.Endereco;
 import com.adisolucoes.adimanager.model.Pessoa;
 import com.adisolucoes.adimanager.model.Usuario;
 import com.adisolucoes.adimanager.util.crud.CrudUtils;
-import com.adisolucoes.adimanager.util.jsf.ConnectionUtils;
 import com.adisolucoes.adimanager.util.jsf.FacesUtils;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,8 +22,6 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.jsoup.Connection;
-import org.jsoup.nodes.Document;
 import org.primefaces.event.FileUploadEvent;
 
 /**

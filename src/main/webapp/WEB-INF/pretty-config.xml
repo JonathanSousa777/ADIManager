@@ -23,7 +23,7 @@
     <url-mapping id="editar-usuarios">
         <pattern value="/editar-usuarios=#{ pcid : usuarioBean.codigo}"/>
         <action onPostback="false">#{usuarioBean.buscarUsuario}</action>
-        <view-id value="/cadastroUsuarios.xhtml"/>
+        <view-id value="/cadastros/cadastroUsuarios.xhtml"/>
     </url-mapping>
     <url-mapping id="consulta-ferramentas">
         <pattern value="/ferramentas"/>
@@ -39,6 +39,11 @@
     </url-mapping>
     <url-mapping id="cadastro-clientes">
         <pattern value="/cadastro-clientes"/>
+        <view-id value="/cadastros/cadastroClientes.xhtml"/>
+    </url-mapping>
+     <url-mapping id="editar-clientes">
+        <pattern value="/editar-clientes=#{ pcid : clienteBean.codigo}"/>
+        <action onPostback="false">#{clienteBean.buscarCliente}</action>
         <view-id value="/cadastros/cadastroClientes.xhtml"/>
     </url-mapping>
 </pretty-config>

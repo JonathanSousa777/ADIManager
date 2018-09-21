@@ -55,7 +55,7 @@
                                     <h:panelGrid columns="1" styleClass="width-full" rendered="#{clienteBean.buscaAvancada}">
                                         <p:outputLabel value="Código" />
                                         <p:inputText id="inputCodigo"
-                                                     value="#{clienteBean.clienteFiltro.codigo}"
+                                                     value="#{clienteBean.clienteFiltro.codigoIdentificador}"
                                                      styleClass="form-control"
                                                      label="Código"/>
                                     </h:panelGrid>
@@ -122,9 +122,50 @@
                         <p:column headerText="Telefone" priority="2">
                             <h:outputText value="#{cliente.pessoa.telefone}"/>
                         </p:column>
+                        <p:column headerText="" priority="1" width="100">
+                            <p:commandButton icon="fa fa-pencil" title="Editar Cliente" process="@this #{p:component('formTable')}" action="pretty:editar-clientes" style="margin: 0 5px 5px 0">
+                                <f:setPropertyActionListener value="#{cliente.id * 483957299}" target="#{clienteBean.codigo}"/>
+                            </p:commandButton>
+                            <p:commandButton icon="fa fa-remove" title="Excluir Cliente" process="@this #{p:component('formTable')}" oncomplete="PF('yesnoCliente').show()" update="#{p:component('formExclusaoCliente')}">
+                                <f:setPropertyActionListener value="#{cliente}" target="#{clienteBean.clienteSelecionado}"/>
+                            </p:commandButton>
+                        </p:column>
                     </p:dataTable>
                 </div>
             </h:form>
+
+            <h:form id="formExclusaoCliente">
+                <p:dialog header="Confirmar Exclusão"
+                          responsive="true" closable="false"
+                          draggable="false"
+                          closeOnEscape="true"
+                          resizable="false" 
+                          modal="true"
+                          widgetVar="yesnoCliente">
+                    <p:messages id="msgDialogExclusao" autoUpdate="false" />
+                    <div class="center">
+                        <p>Deseja realmente deletar esse cliente?</p>
+                        <p class="nome-exclusao">#{clienteBean.clienteSelecionado.pessoa.nome}</p>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="painel-botoes">
+                            <p:commandLink update="#{p:component('dataTableClientes')} #{p:component('msg')} msgDialogExclusao" oncomplete="PF('yesnoCliente').hide();"
+                                           action="#{clienteBean.excluirCliente}"
+                                           process="@this #{p:component('dataTableClientes')}"
+                                           style="margin-right: 5px;"
+                                           styleClass="btn botaoVermelho">
+                                <i class="fa fa fa-check"></i>
+                                <span>Sim</span>
+                            </p:commandLink>
+                            <p:commandLink onclick="PF('yesnoCliente').hide()" styleClass="btn botaoCinza">
+                                <i class="fa fa fa-close"></i>
+                                <span>Não</span>
+                            </p:commandLink>
+                        </div>
+                    </div>
+                </p:dialog> 
+            </h:form>
+
         </div>
     </ui:define>
 </ui:composition>

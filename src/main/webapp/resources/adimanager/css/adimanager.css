@@ -107,6 +107,10 @@ input.botaoCinza, input.botaoAzul, input.botaoVerde{
     font-weight: 700;
 }
 
+.center {
+    text-align: center;
+}
+
 .adimanager-group input, .adimanager-group textarea {
     background-color: #FFFFFF !important;
     background-image: none !important;
@@ -424,4 +428,9 @@ p{line-height: 18px; margin-top: -10px; font-weight: bold;}
     filter: progid:dximagetransform.microsoft.gradient(enabled=false);
     -webkit-box-shadow: none;
     box-shadow: none;
+}
+
+.nome-exclusao {
+    text-align: center;
+    color: #b96570;
 }

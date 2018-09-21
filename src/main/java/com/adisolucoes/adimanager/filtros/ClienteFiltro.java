@@ -13,7 +13,7 @@ public class ClienteFiltro implements LazyFiltro {
     private boolean count;
     private String nome;
     private String cpfCnpj;
-    private String codigo;
+    private String codigoIdentificador;
     private Projeto projeto;
 
     public Integer getPrimeiro() {
@@ -56,12 +56,12 @@ public class ClienteFiltro implements LazyFiltro {
         this.cpfCnpj = cpfCnpj;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getCodigoIdentificador() {
+        return codigoIdentificador;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setCodigoIdentificador(String codigoIdentificador) {
+        this.codigoIdentificador = codigoIdentificador;
     }
 
     public Projeto getProjeto() {

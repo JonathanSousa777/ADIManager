@@ -49,8 +49,8 @@ public class ClienteDAO extends DAO<Cliente> implements LazyDAO<Cliente>, Serial
         String sql = "";
         sql += filtro.isCount() ? "SELECT COUNT(c) FROM Cliente c WHERE c.id IS NOT NULL " : "SELECT c FROM Cliente c WHERE c.id IS NOT NULL ";
         sql += (filtro.getNome() != null && !filtro.getNome().isEmpty()) ? "AND c.pessoa.nome LIKE :nome " : " ";
-        sql += (filtro.getCpfCnpj() != null && !filtro.getCpfCnpj().isEmpty()) ? "AND c.pessoa.cpfCnpj LIKE :cpfCnpj" : " ";
-        sql += (filtro.getCodigo() != null && !filtro.getCodigo().isEmpty()) ? "AND c.codigo LIKE :codigo" : " ";
+        sql += (filtro.getCpfCnpj() != null && !filtro.getCpfCnpj().isEmpty()) ? "AND c.pessoa.cpfCnpj LIKE :cpfCnpj " : " ";
+        sql += (filtro.getCodigoIdentificador() != null && !filtro.getCodigoIdentificador().isEmpty()) ? "AND c.codigoIdentificador LIKE :codigoIdentificador" : " ";
         sql += (filtro.getProjeto() != null) ? "AND :projeto MEMBER OF c.projetos " : " ";
         sql += " ORDER BY c.pessoa.nome ASC";
         return sql;
@@ -63,8 +63,8 @@ public class ClienteDAO extends DAO<Cliente> implements LazyDAO<Cliente>, Serial
         if (filtro.getCpfCnpj() != null && !filtro.getCpfCnpj().isEmpty()) {
             query.setParameter("cpfCnpj", "%" + filtro.getCpfCnpj() + "%");
         }
-        if (filtro.getCodigo() != null && !filtro.getCodigo().isEmpty()) {
-            query.setParameter("codigo", "%" + filtro.getCodigo() + "%");
+        if (filtro.getCodigoIdentificador() != null && !filtro.getCodigoIdentificador().isEmpty()) {
+            query.setParameter("codigoIdentificador", "%" + filtro.getCodigoIdentificador() + "%");
         }
         if (filtro.getProjeto() != null) {
             query.setParameter("projeto", filtro.getProjeto());
