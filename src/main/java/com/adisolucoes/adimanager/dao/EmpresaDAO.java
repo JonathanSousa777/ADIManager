@@ -3,8 +3,8 @@ package com.adisolucoes.adimanager.dao;
 import com.adisolucoes.adimanager.exceptions.ErroBancoDadosException;
 import com.adisolucoes.adimanager.filtros.EmpresaFiltro;
 import com.adisolucoes.adimanager.filtros.LazyFiltro;
+import com.adisolucoes.adimanager.model.Cliente;
 import com.adisolucoes.adimanager.model.Empresa;
-import com.adisolucoes.adimanager.model.Pessoa;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +43,21 @@ public class EmpresaDAO extends DAO<Empresa> implements LazyDAO<Empresa>, Serial
             empresa = null;
         }
         return empresa;
+    }
+
+    public List<Empresa> buscarPorCliente(Cliente cliente) throws ErroBancoDadosException {
+        List<Empresa> empresas = new ArrayList<>();
+        try {
+            String sql = "SELECT e FROM Empresa e WHERE e.proprietario.id = :idCliente";
+            TypedQuery<Empresa> query = manager.createQuery(sql, Empresa.class);
+            query.setParameter("idCliente", cliente.getId());
+            empresas = query.getResultList();
+        } catch (NonUniqueResultException | IllegalArgumentException ex) {
+            throw new ErroBancoDadosException(ex.getMessage());
+        } catch (NoResultException ex) {
+            empresas = new ArrayList<>();
+        }
+        return empresas;
     }
 
     @Override

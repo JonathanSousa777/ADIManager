@@ -1,13 +1,16 @@
 package com.adisolucoes.adimanager.controller;
 
 import com.adisolucoes.adimanager.dao.ClienteDAO;
+import com.adisolucoes.adimanager.dao.EmpresaDAO;
 import com.adisolucoes.adimanager.dao.ProjetoDAO;
 import com.adisolucoes.adimanager.enumerations.Sexo;
 import com.adisolucoes.adimanager.enumerations.UF;
 import com.adisolucoes.adimanager.exceptions.ErroBancoDadosException;
 import com.adisolucoes.adimanager.exceptions.ErroPessoaDuplicadoException;
+import com.adisolucoes.adimanager.exceptions.ErroValidacaoExclusao;
 import com.adisolucoes.adimanager.filtros.ClienteFiltro;
 import com.adisolucoes.adimanager.model.Cliente;
+import com.adisolucoes.adimanager.model.Empresa;
 import com.adisolucoes.adimanager.model.Endereco;
 import com.adisolucoes.adimanager.model.LazyBean;
 import com.adisolucoes.adimanager.model.Pessoa;
@@ -40,6 +43,9 @@ public class ClienteBean implements Serializable {
     @Inject
     private ProjetoDAO projetoDAO;
 
+    @Inject
+    private EmpresaDAO empresaDAO;
+
     private Cliente cliente;
     private Cliente clienteSelecionado;
     private ClienteFiltro clienteFiltro;
@@ -47,10 +53,12 @@ public class ClienteBean implements Serializable {
     private boolean buscaAvancada;
     private final CrudUtils crudUtils;
     private List<Projeto> projetos;
+    private List<Empresa> empresas;
     private LazyBean<Cliente> modelo;
 
     public ClienteBean() {
-        projetos = new ArrayList<Projeto>();
+        projetos = new ArrayList<>();
+        empresas = new ArrayList<>();
         clienteFiltro = new ClienteFiltro();
         crudUtils = new CrudUtils();
         limparForm();
@@ -93,18 +101,46 @@ public class ClienteBean implements Serializable {
         }
     }
 
-    //Falta terminar a exclusão, verificar se o cliente tem empresa
     public void excluirCliente() {
         try {
             if (clienteSelecionado != null) {
-                clienteDAO.excluir(clienteSelecionado.getId());
-                modelo = null;
-                FacesUtils.showFacesMessage("Cliente excluído com sucesso!", 2);
+                boolean podeExcluir;
+                podeExcluir = validarExclusaoCliente(clienteSelecionado);
+                if (podeExcluir) {
+                    clienteDAO.excluir(clienteSelecionado.getId());
+                    modelo = null;
+                    FacesUtils.showFacesMessage("Cliente excluído com sucesso!", 2);
+                }
             }
         } catch (ErroBancoDadosException ex) {
             LOG.log(Level.SEVERE, null, ex);
             FacesUtils.showFacesMessage("Erro na conexão com o banco de dados!", 1);
+        } catch (ErroValidacaoExclusao ex) {
+            LOG.log(Level.SEVERE, null, ex);
         }
+    }
+
+    public boolean validarExclusaoCliente(Cliente clienteSelecionado) throws ErroValidacaoExclusao {
+        boolean podeExcluir = true;
+        try {
+            empresas = empresaDAO.buscarPorCliente(clienteSelecionado);
+            projetos = projetoDAO.buscarPorCliente(clienteSelecionado);
+            if (empresas != null && !empresas.isEmpty() || projetos != null && !projetos.isEmpty()) {
+                podeExcluir = false;
+                if (empresas != null && !empresas.isEmpty()) {
+                    FacesUtils.showFacesMessage(clienteSelecionado.getPessoa().getNome() + " é proprietário da Empresa " + empresas.get(0).getNome() + ", é necessário excluir todas as empresas do Cliente antes", 1);
+                } else {
+                    FacesUtils.showFacesMessage(clienteSelecionado.getPessoa().getNome() + " possui Projetos, é necessário exclui-los antes!", 1);
+                }
+                throw new ErroValidacaoExclusao();
+            }
+        } catch (ErroBancoDadosException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+            FacesUtils.showFacesMessage("Erro na conexão com o banco de dados!", 1);
+        } catch (ErroValidacaoExclusao ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        }
+        return podeExcluir;
     }
 
     public void buscarCliente() {
