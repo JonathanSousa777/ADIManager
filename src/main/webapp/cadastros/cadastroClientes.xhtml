@@ -26,30 +26,7 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="margin-down">
-                                            <div class="col-xs-12 col-sm-2">
-                                                <div class="col-xs-12 col-sm-12">
-                                                    <p:outputPanel id="outputPanelImagem">
-                                                        <p:graphicImage id="usuarioSemFoto" name="user.png" library="images" styleClass="center-object-block image-perfil" rendered="#{usuarioBean.usuario.pessoa.imagem == null and fotoBean.imagemTemporaria == null}" />
-                                                        <p:graphicImage id="usuarioImagemTemporaria" styleClass="center-object-block image-perfil" rendered="#{fotoBean.imagemTemporaria != null}" value="#{fotoBean.imagemTemporaria}" />
-                                                        <p:fileUpload  fileUploadListener="#{usuarioBean.carregarImagem}"
-                                                                       allowTypes="/(\.|\/)(jpg|png)$/"
-                                                                       auto="true"
-                                                                       label="Imagem"
-                                                                       cancelLabel="Cancelar"
-                                                                       uploadLabel="Enviar"
-                                                                       process="@this"
-                                                                       update="#{p:component('outputPanelImagem')} messages" 
-                                                                       sizeLimit="1536000"
-                                                                       invalidFileMessage="Extensão de arquivo inválida. Selecione JPG ou PNG."
-                                                                       invalidSizeMessage="Arquivo muito grande. Tamanho máximo 150KB."
-                                                                       multiple="false"
-                                                                       dragDropSupport="true"
-                                                                       styleClass="center-object-block file-upload-foto">
-                                                        </p:fileUpload>
-                                                    </p:outputPanel>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-10">
+                                            <div class="col-xs-12 col-sm-12">
                                                 <div class="col-xs-12 col-sm-8">
                                                     <div class="col-xs-12 col-sm-12">
                                                         <p:outputLabel value="Nome" for="nome"/>
