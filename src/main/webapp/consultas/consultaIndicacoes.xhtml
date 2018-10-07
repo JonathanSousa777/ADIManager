@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<ui:composition template="/WEB-INF/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="complementoTitulo"> - Consulta de Indicações</ui:define>
+    <ui:define name="header">Consulta de Indicações</ui:define>
+    <ui:define name="breadcrumb"><h:link></h:link> Consulta de Indicações</ui:define>
+
+    <ui:define name="conteudo">
+        <div class="box">
+            <div class="box-header with-border">
+                <h:form id="formDados">
+                    <p:messages id="msg"/>
+                    <div class="col-xs-12 col-sm-12">
+                        <div class="row">
+                            <p:outputPanel id="dadosConsulta">
+                                <div class="col-sm-4">
+                                    <h:panelGrid columns="1" styleClass="width-full">
+                                        <p:outputLabel value="Descrição" />
+                                        <p:inputText id="inputDescricao"
+                                                     value="#{indicacaoBean.indicacaoFiltro.descricao}"
+                                                     styleClass="form-control"
+                                                     label="Descrição"/>
+                                    </h:panelGrid>
+                                </div>
+                                <div class="col-xs-12 col-sm-4">
+                                    <h:panelGrid columns="1" styleClass="width-full">
+                                        <p:outputLabel value="Cliente Ativo" />
+                                        <p:inputText id="inputClienteAtivo"
+                                                     value="#{indicacaoBean.indicacaoFiltro.clienteAtivo}"
+                                                     styleClass="form-control"
+                                                     label="Cliente Ativo"/>
+                                    </h:panelGrid>
+                                </div>
+                                <div class="col-xs-12 col-sm-4">
+                                    <h:panelGrid columns="1" styleClass="width-full">
+                                        <p:outputLabel value="Cliente Passivo" />
+                                        <p:inputText id="inputClientePassivo"
+                                                     value="#{indicacaoBean.indicacaoFiltro.clientePassivo}"
+                                                     styleClass="form-control"
+                                                     label="Cliente Passivo"/>
+                                    </h:panelGrid>
+                                </div>
+                                <p:outputPanel id="panelBuscaAvancada" rendered="#{indicacaoBean.buscaAvancada}">
+                                    <div class="col-sm-4">
+                                        <h:panelGrid columns="1" styleClass="width-full">
+                                            <p:outputLabel value="Código" />
+                                            <p:inputText id="inputCodigo"
+                                                         value="#{indicacaoBean.indicacaoFiltro.codigo}"
+                                                         styleClass="form-control"
+                                                         label="Código"/>
+                                        </h:panelGrid>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4">
+                                        <p:outputLabel value="Data de Cadastro" for="dataCadastro"/><br/>
+                                        <h:panelGroup>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <p:calendar id="dataCadastro" 
+                                                                required="true"
+                                                                navigator="true" 
+                                                                effect="fade"
+                                                                placeholder="Data Inicial"
+                                                                mask="99/99/9999"
+                                                                pattern="dd/MM/yyyy"
+                                                                value="#{indicacaoBean.indicacaoFiltro.dataCadastroDe}" 
+                                                                styleClass="width-full-input" 
+                                                                locale="pt"/>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6">
+                                                    <p:calendar id="dataCadastroAte" 
+                                                                required="true"
+                                                                navigator="true" 
+                                                                effect="fade"
+                                                                placeholder="Data Final"
+                                                                mask="99/99/9999"
+                                                                pattern="dd/MM/yyyy"
+                                                                value="#{indicacaoBean.indicacaoFiltro.dataCadastroAte}" 
+                                                                styleClass="width-full-input" 
+                                                                locale="pt"/>
+                                                </div>
+                                            </div>
+                                        </h:panelGroup> 
+                                    </div>
+                                </p:outputPanel>
+                                <div class="col-sm-12">
+                                    <p:commandLink value="+ Busca Avançada"
+                                                   process="@this"
+                                                   update="#{p:component('dadosConsulta')}"
+                                                   rendered="#{!indicacaoBean.buscaAvancada}"
+                                                   styleClass="link-consulta-acao">
+                                        <f:setPropertyActionListener value="true" target="#{indicacaoBean.buscaAvancada}"/>
+                                    </p:commandLink>
+                                    <p:commandLink value="- Busca Avançada"
+                                                   process="@this"
+                                                   update="#{p:component('dadosConsulta')}"
+                                                   rendered="#{indicacaoBean.buscaAvancada}"
+                                                   styleClass="link-consulta-acao">
+                                        <f:setPropertyActionListener value="false" target="#{indicacaoBean.buscaAvancada}"/>
+                                    </p:commandLink>
+                                </div>
+                            </p:outputPanel>
+                            <div class="col-sm-12">
+                                <div class="painel-botoes" style="margin-top: 30px;">
+                                    <p:commandLink styleClass="btn btn-info" title="Buscar Indicações" action="#{indicacaoBean.pesquisarLazy()}" style="margin:3px 5px 3px 0;"
+                                                   update="#{p:component('dataTableIndicacoes')} " process="@form @this">
+                                        <i class="fa fa fa-search"></i>
+                                        <span>Buscar</span>
+                                    </p:commandLink>
+                                    <p:commandLink styleClass="btn botaoVerde" title="Cadastrar Indicações" 
+                                                   action="pretty:cadastro-clientes"
+                                                   update="formDados " process="@form">
+                                        <i class="fa fa fa-plus"></i>
+                                        <span>Cadastrar</span>
+                                    </p:commandLink>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </div>
+
+            <h:form id="formTable">
+                <div id="boxBody" class="box-body" >
+                    <p:dataTable value="#{indicacaoBean.modelo}" 
+                                 id="dataTableIndicacoes"
+                                 var="indicacao" 
+                                 rows="20" 
+                                 lazy="true"
+                                 rowsPerPageTemplate="20,30,50"
+                                 paginator="true" 
+                                 paginatorPosition="bottom"
+                                 tableStyle="table-layout:auto;"
+                                 emptyMessage="Nenhuma Indicação encontrada"
+                                 styleClass="datatable-custom">
+                        <p:column headerText="Descricao" priority="1">
+                            <h:outputText value="#{indicacao.descricao}"/>
+                        </p:column>
+                        <p:column headerText="Cliente Ativo" priority="2">
+                            <h:outputText value="#{indicacao.clienteAtivo.pessoa.nome}"/>
+                        </p:column>
+                        <p:column headerText="Cliente Passivo" priority="1">
+                            <h:outputText value="#{indicacao.clientePassivo.pessoa.nome}"/>
+                        </p:column>
+                        <p:column headerText="Código" priority="2">
+                            <h:outputText value="#{indicacao.codigoIdentificador}"/>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

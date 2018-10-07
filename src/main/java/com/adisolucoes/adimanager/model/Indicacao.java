@@ -22,10 +22,11 @@ import javax.persistence.TemporalType;
 public class Indicacao implements Serializable {
 
     private long id;
-    private long codigoClientePassivo;
+    private Cliente clientePassivo;
     private Cliente clienteAtivo;
     private Date data;
     private String descricao;
+    private String codigoIdentificador;
 
     public Indicacao() {
     }
@@ -40,13 +41,14 @@ public class Indicacao implements Serializable {
         this.id = id;
     }
 
-    @Column(name = "codigo_cliente_passivo", nullable = false)
-    public long getCodigoClientePassivo() {
-        return codigoClientePassivo;
+    @ManyToOne
+    @JoinColumn(name = "cliente_passivo_id", nullable = false)
+    public Cliente getClientePassivo() {
+        return clientePassivo;
     }
 
-    public void setCodigoClientePassivo(long codigoClientePassivo) {
-        this.codigoClientePassivo = codigoClientePassivo;
+    public void setClientePassivo(Cliente clientePassivo) {
+        this.clientePassivo = clientePassivo;
     }
 
     @ManyToOne
@@ -75,6 +77,15 @@ public class Indicacao implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    @Column(name = "codigo_identificador")
+    public String getCodigoIdentificador() {
+        return codigoIdentificador;
+    }
+
+    public void setCodigoIdentificador(String codigoIdentificador) {
+        this.codigoIdentificador = codigoIdentificador;
     }
 
     @Override

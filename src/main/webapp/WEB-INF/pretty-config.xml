@@ -33,6 +33,10 @@
         <pattern value="/empresas"/>
         <view-id value="/consultas/consultaEmpresas.xhtml"/>
     </url-mapping>
+    <url-mapping id="cadastro-empresa">
+        <pattern value="/cadastro-empresa"/>
+        <view-id value="/cadastros/cadastroEmpresa.xhtml"/>
+    </url-mapping>
     <url-mapping id="consulta-clientes">
         <pattern value="/clientes"/>
         <view-id value="/consultas/consultaClientes.xhtml"/>
@@ -41,14 +45,13 @@
         <pattern value="/cadastro-clientes"/>
         <view-id value="/cadastros/cadastroClientes.xhtml"/>
     </url-mapping>
-     <url-mapping id="editar-clientes">
+    <url-mapping id="editar-clientes">
         <pattern value="/editar-clientes=#{ pcid : clienteBean.codigo}"/>
         <action onPostback="false">#{clienteBean.buscarCliente}</action>
         <view-id value="/cadastros/cadastroClientes.xhtml"/>
     </url-mapping>
-    <url-mapping id="cadastro-empresa">
-        <pattern value="/cadastro-empresa"/>
-        <view-id value="/cadastros/cadastroEmpresa.xhtml"/>
+    <url-mapping id="consulta-indicacoes">
+        <pattern value="/indicacoes"/>
+        <view-id value="/consultas/consultaIndicacoes.xhtml"/>
     </url-mapping>
-    
 </pretty-config>

@@ -15,9 +15,9 @@
     <ui:define name="conteudo">
         <div class="box">
             <div class="box-header with-border">
-                <h:form id="formDadosEmpresa" enctype="multipart/form-data">
-                    <p:messages id="message" autoUpdate="false" closable="true"/>
+                <h:form id="formDadosEmpresa">
                     <p:outputPanel id="panelCadastroEmpresa">
+                        <p:messages id="message" autoUpdate="false" closable="true"/>
                         <div class="col-ms-12">
                             <div class="msg-campos-obrigatorios">Os campos marcados com um asterísco <i style="color: red;">*</i> são obrigatórios.</div>
                             <div class="panel panel-default">
@@ -44,7 +44,7 @@
                                         <div class="col-xs-12 col-sm-12">
                                             <div class="col-xs-12 col-sm-4">
                                                 <p:outputLabel value="Proprietário" for="proprietario"/>
-                                                <p:selectOneMenu value="#{empresaBean.empresa.proprietario}" id="proprietario">
+                                                <p:selectOneMenu value="#{empresaBean.empresa.proprietario}" id="proprietario" required="true" converter="entityConverter">
                                                     <f:selectItem itemLabel="Selecione o Proprietário" noSelectionOption="true"/>
                                                     <f:selectItems value="#{empresaBean.clientes}" var="proprietario" itemLabel="#{proprietario.pessoa.nome}" itemValue="#{proprietario}"/>
                                                 </p:selectOneMenu>
@@ -55,7 +55,7 @@
                                             </div>
                                             <div class="col-xs-12 col-sm-4">
                                                 <p:outputLabel value="CNPJ" for="cnpj"/>
-                                                <p:inputText id="cnpj" required="true" styleClass="width-full" value="#{empresaBean.empresa.cnpj}"/>
+                                                <p:inputMask id="cnpj" required="true" styleClass="width-full" value="#{empresaBean.empresa.cnpj}" mask="99.999.999/9999-99"/>
                                             </div>
                                         </div>
                                         <p:spacer height="15"/>
