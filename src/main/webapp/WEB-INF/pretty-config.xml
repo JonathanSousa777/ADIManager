@@ -46,4 +46,9 @@
         <action onPostback="false">#{clienteBean.buscarCliente}</action>
         <view-id value="/cadastros/cadastroClientes.xhtml"/>
     </url-mapping>
+    <url-mapping id="cadastro-empresa">
+        <pattern value="/cadastro-empresa"/>
+        <view-id value="/cadastros/cadastroEmpresa.xhtml"/>
+    </url-mapping>
+    
 </pretty-config>

@@ -11,7 +11,7 @@
     <ui:define name="complementoTitulo"> - Consulta de Empresas</ui:define>   
     <ui:define name="header">Consulta de Empresas</ui:define>
     <ui:define name="breadcrumb">Consulta de Empresas</ui:define>
-
+    
     <ui:define name="conteudo">
         <div class="box">
             <div class="box-header with-border">
@@ -58,8 +58,10 @@
                                         <span>Buscar</span>
                                         <f:setPropertyActionListener value="false" target="#{empresaBean.empresaFiltro.todas}"/>
                                     </p:commandLink>
-                                    <p:commandLink styleClass="btn botaoVerde" title="Cadastrar Empresa" update="formDados #{p:component('dataTableEmpresas')}"
-                                                   process="@form">
+                                    <p:commandLink styleClass="btn botaoVerde" title="Cadastrar Empresa" 
+                                                   update="formDados #{p:component('dataTableEmpresas')}"
+                                                   process="@form"
+                                                   action="pretty:cadastro-empresa">
                                         <i class="fa fa fa-plus"></i>
                                         <span>Cadastrar</span>
                                     </p:commandLink>

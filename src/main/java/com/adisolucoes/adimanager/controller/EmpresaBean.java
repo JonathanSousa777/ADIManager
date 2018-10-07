@@ -7,6 +7,7 @@ import com.adisolucoes.adimanager.filtros.EmpresaFiltro;
 import com.adisolucoes.adimanager.model.Cliente;
 import com.adisolucoes.adimanager.model.Empresa;
 import com.adisolucoes.adimanager.model.LazyBean;
+import com.adisolucoes.adimanager.util.jsf.FacesUtils;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,7 @@ public class EmpresaBean implements Serializable {
 
     public EmpresaBean() {
         clientes = new ArrayList<Cliente>();
+        empresa = new Empresa();
     }
 
     @PostConstruct
@@ -60,6 +62,27 @@ public class EmpresaBean implements Serializable {
 
     public void pesquisarLazy() {
         modelo = new LazyBean<Empresa>(empresaDAO, empresaFiltro);
+    }
+    
+    public void salvar(){
+        try {
+            if(empresa != null){
+                if(empresa.getId() == 0){
+                    empresaDAO.salvar(empresa);
+                    FacesUtils.showFacesMessage("Empresa salva com sucesso", 2);
+                    limparForm();
+                }else{
+                    empresaDAO.atualizar(empresa);
+                    FacesUtils.showFacesMessage("Empresa atualizada com sucesso", 2);
+                }
+            }
+        } catch (ErroBancoDadosException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void limparForm(){
+        empresa = new Empresa();
     }
 
     public Empresa getEmpresa() {
