@@ -2,10 +2,12 @@ package com.adisolucoes.adimanager.controller;
 
 import com.adisolucoes.adimanager.dao.ClienteDAO;
 import com.adisolucoes.adimanager.dao.EmpresaDAO;
+import com.adisolucoes.adimanager.enumerations.UF;
 import com.adisolucoes.adimanager.exceptions.ErroBancoDadosException;
 import com.adisolucoes.adimanager.filtros.EmpresaFiltro;
 import com.adisolucoes.adimanager.model.Cliente;
 import com.adisolucoes.adimanager.model.Empresa;
+import com.adisolucoes.adimanager.model.Endereco;
 import com.adisolucoes.adimanager.model.LazyBean;
 import com.adisolucoes.adimanager.util.jsf.FacesUtils;
 import java.io.Serializable;
@@ -83,6 +85,11 @@ public class EmpresaBean implements Serializable {
     
     private void limparForm(){
         empresa = new Empresa();
+        empresa.setEndereco(new Endereco());
+    }
+    
+    public UF[] getEstados(){
+       return UF.values();
     }
 
     public Empresa getEmpresa() {
