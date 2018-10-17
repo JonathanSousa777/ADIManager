@@ -3,11 +3,16 @@ package com.adisolucoes.adimanager.dao;
 import com.adisolucoes.adimanager.exceptions.ErroBancoDadosException;
 import com.adisolucoes.adimanager.filtros.IndicacaoFiltro;
 import com.adisolucoes.adimanager.filtros.LazyFiltro;
+import com.adisolucoes.adimanager.model.Cliente;
 import com.adisolucoes.adimanager.model.Indicacao;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -19,6 +24,25 @@ public class IndicacaoDAO extends DAO<Indicacao> implements LazyDAO<Indicacao>, 
 
     public IndicacaoDAO() {
         super(Indicacao.class);
+    }
+
+    public Indicacao buscarIndicacaoAtiva(Cliente clientePassivo) throws ErroBancoDadosException {
+        Indicacao indicacaoAtiva = null;
+        List<Indicacao> indicacoes = new ArrayList<>();
+        try {
+            String sql = "SELECT i FROM Indicacao i WHERE i.clientePassivo.id = :idClientePassivo";
+            TypedQuery<Indicacao> query = manager.createQuery(sql, Indicacao.class);
+            query.setParameter("idClientePassivo", clientePassivo.getId());
+            indicacoes = query.getResultList();
+            if (!indicacoes.isEmpty()) {
+                indicacaoAtiva = indicacoes.get(0);
+            }
+        } catch (NonUniqueResultException | IllegalArgumentException ex) {
+            throw new ErroBancoDadosException(ex.getMessage());
+        } catch (NoResultException ex) {
+            indicacaoAtiva = null;
+        }
+        return indicacaoAtiva;
     }
 
     @Override

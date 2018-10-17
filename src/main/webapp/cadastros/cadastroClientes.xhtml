@@ -72,6 +72,17 @@
                                                         </p:selectOneRadio>
                                                     </div>
                                                 </div>
+                                                <p:outputPanel id="panelFoiIndicado" rendered="#{clienteBean.indicacao ne null}">
+                                                    <p:spacer height="15"/>
+                                                    <div class="col-xs-12 col-sm-12">
+                                                        <div class="col-xs-12 col-sm-12">
+                                                            Indicado por: #{clienteBean.indicacao.clienteAtivo.pessoa.nome}
+                                                            <p:commandLink value="| Visualizar indicação" title="Visualizar indicação" process="@this" action="pretty:editar-indicacoes">
+                                                                <f:setPropertyActionListener value="#{clienteBean.indicacao.id * 483957299}" target="#{indicacaoBean.codigo}"/>
+                                                            </p:commandLink>
+                                                        </div>
+                                                    </div>
+                                                </p:outputPanel>
                                             </div>
                                         </div>
                                     </div>
@@ -166,7 +177,7 @@
                         <div class="col-xs-12 col-sm-12">
                             <p:spacer height="15"/>
                             <div class="painel-botoes">
-                                <p:commandLink styleClass="btn btn-info" title="Salvar Usuários" 
+                                <p:commandLink styleClass="btn btn-info" title="Salvar Clientes" 
                                                action="#{clienteBean.salvar()}"
                                                update="#{p:component('panelCadastroCliente')} #{p:component('messages')}"
                                                style="margin-right: 5px;"

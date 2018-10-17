@@ -2,6 +2,7 @@ package com.adisolucoes.adimanager.controller;
 
 import com.adisolucoes.adimanager.dao.ClienteDAO;
 import com.adisolucoes.adimanager.dao.EmpresaDAO;
+import com.adisolucoes.adimanager.dao.IndicacaoDAO;
 import com.adisolucoes.adimanager.dao.ProjetoDAO;
 import com.adisolucoes.adimanager.enumerations.Sexo;
 import com.adisolucoes.adimanager.enumerations.UF;
@@ -12,6 +13,7 @@ import com.adisolucoes.adimanager.filtros.ClienteFiltro;
 import com.adisolucoes.adimanager.model.Cliente;
 import com.adisolucoes.adimanager.model.Empresa;
 import com.adisolucoes.adimanager.model.Endereco;
+import com.adisolucoes.adimanager.model.Indicacao;
 import com.adisolucoes.adimanager.model.LazyBean;
 import com.adisolucoes.adimanager.model.Pessoa;
 import com.adisolucoes.adimanager.model.Projeto;
@@ -46,9 +48,13 @@ public class ClienteBean implements Serializable {
     @Inject
     private EmpresaDAO empresaDAO;
 
+    @Inject
+    private IndicacaoDAO indicacaoDAO;
+
     private Cliente cliente;
     private Cliente clienteSelecionado;
     private ClienteFiltro clienteFiltro;
+    private Indicacao indicacao;
     private long codigo;
     private boolean buscaAvancada;
     private final CrudUtils crudUtils;
@@ -147,9 +153,19 @@ public class ClienteBean implements Serializable {
         try {
             codigo = codigo / 483957299;
             cliente = clienteDAO.buscarPorId(codigo);
+            carregarIndicacao();
         } catch (ErroBancoDadosException ex) {
             LOG.log(Level.SEVERE, null, ex);
             FacesUtils.showFacesMessage("Erro ao recuperar cliente!", 1);
+        }
+    }
+
+    public void carregarIndicacao() {
+        try {
+            indicacao = indicacaoDAO.buscarIndicacaoAtiva(cliente);
+        } catch (ErroBancoDadosException ex) {
+            LOG.info("Erro ao buscar indicação ativa");
+            LOG.log(Level.SEVERE, null, ex);
         }
     }
 
@@ -226,6 +242,14 @@ public class ClienteBean implements Serializable {
 
     public void setClienteSelecionado(Cliente clienteSelecionado) {
         this.clienteSelecionado = clienteSelecionado;
+    }
+
+    public Indicacao getIndicacao() {
+        return indicacao;
+    }
+
+    public void setIndicacao(Indicacao indicacao) {
+        this.indicacao = indicacao;
     }
 
 }

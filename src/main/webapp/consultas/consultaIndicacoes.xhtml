@@ -114,7 +114,7 @@
                                         <span>Buscar</span>
                                     </p:commandLink>
                                     <p:commandLink styleClass="btn botaoVerde" title="Cadastrar Indicações" 
-                                                   action="pretty:cadastro-clientes"
+                                                   action="pretty:cadastro-indicacoes"
                                                    update="formDados " process="@form">
                                         <i class="fa fa fa-plus"></i>
                                         <span>Cadastrar</span>
@@ -156,8 +156,47 @@
                         <p:column headerText="Código" priority="2">
                             <h:outputText value="#{indicacao.codigoIdentificador}"/>
                         </p:column>
+                        <p:column headerText="" priority="1" width="100">
+                            <p:commandButton icon="fa fa-pencil" title="Editar Indicação" process="@this #{p:component('formTable')}" action="pretty:editar-indicacoes" style="margin: 0 5px 5px 0">
+                                <f:setPropertyActionListener value="#{indicacao.id * 483957299}" target="#{indicacaoBean.codigo}"/>
+                            </p:commandButton>
+                            <p:commandButton icon="fa fa-remove" title="Excluir Indicação" process="@this #{p:component('formTable')}" oncomplete="PF('yesnoIndicacao').show()" update="#{p:component('formExclusaoIndicacao')}">
+                                <f:setPropertyActionListener value="#{indicacao}" target="#{indicacaoBean.indicacaoSelecionada}"/>
+                            </p:commandButton>
+                        </p:column>
                     </p:dataTable>
                 </div>
+            </h:form>
+
+            <h:form id="formExclusaoIndicacao">
+                <p:dialog header=" Exclusão de Indicações"
+                          responsive="true" closable="false"
+                          draggable="false"
+                          closeOnEscape="true"
+                          resizable="false" 
+                          modal="true"
+                          widgetVar="yesnoIndicacao">
+                    <p:messages id="msgDialogIndicacao" autoUpdate="false" />
+                    <div class="center">
+                        <p>Deseja realmente deletar essa indicação?</p>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="painel-botoes">
+                            <p:commandLink update="#{p:component('dataTableIndicacoes')} #{p:component('msg')}" oncomplete="PF('yesnoIndicacao').hide();"
+                                           action="#{indicacaoBean.excluirIndicacao}"
+                                           process="@this #{p:component('dataTableIndicacoes')}"
+                                           style="margin-right: 5px;"
+                                           styleClass="btn botaoVermelho">
+                                <i class="fa fa fa-check"></i>
+                                <span>Sim</span>
+                            </p:commandLink>
+                            <p:commandLink onclick="PF('yesnoIndicacao').hide()" styleClass="btn botaoCinza">
+                                <i class="fa fa fa-close"></i>
+                                <span>Não</span>
+                            </p:commandLink>
+                        </div>
+                    </div>
+                </p:dialog> 
             </h:form>
         </div>
     </ui:define>

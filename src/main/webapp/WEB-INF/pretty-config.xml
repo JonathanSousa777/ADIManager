@@ -54,4 +54,13 @@
         <pattern value="/indicacoes"/>
         <view-id value="/consultas/consultaIndicacoes.xhtml"/>
     </url-mapping>
+    <url-mapping id="cadastro-indicacoes">
+        <pattern value="/cadastro-indicacoes"/>
+        <view-id value="/cadastros/cadastroIndicacoes.xhtml"/>
+    </url-mapping>
+    <url-mapping id="editar-indicacoes">
+        <pattern value="/editar-indicacoes=#{ pcid : indicacaoBean.codigo}"/>
+        <action onPostback="false">#{indicacaoBean.buscarIndicacao}</action>
+        <view-id value="/cadastros/cadastroIndicacoes.xhtml"/>
+    </url-mapping>
 </pretty-config>

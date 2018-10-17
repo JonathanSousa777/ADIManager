@@ -15,7 +15,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author Jonathan Sousa
+ * @author ADI Soluçoes
  */
 @Entity
 @Table(name = "tab_indicacao")
