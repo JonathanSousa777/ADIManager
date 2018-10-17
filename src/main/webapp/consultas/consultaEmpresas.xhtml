@@ -11,7 +11,7 @@
     <ui:define name="complementoTitulo"> - Consulta de Empresas</ui:define>   
     <ui:define name="header">Consulta de Empresas</ui:define>
     <ui:define name="breadcrumb">Consulta de Empresas</ui:define>
-    
+
     <ui:define name="conteudo">
         <div class="box">
             <div class="box-header with-border">
@@ -93,8 +93,57 @@
                         <p:column headerText="Proprietário" priority="1">
                             <h:outputText value="#{empresa.proprietario.pessoa.nome}"/>
                         </p:column>
+                        <p:column headerText="Proprietário">
+                            <p:commandButton icon="fa fa-pencil" 
+                                             class="btn btn-default"
+                                             process="@this #{p:component('formTable')}"
+                                             action="pretty:editar-empresa"
+                                             style="margin: 0 5px 5px 0">
+                                <f:setPropertyActionListener value="#{empresa.id * 483957299}" target="#{empresaBean.codigo}"/>
+                            </p:commandButton>
+                            <p:commandButton icon="fa fa-remove" 
+                                             title="Excluir Empresa" 
+                                             process="@this #{p:component('formTable')}"
+                                             oncomplete="PF('yesnoEmpresa').show()"
+                                             update="#{p:component('formExclusaoEmpresa')}">
+                                <f:setPropertyActionListener value="#{empresa}" target="#{empresaBean.empresaSelecionada}"/>
+                            </p:commandButton>
+                        </p:column>
                     </p:dataTable>
                 </div>
+            </h:form>
+
+            <h:form id="formExclusaoEmpresa">
+                <p:dialog header="Exclusão de Empresas"
+                          responsive="true" closable="false"
+                          draggable="false"
+                          closeOnEscape="true"
+                          resizable="false"
+                          modal="true"
+                          widgetVar="yesnoEmpresa">
+                    <p:messages id="msgDialogExclusao" autoUpdate="false"/>
+                    <div class="center">
+                        <p>Deseja realmente deletar essa empresa?</p>
+                        <p class="nome-exclusao">#{empresaBean.empresaSelecionada.nome}</p>
+                    </div>
+                    <div class="col-ms-12">
+                        <div class="painel-botoes">
+                            <p:commandLink update="#{p:component('dataTableEmpresas')} #{p:component('msg')} msgDialogExclusao" 
+                                           oncomplete="PF('yesnoEmpresa').hide();"
+                                           process="@this #{p:component('dataTableEmpresas')}"
+                                           action="#{empresaBean.excluirEmpresa()}"
+                                           style="margin-right: 5px;"
+                                           styleClass="btn botaoVermelho">
+                                <i class="fa fa fa-check"></i>
+                                <span>Sim</span>
+                            </p:commandLink>
+                            <p:commandLink onclick="PF('yesonEmpresa').hide()" styleClass="btn botaoCinza">
+                                <i class="fa fa fa-close"></i>
+                                <span>Não</span>
+                            </p:commandLink>
+                        </div>
+                    </div>
+                </p:dialog>
             </h:form>
         </div>
     </ui:define>

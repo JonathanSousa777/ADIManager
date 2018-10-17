@@ -149,7 +149,8 @@
                     </div>
                     <div class="col-sm-12">
                         <div class="painel-botoes">
-                            <p:commandLink update="#{p:component('dataTableClientes')} #{p:component('msg')} msgDialogExclusao" oncomplete="PF('yesnoCliente').hide();"
+                            <p:commandLink update="#{p:component('dataTableClientes')} #{p:component('msg')} msgDialogExclusao" 
+                                           oncomplete="PF('yesnoCliente').hide();"
                                            action="#{clienteBean.excluirCliente}"
                                            process="@this #{p:component('dataTableClientes')}"
                                            style="margin-right: 5px;"
@@ -157,7 +158,7 @@
                                 <i class="fa fa fa-check"></i>
                                 <span>Sim</span>
                             </p:commandLink>
-                            <p:commandLink onclick="PF('yesnoCliente').hide()" styleClass="btn botaoCinza">
+                            <p:commandLink onclick="PF('yesonCliente').hide()" styleClass="btn botaoCinza">
                                 <i class="fa fa fa-close"></i>
                                 <span>Não</span>
                             </p:commandLink>

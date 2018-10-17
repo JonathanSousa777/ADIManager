@@ -37,6 +37,11 @@
         <pattern value="/cadastro-empresa"/>
         <view-id value="/cadastros/cadastroEmpresa.xhtml"/>
     </url-mapping>
+    <url-mapping id="editar-empresa">
+        <pattern value="/editar-empresa=#{ pcid : empresaBean.codigo}"/>
+        <action onPostback="false">#{empresaBean.buscarEmpresa}</action>
+        <view-id value="/cadastros/cadastroEmpresa.xhtml"/>
+    </url-mapping>
     <url-mapping id="consulta-clientes">
         <pattern value="/clientes"/>
         <view-id value="/consultas/consultaClientes.xhtml"/>

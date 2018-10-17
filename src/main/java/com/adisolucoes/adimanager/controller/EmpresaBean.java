@@ -9,6 +9,7 @@ import com.adisolucoes.adimanager.model.Cliente;
 import com.adisolucoes.adimanager.model.Empresa;
 import com.adisolucoes.adimanager.model.Endereco;
 import com.adisolucoes.adimanager.model.LazyBean;
+import com.adisolucoes.adimanager.util.crud.CrudUtils;
 import com.adisolucoes.adimanager.util.jsf.FacesUtils;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -38,6 +39,10 @@ public class EmpresaBean implements Serializable {
 
     private Empresa empresa;
     private Cliente cliente;
+    private long codigo;
+    private Empresa empresaSelecionada;
+    private Endereco endereco;
+    private final CrudUtils crudUtils;
     private EmpresaFiltro empresaFiltro;
     private List<Cliente> clientes;
     private LazyBean<Empresa> modelo;
@@ -45,11 +50,15 @@ public class EmpresaBean implements Serializable {
     public EmpresaBean() {
         clientes = new ArrayList<Cliente>();
         empresa = new Empresa();
+        crudUtils = new CrudUtils();
     }
 
     @PostConstruct
     public void inicializar() {
         cliente = new Cliente();
+        endereco = new Endereco();
+        empresa = new Empresa();
+        empresa.setEndereco(new Endereco());
         empresaFiltro = new EmpresaFiltro();
         carregarClientes();
     }
@@ -80,6 +89,33 @@ public class EmpresaBean implements Serializable {
             }
         } catch (ErroBancoDadosException ex) {
             LOG.log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void preencherDadosPorCep() {
+        crudUtils.preencherDadosPorCep(empresa.getEndereco());
+    }
+    
+    public void excluirEmpresa(){
+        try {
+            if(empresaSelecionada != null){
+                empresaDAO.excluir(empresaSelecionada.getId());
+                modelo = null;
+                FacesUtils.showFacesMessage("Cliente excluido com sucesso!", 2);
+            }
+        } catch (ErroBancoDadosException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+            FacesUtils.showFacesMessage("Error na conexão com o banco de dados!", 1);
+        }
+    }
+    
+    public void buscarEmpresa(){
+        try {
+            codigo = codigo / 483957299;
+            empresa = empresaDAO.buscarPorId(codigo);
+            System.out.println("MEU CNPJ: " + empresa.getCnpj());
+        } catch (ErroBancoDadosException ex) {
+            LOG.log(Level.SEVERE, "Erro ao recuperar a empresa", ex);
         }
     }
     
@@ -133,5 +169,21 @@ public class EmpresaBean implements Serializable {
 
     public void setModelo(LazyBean<Empresa> modelo) {
         this.modelo = modelo;
+    }
+
+    public Empresa getEmpresaSelecionada() {
+        return empresaSelecionada;
+    }
+
+    public void setEmpresaSelecionada(Empresa empresaSelecionada) {
+        this.empresaSelecionada = empresaSelecionada;
+    }
+
+    public long getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(long codigo) {
+        this.codigo = codigo;
     }
 }
