@@ -93,7 +93,7 @@
                         <p:column headerText="Proprietário" priority="1">
                             <h:outputText value="#{empresa.proprietario.pessoa.nome}"/>
                         </p:column>
-                        <p:column headerText="Proprietário">
+                        <p:column headerText="Proprietário" width="100">
                             <p:commandButton icon="fa fa-pencil" 
                                              class="btn btn-default"
                                              process="@this #{p:component('formTable')}"
@@ -137,7 +137,7 @@
                                 <i class="fa fa fa-check"></i>
                                 <span>Sim</span>
                             </p:commandLink>
-                            <p:commandLink onclick="PF('yesonEmpresa').hide()" styleClass="btn botaoCinza">
+                            <p:commandLink onclick="PF('yesnoEmpresa').hide()" styleClass="btn botaoCinza">
                                 <i class="fa fa fa-close"></i>
                                 <span>Não</span>
                             </p:commandLink>

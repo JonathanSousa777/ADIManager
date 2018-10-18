@@ -4,6 +4,7 @@ import com.adisolucoes.adimanager.dao.ClienteDAO;
 import com.adisolucoes.adimanager.dao.EmpresaDAO;
 import com.adisolucoes.adimanager.enumerations.UF;
 import com.adisolucoes.adimanager.exceptions.ErroBancoDadosException;
+import com.adisolucoes.adimanager.exceptions.ErroEmpresaDuplicadaException;
 import com.adisolucoes.adimanager.filtros.EmpresaFiltro;
 import com.adisolucoes.adimanager.model.Cliente;
 import com.adisolucoes.adimanager.model.Empresa;
@@ -74,42 +75,52 @@ public class EmpresaBean implements Serializable {
     public void pesquisarLazy() {
         modelo = new LazyBean<Empresa>(empresaDAO, empresaFiltro);
     }
-    
-    public void salvar(){
+
+    public void salvar() throws ErroEmpresaDuplicadaException {
         try {
-            if(empresa != null){
-                if(empresa.getId() == 0){
+            if (empresa != null) {
+                Empresa empresaExistente = empresaDAO.buscarPorCnpj(empresa.getCnpj());
+                if (empresa.getId() == 0) {
+                    if (empresaExistente != null) {
+                        throw new ErroEmpresaDuplicadaException();
+                    }
                     empresaDAO.salvar(empresa);
                     FacesUtils.showFacesMessage("Empresa salva com sucesso", 2);
                     limparForm();
-                }else{
+                } else {
+                    if (empresaExistente != null && empresaExistente.getId() != empresa.getId()) {
+                        throw new ErroEmpresaDuplicadaException();
+                    }
                     empresaDAO.atualizar(empresa);
                     FacesUtils.showFacesMessage("Empresa atualizada com sucesso", 2);
                 }
             }
         } catch (ErroBancoDadosException ex) {
             LOG.log(Level.SEVERE, null, ex);
+        } catch (ErroEmpresaDuplicadaException ex) {
+            FacesUtils.showFacesMessage("Já existe uma empresa com o CNPJ informado", 1);
+            LOG.log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void preencherDadosPorCep() {
         crudUtils.preencherDadosPorCep(empresa.getEndereco());
     }
-    
-    public void excluirEmpresa(){
+
+    public void excluirEmpresa() {
         try {
-            if(empresaSelecionada != null){
+            if (empresaSelecionada != null) {
                 empresaDAO.excluir(empresaSelecionada.getId());
                 modelo = null;
-                FacesUtils.showFacesMessage("Cliente excluido com sucesso!", 2);
+                FacesUtils.showFacesMessage("Empresa excluida com sucesso!", 2);
             }
         } catch (ErroBancoDadosException ex) {
             LOG.log(Level.SEVERE, null, ex);
             FacesUtils.showFacesMessage("Error na conexão com o banco de dados!", 1);
         }
     }
-    
-    public void buscarEmpresa(){
+
+    public void buscarEmpresa() {
         try {
             codigo = codigo / 483957299;
             empresa = empresaDAO.buscarPorId(codigo);
@@ -118,14 +129,14 @@ public class EmpresaBean implements Serializable {
             LOG.log(Level.SEVERE, "Erro ao recuperar a empresa", ex);
         }
     }
-    
-    private void limparForm(){
+
+    private void limparForm() {
         empresa = new Empresa();
         empresa.setEndereco(new Endereco());
     }
-    
-    public UF[] getEstados(){
-       return UF.values();
+
+    public UF[] getEstados() {
+        return UF.values();
     }
 
     public Empresa getEmpresa() {
