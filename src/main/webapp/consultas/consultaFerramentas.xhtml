@@ -37,7 +37,7 @@
                                                  label="Desenvolvedora"/>
                                 </h:panelGrid>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <h:panelGrid columns="1" styleClass="width-full">
                                     <p:outputLabel value="Projeto" />
                                     <p:selectOneMenu id="selectTipo"
@@ -50,10 +50,14 @@
                                     </p:selectOneMenu>
                                 </h:panelGrid>
                             </div>
-                            <div class="col-sm-1">
+                            <div class="col-sm-2">
                                 <h:panelGrid columns="1" styleClass="width-full">
-                                    <p:outputLabel value="Paga" for="switchPaga"/>
-                                    <p:inputSwitch id="switchPaga" styleClass="width-full" value="#{ferramentaBean.ferramentaFiltro.paga}" onLabel="Sim" offLabel="Não" style="margin-top: 4px;"/>
+                                    <p:outputLabel value="Status" for="selectStatus"/>
+                                    <p:selectOneMenu styleClass="width-full" id="selectStatus" value="#{ferramentaBean.ferramentaFiltro.status}">
+                                        <f:selectItem itemLabel="Selecione um Status" noSelectionOption="true"/>
+                                        <f:selectItem itemLabel="Pago" itemValue="paga"/>
+                                        <f:selectItem itemLabel="Não pago" itemValue="irremunerada"/>
+                                    </p:selectOneMenu>
                                 </h:panelGrid>
                             </div>
                             <div class="col-sm-12">
@@ -62,15 +66,10 @@
                                                    update="formDados  #{p:component('dataTableFerramentas')}" process="@form @this">
                                         <i class="fa fa fa-search"></i>
                                         <span>Buscar</span>
-                                        <f:setPropertyActionListener value="false" target="#{ferramentaBean.ferramentaFiltro.todas}"/>
-                                    </p:commandLink>
-                                    <p:commandLink styleClass="btn botaoCinza" title="Buscar todas Ferramentas" style="margin:0 5px 3px 0;" action="#{ferramentaBean.buscarTodas()}"
-                                                   update="formDados #{p:component('dataTableFerramentas')}" process="@form">
-                                        <i class="fa fa fa-list"></i>
-                                        <span>Buscar Todas</span>
                                     </p:commandLink>
                                     <p:commandLink styleClass="btn botaoVerde" title="Cadastrar Ferramentas" 
                                                    action="pretty:cadastro-usuarios"
+                                                   style="margin:0 5px 3px 0;"
                                                    update="formDados #{p:component('dataTableFerramentas')}" process="@form">
                                         <i class="fa fa fa-plus"></i>
                                         <span>Cadastrar</span>

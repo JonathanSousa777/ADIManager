@@ -51,7 +51,7 @@ public class FerramentaDAO extends DAO<Ferramenta> implements LazyDAO<Ferramenta
         sql += (filtro.getNome() != null && !filtro.getNome().isEmpty()) ? "AND f.nome LIKE :nome " : " ";
         sql += (filtro.getDesenvolvedora() != null && !filtro.getDesenvolvedora().isEmpty()) ? "AND f.desenvolvedora LIKE :desenvolvedora " : " ";
         sql += (filtro.getProjeto() != null) ? "AND :projeto MEMBER OF f.projetos " : " ";
-        sql += (!filtro.isTodas()) ? "AND f.paga = :paga " : " ";
+        sql += (filtro.getStatus() != null) ? "AND f.paga = :paga" : "";
         sql += " ORDER BY f.nome ASC";
         return sql;
     }
@@ -61,13 +61,13 @@ public class FerramentaDAO extends DAO<Ferramenta> implements LazyDAO<Ferramenta
             query.setParameter("nome", "%" + filtro.getNome() + "%");
         }
         if (filtro.getDesenvolvedora() != null && !filtro.getDesenvolvedora().isEmpty()) {
-            query.setParameter("desenvolvedora", "%" +  filtro.getDesenvolvedora() + "%");
+            query.setParameter("desenvolvedora", "%" + filtro.getDesenvolvedora() + "%");
         }
         if (filtro.getProjeto() != null) {
             query.setParameter("projeto", filtro.getProjeto());
         }
-        if (!filtro.isTodas()) {
-            query.setParameter("paga", filtro.isPaga());
+        if (filtro.getStatus() != null) {
+            query.setParameter("paga", filtro.getStatus().equalsIgnoreCase("paga"));
         }
     }
 }

@@ -47,18 +47,11 @@ public class FerramentaBean implements Serializable {
     public void inicializar() {
         projeto = new Projeto();
         ferramentaFiltro = new FerramentaFiltro();
-        ferramentaFiltro.setPaga(true);
         carregarProjetos();
     }
 
     public void pesquisarLazy() {
         modelo = new LazyBean<Ferramenta>(ferramentaDAO, ferramentaFiltro);
-    }
-
-    public void buscarTodas() {
-        ferramentaFiltro = new FerramentaFiltro();
-        ferramentaFiltro.setTodas(true);
-        pesquisarLazy();
     }
 
     public void carregarProjetos() {
@@ -103,7 +96,7 @@ public class FerramentaBean implements Serializable {
 
     public LazyBean<Ferramenta> getModelo() {
         if (modelo == null) {
-            buscarTodas();
+            pesquisarLazy();
         }
         return modelo;
     }

@@ -11,8 +11,7 @@ public class FerramentaFiltro implements LazyFiltro {
     private Integer primeiro;
     private Integer quantidade;
     private boolean count;
-    private boolean paga;
-    private boolean todas;
+    private String status;
     private String nome;
     private String desenvolvedora;
     private Projeto projeto;
@@ -65,20 +64,12 @@ public class FerramentaFiltro implements LazyFiltro {
         this.projeto = projeto;
     }
 
-    public boolean isPaga() {
-        return paga;
+    public String getStatus() {
+        return status;
     }
 
-    public void setPaga(boolean paga) {
-        this.paga = paga;
-    }
-
-    public boolean isTodas() {
-        return todas;
-    }
-
-    public void setTodas(boolean todas) {
-        this.todas = todas;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }
