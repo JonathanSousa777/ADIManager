@@ -1,3 +1,18 @@
+/* 
+    Document   : adimanager
+    Created on : 19/05/2018, 09:00:00
+    Author     : jonathan
+*/
+
+/*SISTEMA*/
+html {
+    font-size: 12px !important;
+    padding: 0;
+    height: 100%;
+    font-family: "Helvetica Neue",Helvetica,Verdana,Tahoma,Arial,sans-serif;
+    margin: 0;
+}
+
 .botoes{
     font-size: 12px !important;
     font-weight: 300;
@@ -137,6 +152,17 @@ input.botaoCinza, input.botaoAzul, input.botaoVerde{
     margin: 2.5px;
 }
 
+.painel-botoes {
+    display: block;
+    text-align: center;
+    margin: 15px 0 5px 0;
+}
+
+.nome-exclusao {
+    text-align: center;
+    color: #b96570;
+}
+
 @media (max-width: 640px) {
     .adimanager-group .botoes {
         width: 100% !important;
@@ -243,6 +269,7 @@ a:active {
     width: 100%;
 }
 
+/*LINK PARA CONSULTA (CONSULTA CLIENTES E INDICAÇÕES)*/
 .link-consulta-acao {
     font-size: 16px;
     font-weight: bold;
@@ -250,6 +277,7 @@ a:active {
     margin-top: 5px;
 }
 
+/*AJUSTES FILEUPLOAD (FOTOS)*/
 @media screen and (max-width: 40em){
     .ui-fileupload-buttonbar .ui-button .ui-button-text {
         display: inline-block !important; 
@@ -257,6 +285,41 @@ a:active {
     .ui-fileupload-buttonbar .ui-button {
         padding: 0em !important;
     }
+}
+
+.file-upload-foto .ui-fileupload-content {
+    display: none;
+}
+
+.file-upload-foto .ui-widget-header {
+    border: none; 
+    background: none; 
+    color: #333333;
+    font-weight: normal; 
+}
+
+.file-upload-foto .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    color: #333333;
+    /* text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75); */
+    cursor: pointer;
+    background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: none;
+    background-image: none;
+    background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+    background-repeat: no-repeat;
+    border: none;
+    /* border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25); */
+    /* border-color: #e6e6e6 #e6e6e6 #bfbfbf; */
+    /* border-bottom-color: #b3b3b3; */
+    /* -webkit-border-radius: 4px; */
+    -moz-border-radius: 4px;
+    /* border-radius: 4px; */
+    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+    filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
 
 /* ALTERAÇÕES PRIMEFACES REFERENTE AO CADASTRO DE USUÁRIOS*/
@@ -374,12 +437,6 @@ a:active {
     font-size: 12px;
 }
 
-.painel-botoes {
-    display: block;
-    text-align: center;
-    margin: 15px 0 5px 0;
-}
-
 /* PAGINAS DE ERRORS */
 p{line-height: 18px; margin-top: -10px; font-weight: bold;}
 .display-1 {text-align:center;margin-bottom: -20px;color: #199236;}
@@ -392,45 +449,4 @@ p{line-height: 18px; margin-top: -10px; font-weight: bold;}
     background-color: #FFFFFF;
     border-radius: 6px;
     padding: 140px 20px;
-}
-
-/*CUSTOMIZAÇÃO FILEUPLOAD*/
-.file-upload-foto .ui-fileupload-content {
-    display: none;
-}
-
-.file-upload-foto .ui-widget-header {
-    border: none; 
-    background: none; 
-    color: #333333;
-    font-weight: normal; 
-}
-
-.file-upload-foto .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-    color: #333333;
-    /* text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75); */
-    cursor: pointer;
-    background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6);
-    background-image: none;
-    background-image: none;
-    background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
-    background-image: linear-gradient(top, #ffffff, #e6e6e6);
-    background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
-    background-repeat: no-repeat;
-    border: none;
-    /* border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25); */
-    /* border-color: #e6e6e6 #e6e6e6 #bfbfbf; */
-    /* border-bottom-color: #b3b3b3; */
-    /* -webkit-border-radius: 4px; */
-    -moz-border-radius: 4px;
-    /* border-radius: 4px; */
-    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
-    filter: progid:dximagetransform.microsoft.gradient(enabled=false);
-    -webkit-box-shadow: none;
-    box-shadow: none;
-}
-
-.nome-exclusao {
-    text-align: center;
-    color: #b96570;
 }

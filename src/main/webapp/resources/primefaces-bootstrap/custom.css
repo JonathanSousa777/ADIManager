@@ -13,12 +13,12 @@
     border-radius: 0 !important;
 }
 
-/* tira aquele fundo vermelho do label na hr da validacao */
+/* tira aquele fundo vermelho do label na hora da validacao */
 label.ui-state-error {
     background: none !important;
 }
 
-/* tira a sembra para que os botoes fiquem certos quando em widgets */
+/* tira a sombra para que os botoes fiquem certos quando em widgets */
 .ui-widget-content button.ui-state-default {
     box-shadow: none !important;
 }
