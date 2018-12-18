@@ -377,9 +377,9 @@ a:active {
 }
 
 .login-header{
-    background-color: #199236;
+    background-color: #484848;
     text-align: center;
-    padding: 8px 14px;
+    padding: 0px 14px;
     border-radius: 2px;
     -webkit-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 6px 10px 0 rgba(0, 0, 0, 0.14);
     -moz-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 6px 10px 0 rgba(0, 0, 0, 0.14);
