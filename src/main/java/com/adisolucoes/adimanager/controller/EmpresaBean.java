@@ -102,6 +102,10 @@ public class EmpresaBean implements Serializable {
             LOG.log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void verificarCpfCnpj() throws ErroEmpresaDuplicadaException{
+        crudUtils.verificarCpfCnpjEmpresa(empresa.getCnpj());
+    }
 
     public void preencherDadosPorCep() {
         crudUtils.preencherDadosPorCep(empresa.getEndereco());

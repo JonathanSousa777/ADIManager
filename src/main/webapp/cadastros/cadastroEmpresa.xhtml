@@ -10,7 +10,7 @@
 
     <ui:define name="complementoTitulo"> - Cadastro de Empresa </ui:define>
     <ui:define name="header">Cadastro de Empresa</ui:define>
-    <ui:define name="breadcrump"><h:link></h:link> Cadastro Empresa</ui:define>
+    <ui:define name="breadcrumb"><h:link></h:link> Cadastro Empresa</ui:define>
 
     <ui:define name="conteudo">
         <div class="box">
@@ -55,7 +55,9 @@
                                             </div>
                                             <div class="col-xs-12 col-sm-4">
                                                 <p:outputLabel value="CNPJ" for="cnpj"/>
-                                                <p:inputMask id="cnpj" required="true" styleClass="width-full" value="#{empresaBean.empresa.cnpj}" mask="99.999.999/9999-99"/>
+                                                <p:inputMask id="cnpj" required="true" styleClass="width-full" value="#{empresaBean.empresa.cnpj}" mask="99.999.999/9999-99">
+                                                    <p:ajax listener="#{empresaBean.verificarCpfCnpj()}" update="message"/>
+                                                </p:inputMask>
                                             </div>
                                         </div>
                                         <p:spacer height="15"/>

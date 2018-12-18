@@ -80,7 +80,7 @@ public class CrudUtils implements Serializable {
         try {
             if (cpfCnpj != null && !cpfCnpj.equals("")) {
                 empresa = empresaDAO.buscarPorCnpj(cpfCnpj);
-            }
+            } 
             if (empresa != null) {
                 FacesUtils.showFacesMessage("Já existe uma Empresa com esse CNPJ", 1);
                 throw new ErroEmpresaDuplicadaException();
