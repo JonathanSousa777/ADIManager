@@ -13,6 +13,7 @@
     <ui:define name="breadcrumb"><h:link></h:link> Cadastro Empresa</ui:define>
 
     <ui:define name="conteudo">
+        <f:event type="preRenderView" listener="#{imagemBean.carregarImagem()}"/>
         <div class="box">
             <div class="box-header with-border">
                 <h:form id="formDadosEmpresa">
@@ -26,13 +27,39 @@
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-12">
                                             <p:outputPanel id="outputPanelImagem">
-                                                <p:graphicImage id="usuarioSemFoto" name="user.png" library="images" styleClass="center-object-block image-perfil"/>
-                                                <p:fileUpload label="LogoMarca"
-                                                              styleClass="center-object-block file-upload-foto"
-                                                              auto="true"
-                                                              dragDropSupport="true"
-                                                              cancelLabel="Cancelar"
-                                                              uploadLabel="Enviar">
+                                                <p:messages id="msgUpload" autoUpdate="false" closable="true"/>
+                                                <p:graphicImage id="empresaSemFoto" 
+                                                                name="logomarca.png" 
+                                                                library="images" 
+                                                                cache="false"
+                                                                styleClass="center-object-block image-perfil" 
+                                                                rendered="#{imagemBean.imagem eq null}" />
+                                                <p:commandLink title="Remover imagem do perfil" 
+                                                               action="#{imagemBean.removerImagem}"
+                                                               rendered="#{imagemBean.imagem ne null}"
+                                                               process="@this"
+                                                               update="#{p:component('outputPanelImagem')} msgUpload" >
+                                                    <i class="icon-close fa fa-close"/>
+                                                </p:commandLink>
+                                                <p:graphicImage id="empresaImagemTemporaria" 
+                                                                styleClass="center-object-block image-perfil" 
+                                                                rendered="#{imagemBean.imagem ne null}" 
+                                                                cache="false"
+                                                                value="#{imagemBean.imagem}" >
+                                                </p:graphicImage>
+                                                <p:fileUpload  fileUploadListener="#{imagemBean.alterarImagem}"
+                                                               allowTypes="/(\.|\/)(jpg|png)$/"
+                                                               auto="true"
+                                                               label="Imagem"
+                                                               cancelLabel="Cancelar"
+                                                               uploadLabel="Enviar"
+                                                               process="@this"
+                                                               update="#{p:component('outputPanelImagem')} msgUpload" 
+                                                               sizeLimit="1536000"
+                                                               invalidFileMessage="Extensão de arquivo inválida. Selecione JPG ou PNG."
+                                                               invalidSizeMessage="Arquivo muito grande. Tamanho máximo 150KB."
+                                                               multiple="false"
+                                                               styleClass="center-object-block file-upload-foto">
                                                 </p:fileUpload>
                                             </p:outputPanel>
                                         </div>

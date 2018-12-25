@@ -322,6 +322,16 @@ a:active {
     box-shadow: none;
 }
 
+.icon-close {
+    background-color: #d8d6d6;
+    padding: 4px;
+    box-sizing: border-box;
+    display: block;
+    margin: 0px auto;
+    width: 19px;
+    border-radius: 3px;
+}
+
 /* ALTERAÇÕES PRIMEFACES REFERENTE AO CADASTRO DE USUÁRIOS*/
 .center-object-block {
     margin: 0 auto 10px;

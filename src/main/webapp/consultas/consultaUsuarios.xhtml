@@ -88,6 +88,7 @@
                         <p:column priority="1" width="15">
                             <p:commandButton icon="fa fa-pencil" title="Editar Usuário" process="@this #{p:component('formTable')}" action="pretty:editar-usuarios" >
                                 <f:setPropertyActionListener value="#{usuario.id * 483957299}" target="#{usuarioBean.codigo}"/>
+                                <f:setPropertyActionListener value="#{usuario.pessoa.id * 483957299}" target="#{imagemBean.codigoPessoa}"/>
                             </p:commandButton>
                         </p:column>
                     </p:dataTable>
