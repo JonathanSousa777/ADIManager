@@ -11,6 +11,7 @@ public enum TipoPrioridadeNotificacao implements Serializable {
     CLIENTE("Cliente"),
     LEMBRETE("Lembrete"),
     FINANCEIRO("Financeiro"),
+    ANIVERSARIO("Aniversario"),
     ENTRETETIMENTO("Entretenimento");
 
     private String descricao;
@@ -26,5 +27,4 @@ public enum TipoPrioridadeNotificacao implements Serializable {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-
 }

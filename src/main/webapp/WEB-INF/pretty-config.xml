@@ -68,4 +68,12 @@
         <action onPostback="false">#{indicacaoBean.buscarIndicacao}</action>
         <view-id value="/cadastros/cadastroIndicacoes.xhtml"/>
     </url-mapping>
+    <url-mapping id="consulta-notificacoes">
+        <pattern value="/notificaoes"/>
+        <view-id value="/consultas/consultaNotificacoes.xhtml"/>
+    </url-mapping>
+    <url-mapping id="cadastro-notificacao">
+        <pattern value="/cadastro-notificao"/>
+        <view-id value="/cadastros/cadastroNotificacao.xhtml"/>
+    </url-mapping>
 </pretty-config>

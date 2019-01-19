@@ -24,9 +24,12 @@ public class Notificacao implements Serializable {
 
     private long id;
     private String descricao;
-    private Date duracao;
+    private String responsavel;
+    private Date dataInicio;
+    private Date dataFinal;
     private TipoPrioridadeNotificacao tipoPrioridadeNotificacao;
     private boolean lida;
+    private boolean status;
 
     public Notificacao() {
     }
@@ -48,15 +51,33 @@ public class Notificacao implements Serializable {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "data_duracao", nullable = false)
-    public Date getDuracao() {
-        return duracao;
+    
+    public String getResponsavel() {
+        return responsavel;
     }
 
-    public void setDuracao(Date duracao) {
-        this.duracao = duracao;
+    public void setResponsavel(String responsavel) {
+        this.responsavel = responsavel;
+    }
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "data_inicio", nullable = false)
+    public Date getDataInicio() {
+        return dataInicio;
+    }
+
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
+    }
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "data_final", nullable = false)
+    public Date getDataFinal() {
+        return dataFinal;
+    }
+
+    public void setDataFinal(Date dataFinal) {
+        this.dataFinal = dataFinal;
     }
 
     @Enumerated(EnumType.STRING)
@@ -76,6 +97,15 @@ public class Notificacao implements Serializable {
 
     public void setLida(boolean lida) {
         this.lida = lida;
+    }
+    
+    @Column(name = "status")
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     @Override

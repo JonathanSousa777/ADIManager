@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<ui:composition template="/WEB-INF/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:define name="complementoTitulo"> - Consulta de Notificações</ui:define>
+    <ui:define name="header">Consulta Notificações</ui:define>
+    <ui:define name="breadcrumb">Consulta Notificações</ui:define>
+
+    <ui:define name="conteudo">
+        <div class="box">
+            <div class="box-header with-border">
+                <h:form id="formDados">
+                    <p:messages id="msg"/>
+                    <div class="col-xs-12 col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <h:panelGrid columns="1" styleClass="width-full">
+                                    <p:outputLabel value="Prioridade" for="prioridade"/>
+                                    <p:selectOneMenu id="prioridade" value="#{notificacaoBean.notificacaoFiltro.tipoPrioridade}">
+                                        <f:selectItem itemLabel="Selecione a Prioridade" noSelectionOption="true"/>
+                                        <f:selectItems value="#{notificacaoBean.prioridades}" 
+                                                       var="notificacao" itemLabel="#{notificacao.descricao}" itemValue="#{notificacao}"/>
+                                    </p:selectOneMenu>
+                                </h:panelGrid>
+                            </div>
+                            <div class="col-sm-3">
+                                <h:panelGrid columns="1" styleClass="width-full">
+                                    <p:outputLabel value="Data Inicio" for="data-inicial"/>
+                                    <p:calendar value="#{notificacaoBean.notificacaoFiltro.dataInicio}"
+                                                id="data-inicial" effect="fade"
+                                                styleClass="width-full-input"
+                                                navigator="true"
+                                                pattern="dd/MM/yyyy"
+                                                locale="pt"/>
+                                </h:panelGrid>
+                            </div>
+                            <div class="col-sm-3">
+                                <h:panelGrid columns="1" styleClass="width-full">
+                                    <p:outputLabel value="Data Final" for="data-final"/>
+                                    <p:calendar value="#{notificacaoBean.notificacaoFiltro.dataFinal}"
+                                                id="data-final" navigator="true"
+                                                styleClass="width-full-input"
+                                                pattern="dd/MM/yyyy"
+                                                effect="fade"
+                                                locale="pt"/>
+                                </h:panelGrid>
+                            </div>
+                            <div class="col-sm-2">
+                                <h:panelGrid columns="1" styleClass="width-full">
+                                    <p:outputLabel value="Status" for="status"/>
+                                    <p:inputSwitch value="#{notificacaoBean.notificacaoFiltro.status}" id="status" offLabel="Não" onLabel="Sim" />
+                                </h:panelGrid>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="painel-botoes">
+                                    <p:commandLink styleClass="btn btn-info" title="Buscar Notificacoes" action="#{notificacaoBean.pesquisarLazy()}" style="margin:0px 5px 0px 5px;"
+                                                   update="formDados #{p:component('dataTableNotificacoes')}"
+                                                   process="@form @this">
+                                        <i class="fa fa-search"></i>
+                                        <span>Buscar</span>
+                                    </p:commandLink>
+                                    <p:commandLink styleClass="btn botaoVerde" title="Cadastro Notificacao"
+                                                   update="formDados formDados #{p:component('dataTableNotificacoes')}"
+                                                   process="@form"
+                                                   action="pretty:cadastro-notificacao">
+                                        <i class="fa fa fa-plus"></i>
+                                        <span>Cadastrar</span>
+                                    </p:commandLink>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </div>
+            <h:form id="formTable">
+                <div class="box-body" id="boxbody">
+                    <p:dataTable value="#{notificacaoBean.modelo}"
+                                 id="dataTableNotificacoes"
+                                 var="notificacao"
+                                 rows="20"
+                                 lazy="true"
+                                 rowsPerPageTemplate="20,30,40"
+                                 paginator="true"
+                                 paginatorPosition="bottom"
+                                 tableStyle="table-layout:auto;"
+                                 emptyMessage="Nenhuma notificao foi encontrada"
+                                 styleClass="datatable-custom">
+
+                        <p:column headerText="Prioridade" priority="1">
+                            <h:outputText value="#{notificacao.tipoPrioridadeNotificacao}"/>
+                        </p:column>
+                        <p:column headerText="Data Inicio" priority="2">
+                            <h:outputText value="#{notificacao.dataInicio}"/>
+                        </p:column>
+                        <p:column headerText="Data Final" priority="2">
+                            <h:outputText value="#{notificacao.dataFinal}"/>
+                        </p:column>
+                        <p:column headerText="Status" priority="1">
+                            <h:outputText value="Sim" rendered="#{notificacao.status eq true}"/>
+                            <h:outputText value="Não" rendered="#{notificacao.status eq false}"/>
+                        </p:column>
+                        <p:column headerText="Ações">
+                            <p:commandButton icon="fa fa-remove" disabled="#{!FacesUtils.getUsuarioLogado().getLogin() eq notificacaoBean.notificacao1Selecionada.responsavel}"
+                                             title="Excluir Notificação"
+                                             process="@this #{p:component('formTable')}"
+                                             oncomplete="PF('yesnoNotificacao').show()"
+                                             update="#{p:component('formExclusaoNotificacao')}">
+                                <f:setPropertyActionListener value="#{notificacao}" target="#{notificacaoBean.notificacao1Selecionada}"/>
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </h:form>
+            <h:form id="formExclusaoNotificacao">
+                <p:dialog header="Exclusão de Notificação"
+                          responsive="true" closable="false"
+                          draggable="false"
+                          closeOnEscape="true"
+                          resizable="false"
+                          modal="true"
+                          widgetVar="yesnoNotificacao">
+                    <p:messages id="msgDialogExclusao" autoUpdate="false"/>
+                    <div class="center">
+                        <p>Deseja realmente deletar essa notitificação?</p>
+                        <p class="nome-exclusao">#{notificacaoBean.notificacao1Selecionada.descricao}</p>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="painel-botoes">
+                            <p:commandLink update="#{p:component('dataTableNotificacoes')} #{p:component('msg')} msgDialogExclusao"
+                                           oncomplete="PF('yesnoNotificacao').hide();"
+                                           process="@this #{p:component('dataTableNotificacoes')}"
+                                           action="#{notificacaoBean.excluirNotificacao}"
+                                           style="margin-right: 5px;"
+                                           styleClass="btn botaoVermelho">
+                                <i class="fa fa fa-check"></i>
+                                <span>Sim</span>
+                            </p:commandLink>
+                            <p:commandLink onclick="PF('yesnoNotificacao').hide()" styleClass="btn botaoCinza">
+                                <i class="fa fa fa-close"></i>
+                                <span>Não</span>
+                            </p:commandLink>
+                        </div>
+                    </div>
+                </p:dialog> 
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
