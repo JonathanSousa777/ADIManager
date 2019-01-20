@@ -11,7 +11,7 @@ public enum TipoPrioridadeNotificacao implements Serializable {
     CLIENTE("Cliente"),
     LEMBRETE("Lembrete"),
     FINANCEIRO("Financeiro"),
-    ANIVERSARIO("Aniversario"),
+    ANIVERSARIO("Aniversário"),
     ENTRETETIMENTO("Entretenimento");
 
     private String descricao;

@@ -202,12 +202,6 @@
                                             <span>Ferramentas</span>
                                         </p:link>
                                     </li>
-                                    <li>
-                                        <p:link outcome="pretty:consulta-notificacoes">
-                                            <i class="fa fa-bell-o"></i> 
-                                            <span>Notificações</span>
-                                        </p:link>
-                                    </li>
                                 </ul>
                             </li>
                             <li class="treeview">
@@ -237,6 +231,21 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li class="treeview">
+                                <p:link href="#">
+                                    <i class="fa fa-info-circle"></i> 
+                                    <span>Informações</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </p:link>
+                                <ul class="treeview-menu">
+                                    <li>
+                                        <p:link outcome="pretty:consulta-notificacoes">
+                                            <i class="fa fa-bell-o"></i> 
+                                            <span>Notificações</span>
+                                        </p:link>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     </section>
                     <!-- FIM DO BLOCO ESQUERDO -->
@@ -253,7 +262,7 @@
                         <!-- INDICAÇÃO DE PÁGINA DIREITA -->
                         <ol class="breadcrumb">
                             <li><a href="#"><h:link outcome="/dashboard"><i class="fa fa-dashboard"></i>Dashboard</h:link></a></li>
-                            <li class="active"><ui:insert name="breadcrumb">Dashboards</ui:insert></li>
+                            <li class="active"><ui:insert name="breadcrumb"></ui:insert></li>
                         </ol>
                     </section>
 

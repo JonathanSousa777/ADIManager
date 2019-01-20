@@ -9,8 +9,8 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <ui:define name="complementoTitulo"> - Consulta de Notificações</ui:define>
-    <ui:define name="header">Consulta Notificações</ui:define>
-    <ui:define name="breadcrumb">Consulta Notificações</ui:define>
+    <ui:define name="header">Consulta de Notificações</ui:define>
+    <ui:define name="breadcrumb">Consulta de Notificações</ui:define>
 
     <ui:define name="conteudo">
         <div class="box">
@@ -89,16 +89,15 @@
                                  paginator="true"
                                  paginatorPosition="bottom"
                                  tableStyle="table-layout:auto;"
-                                 emptyMessage="Nenhuma notificao foi encontrada"
+                                 emptyMessage="Nenhuma notificação encontrada"
                                  styleClass="datatable-custom">
-
                         <p:column headerText="Prioridade" priority="1">
                             <h:outputText value="#{notificacao.tipoPrioridadeNotificacao}"/>
                         </p:column>
-                        <p:column headerText="Data Inicio" priority="2">
+                        <p:column headerText="Data inicial" priority="2">
                             <h:outputText value="#{notificacao.dataInicio}"/>
                         </p:column>
-                        <p:column headerText="Data Final" priority="2">
+                        <p:column headerText="Data final" priority="2">
                             <h:outputText value="#{notificacao.dataFinal}"/>
                         </p:column>
                         <p:column headerText="Status" priority="1">
