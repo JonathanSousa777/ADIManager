@@ -50,8 +50,8 @@ public class NotificacaoDAO extends DAO<Notificacao> implements LazyDAO<Notifica
         sql += filtro.isCount() ? "SELECT COUNT(n) FROM Notificacao n WHERE n.id IS NOT NULL " : "SELECT n FROM Notificacao n WHERE n.id IS NOT NULL ";
         sql += (filtro.getTipoPrioridade() != null) ? "AND n.tipoPrioridadeNotificacao = :prioridade " : "";
         sql += (filtro.getDataInicio() != null && !filtro.getDataInicio().equals("")) ? "AND n.dataInicio = :dataInicio " : "";
-        sql += (filtro.getDataFinal() != null && !filtro.getDataFinal().equals("")) ? "AND n.dataFinal = :dataFinal " : "";
-        sql += (filtro.isStatus()) ? "AND n.status = :status" : "";
+        sql += (filtro.getDataFinal() != null && !filtro.getDataFinal().equals("")) ? "AND n.dataFinal :dataFinal " : "";
+        sql += (filtro.getStatus() != null) ? "AND n.status = :status" : "";
         sql += " ORDER BY n.tipoPrioridadeNotificacao ASC";
         return sql;
     }
@@ -69,8 +69,8 @@ public class NotificacaoDAO extends DAO<Notificacao> implements LazyDAO<Notifica
             query.setParameter("dataFinal", filtro.getDataFinal());
         }
         
-        if(filtro.isStatus()) {
-          query.setParameter("status", filtro.isStatus());
+        if(filtro.getStatus() != null) {
+          query.setParameter("status", filtro.getStatus().equalsIgnoreCase("ativado"));
         }
     }
 }

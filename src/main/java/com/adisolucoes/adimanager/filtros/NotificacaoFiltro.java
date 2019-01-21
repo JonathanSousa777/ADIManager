@@ -15,7 +15,7 @@ public class NotificacaoFiltro implements LazyFiltro{
     private TipoPrioridadeNotificacao tipoPrioridade;
     private Date dataInicio;
     private Date dataFinal;
-    private boolean status;
+    private String status;
 
     public Integer getPrimeiro() {
         return primeiro;
@@ -65,11 +65,11 @@ public class NotificacaoFiltro implements LazyFiltro{
         this.dataFinal = dataFinal;
     }
 
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 }

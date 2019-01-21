@@ -51,15 +51,25 @@
                                                 locale="pt"/>
                                 </h:panelGrid>
                             </div>
+                            <!--                            <div class="col-sm-2">
+                                                            <h:panelGrid columns="1" styleClass="width-full">
+                                                                <p:outputLabel value="Status" for="status"/>
+                                                                <p:inputSwitch value="#{notificacaoBean.notificacaoFiltro.status}" id="status" offLabel="Não" onLabel="Sim" />
+                                                            </h:panelGrid>
+                                                        </div>-->
                             <div class="col-sm-2">
-                                <h:panelGrid columns="1" styleClass="width-full">
+                                <h:panelGrid columns="1">
                                     <p:outputLabel value="Status" for="status"/>
-                                    <p:inputSwitch value="#{notificacaoBean.notificacaoFiltro.status}" id="status" offLabel="Não" onLabel="Sim" />
+                                    <p:selectOneMenu value="#{notificacaoBean.notificacaoFiltro.status}" id="status">
+                                        <f:selectItem noSelectionOption="true" itemLabel="Todos"/>
+                                        <f:selectItem itemLabel="Ativadas" itemValue="ativado"/>
+                                        <f:selectItem itemLabel="Desativadas" itemValue="desativado"/>
+                                    </p:selectOneMenu>
                                 </h:panelGrid>
                             </div>
                             <div class="col-sm-12">
                                 <div class="painel-botoes">
-                                    <p:commandLink styleClass="btn btn-info" title="Buscar Notificacoes" action="#{notificacaoBean.pesquisarLazy()}" style="margin:0px 5px 0px 5px;"
+                                    <p:commandLink styleClass="btn btn-info" title="Buscar Notificacoes" action="#{notificacaoBean.pesquisarLazy}" style="margin:0px 5px 0px 5px;"
                                                    update="formDados #{p:component('dataTableNotificacoes')}"
                                                    process="@form @this">
                                         <i class="fa fa-search"></i>
@@ -94,6 +104,9 @@
                         <p:column headerText="Prioridade" priority="1">
                             <h:outputText value="#{notificacao.tipoPrioridadeNotificacao}"/>
                         </p:column>
+                        <p:column headerText="Descrição" priority="1">
+                            <h:outputText value="#{notificacao.descricao}"/>
+                        </p:column>
                         <p:column headerText="Data inicial" priority="2">
                             <h:outputText value="#{notificacao.dataInicio}"/>
                         </p:column>
@@ -101,8 +114,8 @@
                             <h:outputText value="#{notificacao.dataFinal}"/>
                         </p:column>
                         <p:column headerText="Status" priority="1">
-                            <h:outputText value="Sim" rendered="#{notificacao.status eq true}"/>
-                            <h:outputText value="Não" rendered="#{notificacao.status eq false}"/>
+                            <h:outputText value="Ativadas" rendered="#{notificacao.status eq true}"/>
+                            <h:outputText value="Desativadas" rendered="#{notificacao.status eq false}"/>
                         </p:column>
                         <p:column headerText="Ações">
                             <p:commandButton icon="fa fa-remove" disabled="#{!FacesUtils.getUsuarioLogado().getLogin() eq notificacaoBean.notificacao1Selecionada.responsavel}"
