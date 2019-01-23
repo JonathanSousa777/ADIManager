@@ -1,6 +1,7 @@
 package com.adisolucoes.adimanager.dao;
 
 import com.adisolucoes.adimanager.exceptions.ErroBancoDadosException;
+import com.adisolucoes.adimanager.exceptions.ErroNenhumaEmpresaEncontrada;
 import com.adisolucoes.adimanager.filtros.EmpresaFiltro;
 import com.adisolucoes.adimanager.filtros.LazyFiltro;
 import com.adisolucoes.adimanager.model.Cliente;
@@ -106,5 +107,20 @@ public class EmpresaDAO extends DAO<Empresa> implements LazyDAO<Empresa>, Serial
         if (filtro.getProprietario() != null) {
             query.setParameter("idProprietario", filtro.getProprietario().getId());
         }
+    }
+
+    public Empresa buscarUltimaEmpresaCadastrada() throws ErroBancoDadosException, ErroNenhumaEmpresaEncontrada {
+        Empresa empresa = null;
+        try {
+            String sql = "SELECT e FROM Empresa e ORDER BY e.id DESC";
+            TypedQuery<Empresa> query = manager.createQuery(sql, Empresa.class);
+            query.setMaxResults(1);
+            empresa = query.getSingleResult();
+        } catch (NonUniqueResultException | IllegalArgumentException ex) {
+            throw new ErroBancoDadosException(ex.getMessage());
+        } catch (NoResultException ex) {
+            throw new ErroNenhumaEmpresaEncontrada();
+        }
+        return empresa;
     }
 }

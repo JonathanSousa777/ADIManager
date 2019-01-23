@@ -49,6 +49,7 @@
                                             </p:commandLink>
                                             <p:commandLink styleClass="btn botaoVerde" title="Cadastrar Usuários" 
                                                            action="pretty:cadastro-usuarios"
+                                                           actionListener="#{imagemBean.prepararCadastro()}"
                                                            update="formDados #{p:component('idDataTableUsuarios')}" process="@form">
                                                 <i class="fa fa fa-plus"></i>
                                                 <span>Cadastrar</span>

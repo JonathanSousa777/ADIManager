@@ -3,6 +3,8 @@ package com.adisolucoes.adimanager.controller;
 import com.adisolucoes.adimanager.dao.EmpresaDAO;
 import com.adisolucoes.adimanager.dao.PessoaDAO;
 import com.adisolucoes.adimanager.exceptions.ErroBancoDadosException;
+import com.adisolucoes.adimanager.exceptions.ErroNenhumaEmpresaEncontrada;
+import com.adisolucoes.adimanager.exceptions.ErroNenhumaPessoaEncontrada;
 import com.adisolucoes.adimanager.model.Empresa;
 import com.adisolucoes.adimanager.model.Pessoa;
 import com.adisolucoes.adimanager.util.jsf.FacesUtils;
@@ -37,8 +39,9 @@ public class ImagemBean implements Serializable {
     private Pessoa pessoa;
     private Empresa empresa;
     private StreamedContent imagem;
-    private int codigoPessoa;
-    private int codigoEmpresa;
+    private long codigoPessoa;
+    private long codigoEmpresa;
+    private byte[] bytesImagem;
 
     public ImagemBean() {
     }
@@ -46,9 +49,8 @@ public class ImagemBean implements Serializable {
     public void carregarImagem() {
         //Verifica se a edição é de Pessoa ou Empresa
         if (pessoa != null || empresa != null) {
-            byte[] bytesImagem;
             if (pessoa != null) {
-                //Se edição for de empresa carrega a imagem da pessoa
+                //Se edição for de pessoa carrega a imagem da pessoa
                 bytesImagem = pessoa.getImagem();
                 if (bytesImagem != null) {
                     imagem = new DefaultStreamedContent(new ByteArrayInputStream(bytesImagem));
@@ -64,8 +66,6 @@ public class ImagemBean implements Serializable {
                     imagem = null;
                 }
             }
-        } else {
-            imagem = null;
         }
     }
 
@@ -81,9 +81,11 @@ public class ImagemBean implements Serializable {
             if (pessoa != null) {
                 pessoa.setImagem(conteudo);
                 pessoaDAO.atualizar(pessoa);
-            } else {
+            } else if (empresa != null) {
                 empresa.setLogomarca(conteudo);
                 empresaDAO.atualizar(empresa);
+            } else {
+                bytesImagem = conteudo;
             }
         } catch (ErroBancoDadosException ex) {
             FacesUtils.showFacesMessage("Erro ao atualizar a imagem", 1);
@@ -98,7 +100,7 @@ public class ImagemBean implements Serializable {
     private void carregarPessoa() {
         try {
             codigoPessoa = codigoPessoa / 483957299;
-            pessoa = pessoaDAO.buscarPorId(new Long(codigoPessoa));
+            pessoa = pessoaDAO.buscarPorId(codigoPessoa);
             empresa = null;
         } catch (ErroBancoDadosException ex) {
             FacesUtils.showFacesMessage("Erro ao carregar a imagem", 1);
@@ -110,11 +112,48 @@ public class ImagemBean implements Serializable {
     private void carregarEmpresa() {
         try {
             codigoEmpresa = codigoEmpresa / 483957299;
-            empresa = empresaDAO.buscarPorId(new Long(codigoEmpresa));
+            empresa = empresaDAO.buscarPorId(codigoEmpresa);
             pessoa = null;
         } catch (ErroBancoDadosException ex) {
             FacesUtils.showFacesMessage("Erro ao carregar a imagem", 1);
             LOG.info("Erro ao carregar empresa pelo código (Imagem Bean)");
+            LOG.log(Level.SEVERE, null, ex);
+        }
+    }
+
+    //Métodos utilizados nos cadastros
+    public void prepararCadastro() {
+        this.pessoa = null;
+        this.empresa = null;
+        this.imagem = null;
+        this.bytesImagem = null;
+        this.codigoEmpresa = 0;
+        this.codigoPessoa = 0;
+        carregarImagem();
+    }
+
+    public void salvarImagemPessoa() {
+        try {
+            //Assim que uma Pessoa é cadastrada, este método é assionado
+            if (cadastrandoPessoa()) {
+                Pessoa pessoaCadastrada = pessoaDAO.buscarUltimaPessoaCadastrada();
+                pessoaCadastrada.setImagem(bytesImagem);
+                pessoaDAO.atualizar(pessoaCadastrada);
+            }
+        } catch (ErroNenhumaPessoaEncontrada | ErroBancoDadosException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void salvarImagemEmpresa() {
+        //Assim que uma Empresa é cadastrada, este método é assionado
+        try {
+            if (cadastrandoEmpresa()) {
+                Empresa empresaCadastrada = empresaDAO.buscarUltimaEmpresaCadastrada();
+                empresaCadastrada.setLogomarca(bytesImagem);
+                empresaDAO.atualizar(empresaCadastrada);
+            }
+        } catch (ErroBancoDadosException | ErroNenhumaEmpresaEncontrada ex) {
             LOG.log(Level.SEVERE, null, ex);
         }
     }
@@ -135,11 +174,11 @@ public class ImagemBean implements Serializable {
         this.imagem = imagem;
     }
 
-    public int getCodigoPessoa() {
+    public long getCodigoPessoa() {
         return codigoPessoa;
     }
 
-    public void setCodigoPessoa(int codigoPessoa) {
+    public void setCodigoPessoa(long codigoPessoa) {
         if (codigoPessoa != 0) {
             this.codigoPessoa = codigoPessoa;
             carregarPessoa();
@@ -155,16 +194,24 @@ public class ImagemBean implements Serializable {
         this.empresa = empresa;
     }
 
-    public int getCodigoEmpresa() {
+    public long getCodigoEmpresa() {
         return codigoEmpresa;
     }
 
-    public void setCodigoEmpresa(int codigoEmpresa) {
+    public void setCodigoEmpresa(long codigoEmpresa) {
         if (codigoEmpresa != 0) {
             this.codigoEmpresa = codigoEmpresa;
             carregarEmpresa();
         }
         this.codigoEmpresa = codigoEmpresa;
+    }
+
+    private boolean cadastrandoPessoa() {
+        return this.codigoPessoa == 0;
+    }
+
+    private boolean cadastrandoEmpresa() {
+        return this.codigoEmpresa == 0;
     }
 
 }

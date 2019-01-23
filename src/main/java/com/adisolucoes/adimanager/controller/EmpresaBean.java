@@ -42,7 +42,6 @@ public class EmpresaBean implements Serializable {
     private Cliente cliente;
     private long codigo;
     private Empresa empresaSelecionada;
-    private Endereco endereco;
     private final CrudUtils crudUtils;
     private EmpresaFiltro empresaFiltro;
     private List<Cliente> clientes;
@@ -57,7 +56,6 @@ public class EmpresaBean implements Serializable {
     @PostConstruct
     public void inicializar() {
         cliente = new Cliente();
-        endereco = new Endereco();
         empresa = new Empresa();
         empresa.setEndereco(new Endereco());
         empresaFiltro = new EmpresaFiltro();
@@ -102,9 +100,9 @@ public class EmpresaBean implements Serializable {
             LOG.log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void verificarCpfCnpj() throws ErroEmpresaDuplicadaException{
-        crudUtils.verificarCpfCnpjEmpresa(empresa.getCnpj());
+
+    public void verificarCpfCnpj() throws ErroEmpresaDuplicadaException {
+        verificarCpfCnpjEmpresa(empresa.getCnpj());
     }
 
     public void preencherDadosPorCep() {
@@ -137,6 +135,23 @@ public class EmpresaBean implements Serializable {
     private void limparForm() {
         empresa = new Empresa();
         empresa.setEndereco(new Endereco());
+    }
+
+    public void verificarCpfCnpjEmpresa(String cpfCnpj) throws ErroEmpresaDuplicadaException {
+        Empresa empresaExistente = null;
+        try {
+            if (cpfCnpj != null && !cpfCnpj.equals("")) {
+                empresaExistente = empresaDAO.buscarPorCnpj(cpfCnpj);
+            }
+            if (empresaExistente != null) {
+                FacesUtils.showFacesMessage("Já existe uma Empresa com esse CNPJ", 1);
+                throw new ErroEmpresaDuplicadaException();
+            } else {
+                LOG.info("CNPJ livre para cadastro!");
+            }
+        } catch (ErroBancoDadosException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        }
     }
 
     public UF[] getEstados() {

@@ -1,6 +1,7 @@
 package com.adisolucoes.adimanager.dao;
 
 import com.adisolucoes.adimanager.exceptions.ErroBancoDadosException;
+import com.adisolucoes.adimanager.exceptions.ErroNenhumaPessoaEncontrada;
 import com.adisolucoes.adimanager.model.Pessoa;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -37,6 +38,21 @@ public class PessoaDAO extends DAO<Pessoa> implements Serializable {
             throw new ErroBancoDadosException(ex.getMessage());
         } catch (NoResultException ex) {
             pessoa = null;
+        }
+        return pessoa;
+    }
+
+    public Pessoa buscarUltimaPessoaCadastrada() throws ErroNenhumaPessoaEncontrada, ErroBancoDadosException {
+        Pessoa pessoa = null;
+        try {
+            String sql = "SELECT p FROM Pessoa p ORDER BY p.id DESC";
+            TypedQuery<Pessoa> query = manager.createQuery(sql, Pessoa.class);
+            query.setMaxResults(1);
+            pessoa = query.getSingleResult();
+        } catch (NonUniqueResultException | IllegalArgumentException ex) {
+            throw new ErroBancoDadosException(ex.getMessage());
+        } catch (NoResultException ex) {
+            throw new ErroNenhumaPessoaEncontrada();
         }
         return pessoa;
     }

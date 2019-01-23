@@ -3,6 +3,7 @@ package com.adisolucoes.adimanager.controller;
 import com.adisolucoes.adimanager.dao.ClienteDAO;
 import com.adisolucoes.adimanager.dao.EmpresaDAO;
 import com.adisolucoes.adimanager.dao.IndicacaoDAO;
+import com.adisolucoes.adimanager.dao.PessoaDAO;
 import com.adisolucoes.adimanager.dao.ProjetoDAO;
 import com.adisolucoes.adimanager.enumerations.Sexo;
 import com.adisolucoes.adimanager.enumerations.UF;
@@ -41,6 +42,9 @@ public class ClienteBean implements Serializable {
 
     @Inject
     private ClienteDAO clienteDAO;
+
+    @Inject
+    private PessoaDAO pessoaDAO;
 
     @Inject
     private ProjetoDAO projetoDAO;
@@ -170,11 +174,28 @@ public class ClienteBean implements Serializable {
     }
 
     public void verificarCpfCnpj() throws ErroPessoaDuplicadoException {
-        crudUtils.verificarCpfCnpjCliente(cliente.getPessoa().getCpfCnpj());
+        verificarCpfCnpjCliente(cliente.getPessoa().getCpfCnpj());
     }
 
     public void preencherDadosPorCep() {
         crudUtils.preencherDadosPorCep(cliente.getPessoa().getEndereco());
+    }
+
+    public void verificarCpfCnpjCliente(String cpfCnpj) throws ErroPessoaDuplicadoException {
+        Pessoa pessoa = null;
+        try {
+            if (cpfCnpj != null && !cpfCnpj.equals("")) {
+                pessoa = pessoaDAO.buscarPorCpfCnpj(cpfCnpj);
+            }
+            if (pessoa != null) {
+                FacesUtils.showFacesMessage("Já existe uma Pessoa com esse CPF/CNPJ", 1);
+                throw new ErroPessoaDuplicadoException();
+            } else {
+                LOG.info("CPF/CNPJ livre para cadastro!");
+            }
+        } catch (ErroBancoDadosException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        }
     }
 
     public List<Projeto> getProjetos() {
