@@ -42,7 +42,7 @@ public class NotificacaoBean implements Serializable {
         notificacaoFiltro = new NotificacaoFiltro();
     }
     
-    public void PesquisarLazy(){
+    public void pesquisarLazy(){
         modelo = new LazyBean<Notificacao>(notificacaoDAO, notificacaoFiltro);
     }
     
@@ -92,7 +92,7 @@ public class NotificacaoBean implements Serializable {
 
     public LazyBean<Notificacao> getModelo() {
         if(modelo == null){
-            PesquisarLazy();
+            pesquisarLazy();
         }
         return modelo;
     }

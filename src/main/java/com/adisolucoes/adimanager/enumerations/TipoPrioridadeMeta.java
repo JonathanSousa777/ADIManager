@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 public enum TipoPrioridadeMeta implements Serializable {
     NORMAL("Normal"),
-    UP("Evolução"),
+    EVOLUCAO("Evolução"),
     ALTA("Alta");
 
     private String descricao;

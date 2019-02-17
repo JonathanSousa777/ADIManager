@@ -76,4 +76,8 @@
         <pattern value="/cadastro-notificao"/>
         <view-id value="/cadastros/cadastroNotificacao.xhtml"/>
     </url-mapping>
+    <url-mapping id="consulta-metas">
+        <pattern value="/metas"/>
+        <view-id value="/consultas/consultaMetas.xhtml"/>
+    </url-mapping>
 </pretty-config>
