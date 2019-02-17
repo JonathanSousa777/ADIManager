@@ -96,7 +96,7 @@
                                                               label="Prioridade da Meta"
                                                               value="#{metaBean.metaFiltro.tipoPrioridadeMeta}">
                                                 <f:selectItem itemLabel="Selecione uma Prioridade" noSelectionOption="true"/>
-                                                <f:selectItems value="#{metaBean.prioridadeMetas}" var="meta" itemLabel="#{meta.descricao}" itemValue="#{meta}"/>              
+                                                <f:selectItems value="#{metaBean.prioridadesMeta}" var="meta" itemLabel="#{meta.descricao}" itemValue="#{meta}"/>              
                                             </p:selectOneMenu>
                                         </h:panelGrid>
                                     </div>
@@ -136,7 +136,7 @@
                                         <span>Buscar</span>
                                     </p:commandLink>
                                     <p:commandLink styleClass="btn botaoVerde" title="Cadastrar Metas" 
-                                                   action="pretty:cadastro-usuarios"
+                                                   action="pretty:cadastro-metas"
                                                    style="margin:0 5px 3px 0;"
                                                    update="formDados #{p:component('dataTableMetas')}" process="@form">
                                         <i class="fa fa fa-plus"></i>
@@ -181,8 +181,47 @@
                         <p:column headerText="Situação" priority="2">
                             <h:outputText value="#{meta.concluida? 'Concluída' : 'Em andamento'}"/>
                         </p:column>
+                        <p:column headerText="" priority="1" width="100">
+                            <p:commandButton icon="fa fa-pencil" title="Editar Meta" process="@this #{p:component('formTable')}" action="pretty:editar-metas" style="margin: 0 5px 5px 0">
+                                <f:setPropertyActionListener value="#{meta.id * 483957299}" target="#{metaBean.codigo}"/>
+                            </p:commandButton>
+                            <p:commandButton icon="fa fa-remove" title="Excluir Meta" process="@this #{p:component('formTable')}" oncomplete="PF('yesnoMeta').show()" update="#{p:component('formExclusaoMeta')}">
+                                <f:setPropertyActionListener value="#{meta}" target="#{metaBean.metaSelecionada}"/>
+                            </p:commandButton>
+                        </p:column>
                     </p:dataTable>
                 </div>
+            </h:form>
+
+            <h:form id="formExclusaoMeta">
+                <p:dialog header=" Exclusão de Metas"
+                          responsive="true" closable="false"
+                          draggable="false"
+                          closeOnEscape="true"
+                          resizable="false" 
+                          modal="true"
+                          widgetVar="yesnoMeta">
+                    <p:messages id="msgDialogMeta" autoUpdate="false" />
+                    <div class="center">
+                        <p>Deseja realmente deletar essa meta?</p>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="painel-botoes">
+                            <p:commandLink update="#{p:component('dataTableMetas')} #{p:component('msg')}" oncomplete="PF('yesnoMeta').hide();"
+                                           action="#{metaBean.excluirMeta}"
+                                           process="@this #{p:component('dataTableMetas')}"
+                                           style="margin-right: 5px;"
+                                           styleClass="btn botaoVermelho">
+                                <i class="fa fa fa-check"></i>
+                                <span>Sim</span>
+                            </p:commandLink>
+                            <p:commandLink onclick="PF('yesnoMeta').hide()" styleClass="btn botaoCinza">
+                                <i class="fa fa fa-close"></i>
+                                <span>Não</span>
+                            </p:commandLink>
+                        </div>
+                    </div>
+                </p:dialog> 
             </h:form>
         </div>
     </ui:define>

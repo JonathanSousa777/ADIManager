@@ -387,7 +387,7 @@ a:active {
 }
 
 .login-header{
-/*    background-color: #484848;*/
+    /*    background-color: #484848;*/
     text-align: center;
     padding: 10px 14px;
     border-radius: 2px;
@@ -459,4 +459,9 @@ p{line-height: 18px; margin-top: -10px; font-weight: bold;}
     background-color: #FFFFFF;
     border-radius: 6px;
     padding: 140px 20px;
+}
+
+/*AJUSTE DO COMPONENTE SELECTBOOLEAN DO PRIMEFACES*/
+.ui-chkbox-icon.ui-icon {
+    border: 1.5px solid #d0d0d0 !important;
 }

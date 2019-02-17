@@ -80,4 +80,13 @@
         <pattern value="/metas"/>
         <view-id value="/consultas/consultaMetas.xhtml"/>
     </url-mapping>
+    <url-mapping id="cadastro-metas">
+        <pattern value="/cadastro-metas"/>
+        <view-id value="/cadastros/cadastroMetas.xhtml"/>
+    </url-mapping>
+    <url-mapping id="editar-metas">
+        <pattern value="/editar-metas=#{ pcid : metaBean.codigo}"/>
+        <action onPostback="false">#{metaBean.buscarMeta}</action>
+        <view-id value="/cadastros/cadastroMetas.xhtml"/>
+    </url-mapping>
 </pretty-config>
