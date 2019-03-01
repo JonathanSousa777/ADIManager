@@ -3,6 +3,7 @@ package com.adisolucoes.adimanager.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,7 @@ import javax.persistence.Table;
 @Table(name = "tab_servidor")
 public class Servidor implements Serializable {
 
-    private long id;
+    private Long id;
     private String codigoIdentificador;
     private String url;
     private String nomePlano;
@@ -33,11 +34,11 @@ public class Servidor implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -59,7 +60,7 @@ public class Servidor implements Serializable {
         this.url = url;
     }
 
-    @Column(name = "nome_plano" ,length = 60, nullable = false)
+    @Column(name = "nome_plano", length = 60, nullable = false)
     public String getNomePlano() {
         return nomePlano;
     }
@@ -107,7 +108,7 @@ public class Servidor implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 29 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -123,7 +124,7 @@ public class Servidor implements Serializable {
             return false;
         }
         final Servidor other = (Servidor) obj;
-        if (this.id != other.id) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;

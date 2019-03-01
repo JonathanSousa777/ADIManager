@@ -3,6 +3,7 @@ package com.adisolucoes.adimanager.model;
 import com.adisolucoes.adimanager.enumerations.Sexo;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -30,7 +31,7 @@ import javax.persistence.TemporalType;
 @Table(name = "tab_pessoa")
 public class Pessoa implements Serializable {
 
-    private long id;
+    private Long id;
     private Date dataCadastro;
     private Date dataAtualizacao;
     private String nome;
@@ -61,11 +62,11 @@ public class Pessoa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -201,8 +202,8 @@ public class Pessoa implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 59 * hash + (int) (this.id ^ (this.id >>> 32));
+        int hash = 7;
+        hash = 31 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -218,7 +219,7 @@ public class Pessoa implements Serializable {
             return false;
         }
         final Pessoa other = (Pessoa) obj;
-        if (this.id != other.id) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;

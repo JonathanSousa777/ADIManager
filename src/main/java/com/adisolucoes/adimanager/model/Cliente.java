@@ -2,6 +2,7 @@ package com.adisolucoes.adimanager.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +23,7 @@ import javax.persistence.Table;
 @Table(name = "tab_cliente")
 public class Cliente implements Serializable {
 
-    private long id;
+    private Long id;
     private String comoConheceu;
     private List<Projeto> projetos;
     private String observacao;
@@ -35,11 +36,11 @@ public class Cliente implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -100,7 +101,7 @@ public class Cliente implements Serializable {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 59 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 89 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -116,7 +117,7 @@ public class Cliente implements Serializable {
             return false;
         }
         final Cliente other = (Cliente) obj;
-        if (this.id != other.id) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;

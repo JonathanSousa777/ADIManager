@@ -2,6 +2,7 @@ package com.adisolucoes.adimanager.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +25,7 @@ public class Link implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @OneToOne
     @JoinColumn(name = "tab_usuarios_id")
     private Usuario usuario;
@@ -54,11 +55,11 @@ public class Link implements Serializable {
 
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -105,7 +106,7 @@ public class Link implements Serializable {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 37 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 71 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -121,7 +122,7 @@ public class Link implements Serializable {
             return false;
         }
         final Link other = (Link) obj;
-        if (this.id != other.id) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;

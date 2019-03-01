@@ -3,6 +3,7 @@ package com.adisolucoes.adimanager.model;
 import com.adisolucoes.adimanager.enumerations.TipoPrioridadeNotificacao;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -23,7 +24,7 @@ import javax.persistence.TemporalType;
 @Table(name = "tab_notificacao")
 public class Notificacao implements Serializable {
 
-    private long id;
+    private Long id;
     private String descricao;
     private String responsavel;
     private Date dataInicio;
@@ -37,11 +38,11 @@ public class Notificacao implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -53,7 +54,7 @@ public class Notificacao implements Serializable {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
+
     public String getResponsavel() {
         return responsavel;
     }
@@ -71,7 +72,7 @@ public class Notificacao implements Serializable {
     public void setDataInicio(Date dataInicio) {
         this.dataInicio = dataInicio;
     }
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_final", nullable = false)
     public Date getDataFinal() {
@@ -100,7 +101,7 @@ public class Notificacao implements Serializable {
     public void setLida(boolean lida) {
         this.lida = lida;
     }
-    
+
     @Column(name = "status")
     public boolean isStatus() {
         return status;
@@ -112,8 +113,8 @@ public class Notificacao implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 47 * hash + (int) (this.id ^ (this.id >>> 32));
+        int hash = 3;
+        hash = 59 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -129,7 +130,7 @@ public class Notificacao implements Serializable {
             return false;
         }
         final Notificacao other = (Notificacao) obj;
-        if (this.id != other.id) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;

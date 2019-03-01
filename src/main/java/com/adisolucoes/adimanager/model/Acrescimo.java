@@ -2,6 +2,7 @@ package com.adisolucoes.adimanager.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +18,7 @@ import javax.persistence.Table;
 @Table(name = "tab_acrescimo")
 public class Acrescimo implements Serializable {
 
-    private long id;
+    private Long id;
     private String descricao;
     private BigDecimal valor;
 
@@ -26,11 +27,11 @@ public class Acrescimo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -54,7 +55,7 @@ public class Acrescimo implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 83 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -70,7 +71,7 @@ public class Acrescimo implements Serializable {
             return false;
         }
         final Acrescimo other = (Acrescimo) obj;
-        if (this.id != other.id) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;

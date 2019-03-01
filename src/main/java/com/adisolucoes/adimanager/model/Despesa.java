@@ -4,6 +4,7 @@ import com.adisolucoes.adimanager.enumerations.StatusDespesa;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -25,7 +26,7 @@ import javax.persistence.TemporalType;
 @Table(name = "tab_despesa")
 public class Despesa implements Serializable {
 
-    private long id;
+    private Long id;
     private String descricao;
     private Date dataInicio;
     private Date dataVencimento;
@@ -42,11 +43,11 @@ public class Despesa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -147,8 +148,8 @@ public class Despesa implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + (int) (this.id ^ (this.id >>> 32));
+        int hash = 5;
+        hash = 71 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -164,7 +165,7 @@ public class Despesa implements Serializable {
             return false;
         }
         final Despesa other = (Despesa) obj;
-        if (this.id != other.id) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;

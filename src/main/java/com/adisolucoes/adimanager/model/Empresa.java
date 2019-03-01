@@ -1,6 +1,7 @@
 package com.adisolucoes.adimanager.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -22,7 +23,7 @@ import javax.persistence.Table;
 @Table(name = "tab_empresa")
 public class Empresa implements Serializable {
 
-    private long id;
+    private Long id;
     private Cliente proprietario;
     private String cnpj;
     private String nome;
@@ -37,11 +38,11 @@ public class Empresa implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -120,8 +121,8 @@ public class Empresa implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + (int) (this.id ^ (this.id >>> 32));
+        int hash = 5;
+        hash = 29 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -137,7 +138,7 @@ public class Empresa implements Serializable {
             return false;
         }
         final Empresa other = (Empresa) obj;
-        if (this.id != other.id) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;

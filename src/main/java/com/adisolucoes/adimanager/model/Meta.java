@@ -3,6 +3,7 @@ package com.adisolucoes.adimanager.model;
 import com.adisolucoes.adimanager.enumerations.TipoPrioridadeMeta;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -22,7 +23,7 @@ import javax.persistence.TemporalType;
 @Table(name = "tab_meta")
 public class Meta implements Serializable {
 
-    private long id;
+    private Long id;
     private String descricao;
     private Date dataInicio;
     private Date dataFim;
@@ -34,11 +35,11 @@ public class Meta implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -92,7 +93,7 @@ public class Meta implements Serializable {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 67 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 59 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -108,7 +109,7 @@ public class Meta implements Serializable {
             return false;
         }
         final Meta other = (Meta) obj;
-        if (this.id != other.id) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;

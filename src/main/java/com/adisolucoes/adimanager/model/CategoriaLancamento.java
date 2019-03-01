@@ -1,10 +1,13 @@
 package com.adisolucoes.adimanager.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -15,19 +18,20 @@ import javax.persistence.Table;
 @Table(name = "tab_categoria_lancamento")
 public class CategoriaLancamento implements Serializable {
 
-    private long id;
+    private Long id;
     private String descricao;
+    private CategoriaLancamento pai;
 
     public CategoriaLancamento() {
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -39,10 +43,19 @@ public class CategoriaLancamento implements Serializable {
         this.descricao = descricao;
     }
 
+    @OneToOne
+    public CategoriaLancamento getPai() {
+        return pai;
+    }
+
+    public void setPai(CategoriaLancamento pai) {
+        this.pai = pai;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + (int) (this.id ^ (this.id >>> 32));
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -58,7 +71,7 @@ public class CategoriaLancamento implements Serializable {
             return false;
         }
         final CategoriaLancamento other = (CategoriaLancamento) obj;
-        if (this.id != other.id) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;

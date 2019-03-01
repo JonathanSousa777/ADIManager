@@ -3,6 +3,7 @@ package com.adisolucoes.adimanager.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,7 @@ import javax.persistence.Table;
 @Table(name = "tab_ferramenta")
 public class Ferramenta implements Serializable {
 
-    private long id;
+    private Long id;
     private String nome;
     private String descricao;
     private String url;
@@ -37,11 +38,11 @@ public class Ferramenta implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -140,8 +141,8 @@ public class Ferramenta implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 67 * hash + (int) (this.id ^ (this.id >>> 32));
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -157,7 +158,7 @@ public class Ferramenta implements Serializable {
             return false;
         }
         final Ferramenta other = (Ferramenta) obj;
-        if (this.id != other.id) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;

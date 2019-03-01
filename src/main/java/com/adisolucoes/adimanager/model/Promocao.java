@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -25,7 +26,7 @@ import javax.persistence.TemporalType;
 @Table(name = "tab_promocao")
 public class Promocao implements Serializable {
 
-    private long id;
+    private Long id;
     private BigDecimal novoValor;
     private TipoPromocao tipoPromocao;
     private BigDecimal valorDesconto;
@@ -40,11 +41,11 @@ public class Promocao implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -124,8 +125,8 @@ public class Promocao implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + (int) (this.id ^ (this.id >>> 32));
+        int hash = 7;
+        hash = 11 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -141,7 +142,7 @@ public class Promocao implements Serializable {
             return false;
         }
         final Promocao other = (Promocao) obj;
-        if (this.id != other.id) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;

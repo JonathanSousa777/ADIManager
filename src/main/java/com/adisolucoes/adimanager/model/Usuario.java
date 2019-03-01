@@ -3,6 +3,7 @@ package com.adisolucoes.adimanager.model;
 import com.adisolucoes.adimanager.enumerations.TipoUsuario;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +27,7 @@ import javax.persistence.TemporalType;
 @Table(name = "tab_usuario")
 public class Usuario implements Serializable {
 
-    private long id;
+    private Long id;
     private Date dataUltimoAcesso;
     private String login;
     private String senha;
@@ -39,11 +40,11 @@ public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -106,8 +107,8 @@ public class Usuario implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 37 * hash + (int) (this.id ^ (this.id >>> 32));
+        int hash = 7;
+        hash = 71 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -123,7 +124,7 @@ public class Usuario implements Serializable {
             return false;
         }
         final Usuario other = (Usuario) obj;
-        if (this.id != other.id) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
