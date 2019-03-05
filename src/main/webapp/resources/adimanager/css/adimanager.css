@@ -373,6 +373,15 @@ a:active {
     font-weight: bold;
 }
 
+.aviso-senha {
+    background-color: #63ecec;
+    padding: 5px;
+    margin: 10px 0px;
+    border-radius: 5px;
+    font-weight: 700;
+    text-align: center;
+}
+
 /* PAGINA LOGIN*/
 .login-body{
     background-image: url("#{resource['images/bg-dark.jpg']}");

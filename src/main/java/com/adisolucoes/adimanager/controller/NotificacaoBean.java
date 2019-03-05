@@ -49,7 +49,7 @@ public class NotificacaoBean implements Serializable {
     public void salvar(){
         try {
             if (notificacao != null) {
-                if (notificacao.getId() == 0) {
+                if (notificacao.getId() == null) {
                    notificacao.setResponsavel(FacesUtils.getUsuarioLogado().getLogin());
                    notificacaoDAO.salvar(notificacao);
                    FacesUtils.showFacesMessage("Notificação salva com sucesso!", 2);

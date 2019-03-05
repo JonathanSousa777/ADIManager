@@ -73,7 +73,7 @@ public class IndicacaoBean implements Serializable {
     public void salvar() {
         try {
             if (indicacao != null) {
-                if (indicacao.getId() == 0) {
+                if (indicacao.getId() == null) {
                     indicacaoDAO.salvar(indicacao);
                     limparForm();
                     FacesUtils.showFacesMessage("Indicação salva com sucesso!", 2);

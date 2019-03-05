@@ -97,7 +97,7 @@ public class ClienteBean implements Serializable {
     public void salvar() {
         try {
             if (cliente != null) {
-                if (cliente.getId() == 0) {
+                if (cliente.getId() == null) {
                     clienteDAO.salvar(cliente);
                     FacesUtils.showFacesMessage("Cliente salvo com sucesso!", 2);
                     limparForm();
@@ -138,7 +138,7 @@ public class ClienteBean implements Serializable {
             if (empresas != null && !empresas.isEmpty() || projetos != null && !projetos.isEmpty()) {
                 podeExcluir = false;
                 if (empresas != null && !empresas.isEmpty()) {
-                    FacesUtils.showFacesMessage(clienteSelecionado.getPessoa().getNome() + " é proprietário da Empresa " + empresas.get(0).getNome() + ", é necessário excluir todas as empresas do Cliente antes", 1);
+                    FacesUtils.showFacesMessage(clienteSelecionado.getPessoa().getNome() + " é proprietário da Empresa " + empresas.get(0).getNome() + ", é necessário excluir todas as empresas vinculadas ao Cliente antes", 1);
                 } else {
                     FacesUtils.showFacesMessage(clienteSelecionado.getPessoa().getNome() + " possui Projetos, é necessário exclui-los antes!", 1);
                 }

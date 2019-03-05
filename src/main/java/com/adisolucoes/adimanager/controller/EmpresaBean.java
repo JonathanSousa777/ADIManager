@@ -78,7 +78,7 @@ public class EmpresaBean implements Serializable {
         try {
             if (empresa != null) {
                 Empresa empresaExistente = empresaDAO.buscarPorCnpj(empresa.getCnpj());
-                if (empresa.getId() == 0) {
+                if (empresa.getId() == null) {
                     if (empresaExistente != null) {
                         throw new ErroEmpresaDuplicadaException();
                     }

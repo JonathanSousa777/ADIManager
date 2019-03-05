@@ -39,8 +39,8 @@ public class ImagemBean implements Serializable {
     private Pessoa pessoa;
     private Empresa empresa;
     private StreamedContent imagem;
-    private long codigoPessoa;
-    private long codigoEmpresa;
+    private Long codigoPessoa;
+    private Long codigoEmpresa;
     private byte[] bytesImagem;
 
     public ImagemBean() {
@@ -127,8 +127,8 @@ public class ImagemBean implements Serializable {
         this.empresa = null;
         this.imagem = null;
         this.bytesImagem = null;
-        this.codigoEmpresa = 0;
-        this.codigoPessoa = 0;
+        this.codigoEmpresa = null;
+        this.codigoPessoa = null;
         carregarImagem();
     }
 
@@ -207,11 +207,11 @@ public class ImagemBean implements Serializable {
     }
 
     private boolean cadastrandoPessoa() {
-        return this.codigoPessoa == 0;
+        return this.codigoPessoa == null;
     }
 
     private boolean cadastrandoEmpresa() {
-        return this.codigoEmpresa == 0;
+        return this.codigoEmpresa == null;
     }
 
 }

@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -77,7 +78,7 @@ public class UsuarioBean implements Serializable {
             if (usuario != null) {
                 usuario.setDataUltimoAcesso(new Date());
                 Usuario usuarioExistente = usuarioDAO.buscarPorLogin(usuario.getLogin());
-                if (usuario.getId() == 0) {
+                if (usuario.getId() == null) {
                     if (usuarioExistente != null) {
                         throw new ErroLoginDuplicadoException();
                     }
@@ -86,7 +87,7 @@ public class UsuarioBean implements Serializable {
                     FacesUtils.showFacesMessage("Usuário salvo com sucesso!", 2);
                     limparForm();
                 } else {
-                    if (usuarioExistente != null && usuarioExistente.getId() != usuario.getId()) {
+                    if (usuarioExistente != null && !Objects.equals(usuarioExistente.getId(), usuario.getId())) {
                         throw new ErroLoginDuplicadoException();
                     }
                     if (!senha.equals("")) {

@@ -52,7 +52,7 @@ public class MetaBean implements Serializable {
     public void salvar() {
         try {
             if (meta != null) {
-                if (meta.getId() == 0) {
+                if (meta.getId() == null) {
                     metaDAO.salvar(meta);
                     limparForm();
                     FacesUtils.showFacesMessage("Meta salva com sucesso!", 2);
