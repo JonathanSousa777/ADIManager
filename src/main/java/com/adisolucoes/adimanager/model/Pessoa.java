@@ -45,6 +45,7 @@ public class Pessoa implements Serializable {
     private Usuario usuario;
     private Sexo sexo;
     private String telefone;
+    private String celular;
     private Endereco endereco;
 
     public Pessoa() {
@@ -165,13 +166,22 @@ public class Pessoa implements Serializable {
         this.imagem = imagem;
     }
 
-    @Column(length = 25, nullable = false)
+    @Column(length = 25)
     public String getTelefone() {
         return telefone;
     }
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+    
+    @Column(name = "celular", length = 25, nullable = false)
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
     }
 
     @Embedded

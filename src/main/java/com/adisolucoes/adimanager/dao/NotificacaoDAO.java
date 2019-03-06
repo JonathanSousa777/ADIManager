@@ -69,6 +69,8 @@ public class NotificacaoDAO extends DAO<Notificacao> implements LazyDAO<Notifica
             query.setParameter("dataFinal", filtro.getDataFinal());
         }
         
+       
+        
         if(filtro.getStatus() != null) {
           query.setParameter("status", filtro.getStatus().equalsIgnoreCase("ativado"));
         }

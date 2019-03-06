@@ -56,7 +56,7 @@ public class NotificacaoFiltro implements LazyFiltro{
     public void setDataInicio(Date dataInicio) {
         this.dataInicio = dataInicio;
     }
-
+    
     public Date getDataFinal() {
         return dataFinal;
     }

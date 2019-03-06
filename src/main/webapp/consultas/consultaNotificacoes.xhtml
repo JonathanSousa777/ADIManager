@@ -29,6 +29,7 @@
                                     </p:selectOneMenu>
                                 </h:panelGrid>
                             </div>
+
                             <div class="col-sm-3">
                                 <h:panelGrid columns="1" styleClass="width-full">
                                     <p:outputLabel value="Data Inicio" for="data-inicial"/>
@@ -40,6 +41,7 @@
                                                 locale="pt"/>
                                 </h:panelGrid>
                             </div>
+
                             <div class="col-sm-3">
                                 <h:panelGrid columns="1" styleClass="width-full">
                                     <p:outputLabel value="Data Final" for="data-final"/>
@@ -51,6 +53,7 @@
                                                 locale="pt"/>
                                 </h:panelGrid>
                             </div>
+
                             <div class="col-sm-2">
                                 <h:panelGrid columns="1">
                                     <p:outputLabel value="Status" for="status"/>
@@ -63,7 +66,7 @@
                             </div>
                             <div class="col-sm-12">
                                 <div class="painel-botoes">
-                                    <p:commandLink styleClass="btn btn-info" title="Buscar Notificacoes" action="#{notificacaoBean.pesquisarLazy}" style="margin:0px 5px 0px 5px;"
+                                    <p:commandLink styleClass="btn btn-info" title="Buscar Notificacoes" action="#{notificacaoBean.pesquisarLazy()}" style="margin:0px 5px 0px 5px;"
                                                    update="formDados #{p:component('dataTableNotificacoes')}"
                                                    process="@form @this">
                                         <i class="fa fa-search"></i>
@@ -111,7 +114,15 @@
                             <h:outputText value="Ativada" rendered="#{notificacao.status eq true}"/>
                             <h:outputText value="Desativada" rendered="#{notificacao.status eq false}"/>
                         </p:column>
-                        <p:column headerText="Ações">
+                        <p:column headerText="Ações" width="100">
+                            <p:commandButton icon="fa fa-pencil" 
+                                             class="btn btn-default"
+                                             process="@this #{p:component('formTable')}"
+                                             action="pretty:editar-notificacoes"
+                                             style="margin: 0 5px 5px 0">
+                                <f:setPropertyActionListener value="#{notificacao.id * 483957299}" target="#{notificacaoBean.codigo}"/>
+                            </p:commandButton>
+                            
                             <p:commandButton icon="fa fa-remove" disabled="#{!FacesUtils.getUsuarioLogado().getLogin() eq notificacaoBean.notificacao1Selecionada.responsavel}"
                                              title="Excluir Notificação"
                                              process="@this #{p:component('formTable')}"

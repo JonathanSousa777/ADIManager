@@ -51,7 +51,7 @@
                                         <!-- IMAGEM DO USUÁRIO-->
                                         <h:graphicImage library="images" name="jonathan-user.jpg" styleClass="user-image" alt="Imagem de usuário"/>
                                         <!-- hidden-xs ESCONDE O NOME EM DISPOSITIVOS MÓVEIS -->
-                                        <span class="hidden-xs">Jonathan Sousa</span>
+                                        <span class="hidden-xs">#{usuarioBean.usuarioLogado.login}</span>
                                     </a>
                                     <!-- ÁREA DE INFORMAÇÕES DO USUÁRIO -->
                                     <ul class="dropdown-menu">
@@ -59,7 +59,8 @@
                                         <li class="user-header">
                                             <h:graphicImage library="images" name="jonathan-user.jpg" styleClass="img-circle" alt="Imagem de usuário"/>
                                             <p>
-                                                Jonathan Sousa - Full Stack Developer
+                                            <!--  Jonathan Sousa - Full Stack Developer-->
+                                                #{usuarioBean.usuarioLogado.login}
                                                 <small>Membro desde Nov. 2017</small>
                                             </p>
                                         </li>

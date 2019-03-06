@@ -1,6 +1,5 @@
 package com.adisolucoes.adimanager.controller;
 
-import com.adisolucoes.adimanager.dao.LazyDAO;
 import com.adisolucoes.adimanager.dao.NotificacaoDAO;
 import com.adisolucoes.adimanager.enumerations.TipoPrioridadeNotificacao;
 import com.adisolucoes.adimanager.exceptions.ErroBancoDadosException;
@@ -29,6 +28,7 @@ public class NotificacaoBean implements Serializable {
     private NotificacaoDAO notificacaoDAO;
     
     private Notificacao notificacao;
+    private long codigo;
     private Notificacao notificacao1Selecionada;
     private NotificacaoFiltro notificacaoFiltro;
     private LazyBean<Notificacao> modelo;
@@ -43,17 +43,20 @@ public class NotificacaoBean implements Serializable {
     }
     
     public void pesquisarLazy(){
-        modelo = new LazyBean<Notificacao>(notificacaoDAO, notificacaoFiltro);
+        modelo = new LazyBean<>(notificacaoDAO, notificacaoFiltro);
     }
     
     public void salvar(){
         try {
-            if (notificacao != null) {
-                if (notificacao.getId() == null) {
-                   notificacao.setResponsavel(FacesUtils.getUsuarioLogado().getLogin());
+            if (this.notificacao != null) {
+                if (this.notificacao.getId() == null) {
+                   this.notificacao.setResponsavel(FacesUtils.getUsuarioLogado().getLogin());
                    notificacaoDAO.salvar(notificacao);
                    FacesUtils.showFacesMessage("Notificação salva com sucesso!", 2);
                    limparForm();
+                }else{
+                    notificacaoDAO.atualizar(notificacao);
+                    FacesUtils.showFacesMessage("Notificação atualizada com sucesso", 2);
                 }
             }
         } catch (ErroBancoDadosException ex) {
@@ -71,6 +74,17 @@ public class NotificacaoBean implements Serializable {
         } catch(ErroBancoDadosException ex){
             LOG.log(Level.SEVERE, null, ex);
             FacesUtils.showFacesMessage("Error na conexao do banco", 1);
+        }
+    }
+    
+    public void buscarNotificacao(){
+        try{
+            codigo = codigo / 483957299;
+            notificacao = notificacaoDAO.buscarPorId(codigo);
+            System.out.println("**** EU RESPONSALVEL ****: " + notificacao.getResponsavel());
+        }catch(ErroBancoDadosException ex){
+            LOG.log(Level.SEVERE, null , ex);
+            FacesUtils.showFacesMessage("Erro ao recuperar notificação", 1);
         }
     }
     
@@ -115,6 +129,14 @@ public class NotificacaoBean implements Serializable {
 
     public void setNotificacao1Selecionada(Notificacao notificacao1Selecionada) {
         this.notificacao1Selecionada = notificacao1Selecionada;
+    }
+    
+    public long getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(long codigo) {
+        this.codigo = codigo;
     }
     
 }
