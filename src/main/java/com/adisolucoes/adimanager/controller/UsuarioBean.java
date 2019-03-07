@@ -1,5 +1,6 @@
 package com.adisolucoes.adimanager.controller;
 
+import com.adisolucoes.adimanager.dao.PessoaDAO;
 import com.adisolucoes.adimanager.dao.UsuarioDAO;
 import com.adisolucoes.adimanager.enumerations.Sexo;
 import com.adisolucoes.adimanager.enumerations.TipoUsuario;
@@ -11,6 +12,7 @@ import com.adisolucoes.adimanager.model.Pessoa;
 import com.adisolucoes.adimanager.model.Usuario;
 import com.adisolucoes.adimanager.util.crud.CrudUtils;
 import com.adisolucoes.adimanager.util.jsf.FacesUtils;
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,6 +24,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -35,7 +39,7 @@ public class UsuarioBean implements Serializable {
 
     @Inject
     private UsuarioDAO usuarioDAO;
-
+    
     @Inject
     private Usuario usuario;
 
@@ -48,7 +52,10 @@ public class UsuarioBean implements Serializable {
     private long codigo;
     private CrudUtils enderecoUtils;
     private List<Usuario> usuarioFiltrados;
-
+    
+    private StreamedContent imagem;
+    private byte[] bytesImagem;
+     
     @PostConstruct
     public void inicializar() {
         pessoa = new Pessoa();
@@ -113,6 +120,17 @@ public class UsuarioBean implements Serializable {
         } catch (ErroBancoDadosException ex) {
             LOG.log(Level.SEVERE, null, ex);
             FacesUtils.showFacesMessage("Erro ao recuperar usuário!", 1);
+        }
+    }
+    
+    public void carregarImagem(){
+        if(usuarioLogado != null ){
+            bytesImagem = usuarioLogado.getPessoa().getImagem();
+            if(bytesImagem != null){
+                imagem = new DefaultStreamedContent(new ByteArrayInputStream(bytesImagem));
+            }else{
+                imagem = null;
+            }
         }
     }
 
@@ -216,4 +234,11 @@ public class UsuarioBean implements Serializable {
         this.codigo = codigo;
     }
 
+    public StreamedContent getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(StreamedContent imagem) {
+        this.imagem = imagem;
+    }
 }

@@ -29,31 +29,35 @@
                                     </p:selectOneMenu>
                                 </h:panelGrid>
                             </div>
-
-                            <div class="col-sm-3">
-                                <h:panelGrid columns="1" styleClass="width-full">
-                                    <p:outputLabel value="Data Inicio" for="data-inicial"/>
-                                    <p:calendar value="#{notificacaoBean.notificacaoFiltro.dataInicio}"
-                                                id="data-inicial" effect="fade"
+                                
+                            <div class="col-xs-12 col-sm-6">
+                                <p:outputLabel value="Data da Notificação"/>
+                                <h:panelGroup>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6">
+                                            <p:calendar value="#{notificacaoBean.notificacaoFiltro.dataInicio}"
+                                                id="data-inicial" 
+                                                effect="fade"
                                                 styleClass="width-full-input"
                                                 navigator="true"
                                                 pattern="dd/MM/yyyy"
+                                                placeholder="Data Inicial"
                                                 locale="pt"/>
-                                </h:panelGrid>
-                            </div>
-
-                            <div class="col-sm-3">
-                                <h:panelGrid columns="1" styleClass="width-full">
-                                    <p:outputLabel value="Data Final" for="data-final"/>
-                                    <p:calendar value="#{notificacaoBean.notificacaoFiltro.dataFinal}"
-                                                id="data-final" navigator="true"
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <p:calendar value="#{notificacaoBean.notificacaoFiltro.dataFinal}"
+                                                id="data-final" 
+                                                navigator="true"
                                                 styleClass="width-full-input"
                                                 pattern="dd/MM/yyyy"
+                                                placeholder="Data Final"
                                                 effect="fade"
                                                 locale="pt"/>
-                                </h:panelGrid>
+                                        </div>
+                                    </div>
+                                </h:panelGroup>
                             </div>
-
+                            
                             <div class="col-sm-2">
                                 <h:panelGrid columns="1">
                                     <p:outputLabel value="Status" for="status"/>
