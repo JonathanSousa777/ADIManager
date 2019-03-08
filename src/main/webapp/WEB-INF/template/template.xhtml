@@ -49,15 +49,15 @@
                                     <!-- BOTÃO INFORMAÇÕES DO USUÁRIO -->
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <!-- IMAGEM DO USUÁRIO-->
-                                        <h:graphicImage library="images"
+                                        <p:graphicImage library="images"
                                                         name="user.png"
                                                         styleClass="user-image" 
                                                         alt="Usuário sem Imagem"
-                                                        rendered="#{usuarioBean.imagem eq null}"/>
-                                        <h:graphicImage value="#{usuarioBean.imagem}" 
+                                                        rendered="#{templateBean.imagemUsuario eq null}"/>
+                                        <p:graphicImage value="#{templateBean.imagemUsuario}" 
                                                         styleClass="user-image" 
                                                         alt="Imagem de usuário"
-                                                        rendered="#{usuarioBean.imagem ne null}"/>
+                                                        rendered="#{templateBean.imagemUsuario ne null}"/>
                                         <!-- hidden-xs ESCONDE O NOME EM DISPOSITIVOS MÓVEIS -->
                                         <span class="hidden-xs">#{usuarioBean.usuarioLogado.pessoa.nome}</span>
                                     </a>
@@ -65,17 +65,16 @@
                                     <ul class="dropdown-menu">
                                         <!-- IMAGEM DO USUÁRIO NAS INFORMAÇÕES -->
                                         <li class="user-header">
-                                            <h:graphicImage library="images"
-                                                        name="user.png"
-                                                        styleClass="user-image" 
-                                                        alt="Usuário sem Imagem"
-                                                        rendered="#{usuarioBean.imagem eq null}"/>
-                                            <h:graphicImage value="#{usuarioBean.imagem}" 
-                                                        styleClass="user-image" 
-                                                        alt="Imagem de usuário"
-                                                        rendered="#{usuarioBean.imagem ne null}"/>
+                                            <p:graphicImage library="images"
+                                                            name="user.png"
+                                                            styleClass="user-image" 
+                                                            alt="Usuário sem Imagem"
+                                                            rendered="#{templateBean.imagemUsuario eq null}"/>
+                                            <p:graphicImage value="#{templateBean.imagemUsuario}" 
+                                                            styleClass="user-image" 
+                                                            alt="Imagem de usuário"
+                                                            rendered="#{templateBean.imagemUsuario ne null}"/>
                                             <p>
-                                            <!--  Jonathan Sousa - Full Stack Developer-->
                                                 #{usuarioBean.usuarioLogado.pessoa.nome}
                                                 <small>Membro desde Nov. 2017</small>
                                             </p>
