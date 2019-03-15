@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
  * @author Jonathan Sousa
  */
 @Entity
-@Table(name = "tab_notificacao")
+@Table(name = "tab_notificacoes")
 public class Notificacao implements Serializable {
 
     private Long id;

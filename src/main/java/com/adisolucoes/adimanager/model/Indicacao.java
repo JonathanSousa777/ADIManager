@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
  * @author ADI Soluçoes
  */
 @Entity
-@Table(name = "tab_indicacao")
+@Table(name = "tab_indicacoes")
 public class Indicacao implements Serializable {
 
     private Long id;

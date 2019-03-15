@@ -17,7 +17,7 @@ import javax.persistence.Table;
  * @author Jonathan Sousa
  */
 @Entity
-@Table(name = "tab_servidor")
+@Table(name = "tab_servidores")
 public class Servidor implements Serializable {
 
     private Long id;

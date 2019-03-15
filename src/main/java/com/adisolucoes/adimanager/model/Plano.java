@@ -17,7 +17,7 @@ import javax.persistence.Table;
  * @author Jonathan Sousa
  */
 @Entity
-@Table(name = "tab_plano")
+@Table(name = "tab_planos")
 public class Plano implements Serializable {
 
     private Long id;

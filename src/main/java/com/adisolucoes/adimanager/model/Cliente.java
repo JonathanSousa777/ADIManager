@@ -20,7 +20,7 @@ import javax.persistence.Table;
  * @author ADI Soluções
  */
 @Entity
-@Table(name = "tab_cliente")
+@Table(name = "tab_clientes")
 public class Cliente implements Serializable {
 
     private Long id;

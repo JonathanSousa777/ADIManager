@@ -20,7 +20,7 @@ import javax.persistence.Table;
  * @author Jonathan Sousa
  */
 @Entity
-@Table(name = "tab_empresa")
+@Table(name = "tab_empresas")
 public class Empresa implements Serializable {
 
     private Long id;

@@ -17,7 +17,7 @@ import javax.persistence.Table;
  * @author Jonathan Sousa
  */
 @Entity
-@Table(name = "tab_ferramenta")
+@Table(name = "tab_ferramentas")
 public class Ferramenta implements Serializable {
 
     private Long id;

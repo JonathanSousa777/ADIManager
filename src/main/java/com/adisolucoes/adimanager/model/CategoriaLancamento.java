@@ -15,7 +15,7 @@ import javax.persistence.Table;
  * @author Jonathan Sousa
  */
 @Entity
-@Table(name = "tab_categoria_lancamento")
+@Table(name = "tab_categorias_lancamentos")
 public class CategoriaLancamento implements Serializable {
 
     private Long id;

@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * @author Jonathan Sousa
  */
 @Entity
-@Table(name = "tab_lead")
+@Table(name = "tab_leads")
 public class Lead implements Serializable {
 
     private Long id;

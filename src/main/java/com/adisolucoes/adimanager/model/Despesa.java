@@ -23,7 +23,7 @@ import javax.persistence.TemporalType;
  * @author Jonathan Sousa
  */
 @Entity
-@Table(name = "tab_despesa")
+@Table(name = "tab_despesas")
 public class Despesa implements Serializable {
 
     private Long id;

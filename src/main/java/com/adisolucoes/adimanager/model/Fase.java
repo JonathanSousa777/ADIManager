@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
  * @author Jonathan Sousa
  */
 @Entity
-@Table(name = "tab_fase")
+@Table(name = "tab_fases")
 public class Fase implements Serializable {
 
     private Long id;
