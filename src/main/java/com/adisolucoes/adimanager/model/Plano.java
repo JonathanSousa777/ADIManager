@@ -68,7 +68,7 @@ public class Plano implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "categoria_id", nullable = false)
+    @JoinColumn(name = "tab_categorias_id", nullable = false)
     public CategoriaPlano getCategoriaPlano() {
         return categoriaPlano;
     }
@@ -87,7 +87,7 @@ public class Plano implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "promocao_id")
+    @JoinColumn(name = "tab_promocoes_id")
     public Promocao getPromocao() {
         return promocao;
     }

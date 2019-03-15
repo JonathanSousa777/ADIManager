@@ -43,7 +43,7 @@ public class Indicacao implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "cliente_passivo_id", nullable = false)
+    @JoinColumn(name = "tab_clientes_passivos_id", nullable = false)
     public Cliente getClientePassivo() {
         return clientePassivo;
     }
@@ -53,7 +53,7 @@ public class Indicacao implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "cliente_ativo_id", nullable = false)
+    @JoinColumn(name = "tab_clientes_ativos_id", nullable = false)
     public Cliente getClienteAtivo() {
         return clienteAtivo;
     }

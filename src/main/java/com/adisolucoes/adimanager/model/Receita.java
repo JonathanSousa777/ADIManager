@@ -77,7 +77,7 @@ public class Receita implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "categoria_lancamento_id", nullable = false)
+    @JoinColumn(name = "tab_categorias_lancamentos_id", nullable = false)
     public CategoriaLancamento getCategoriaLancamento() {
         return categoriaLancamento;
     }
@@ -133,7 +133,7 @@ public class Receita implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false)
+    @JoinColumn(name = "tab_clientes_id", nullable = false)
     public Cliente getCliente() {
         return cliente;
     }

@@ -193,7 +193,7 @@ public class Projeto implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "plano_id", nullable = false)
+    @JoinColumn(name = "tab_planos_id", nullable = false)
     public Plano getPlano() {
         return plano;
     }
@@ -221,7 +221,7 @@ public class Projeto implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false)
+    @JoinColumn(name = "tab_clientes_id", nullable = false)
     public Cliente getCliente() {
         return cliente;
     }
@@ -260,7 +260,7 @@ public class Projeto implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "servidor_id", nullable = false)
+    @JoinColumn(name = "tab_servidores_id", nullable = false)
     public Servidor getServidor() {
         return servidor;
     }

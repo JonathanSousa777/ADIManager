@@ -65,19 +65,19 @@
                                     <ul class="dropdown-menu">
                                         <!-- IMAGEM DO USUÁRIO NAS INFORMAÇÕES -->
                                         <li class="user-header">
-                                            <p:graphicImage library="images"
+                                                <p:graphicImage library="images"
                                                             name="user.png"
                                                             styleClass="user-image" 
                                                             alt="Usuário sem Imagem"
                                                             rendered="#{templateBean.imagemUsuario eq null}"/>
-                                            <p:graphicImage value="#{templateBean.imagemUsuario}" 
+                                                <p:graphicImage value="#{templateBean.imagemUsuario}" 
                                                             styleClass="user-image" 
                                                             alt="Imagem de usuário"
                                                             rendered="#{templateBean.imagemUsuario ne null}"/>
-                                            <p>
-                                                #{usuarioBean.usuarioLogado.pessoa.nome}
-                                                <small>Membro desde Nov. 2017</small>
-                                            </p>
+                                                <p>
+                                                    #{usuarioBean.usuarioLogado.pessoa.nome}
+                                                    <small>Membro desde Nov. 2017</small>
+                                                </p>
                                         </li>
                                         <!-- ÁREA PARA AVISOS -->
                                         <li class="user-body">

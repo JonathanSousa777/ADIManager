@@ -80,7 +80,7 @@ public class Despesa implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "categoria_lancamento_id", nullable = false)
+    @JoinColumn(name = "tab_categorias_lancamentos_id", nullable = false)
     public CategoriaLancamento getCategoriaLancamento() {
         return categoriaLancamento;
     }
@@ -127,7 +127,7 @@ public class Despesa implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id")
+    @JoinColumn(name = "tab_clientes_id")
     public Cliente getCliente() {
         return cliente;
     }

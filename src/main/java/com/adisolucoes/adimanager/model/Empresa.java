@@ -47,7 +47,7 @@ public class Empresa implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "proprietario_id")
+    @JoinColumn(name = "tab_proprietarios_id")
     public Cliente getProprietario() {
         return proprietario;
     }

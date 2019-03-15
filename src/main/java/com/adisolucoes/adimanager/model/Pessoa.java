@@ -100,7 +100,7 @@ public class Pessoa implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "tab_usuarios_id")
     public Usuario getUsuario() {
         return usuario;
     }

@@ -95,7 +95,7 @@ public class Agendamento implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
+    @JoinColumn(name = "tab_usuarios_id", nullable = false)
     public Usuario getUsuario() {
         return usuario;
     }
